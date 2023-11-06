@@ -25,7 +25,7 @@
                        FontWeight="Bold"
                        HorizontalAlignment="Center" />
             <TextBlock Text="Gebruikersnaam" />
-            <TextBox x:Name="usernameEl" />
+            <TextBox x:Name="usernameTextbox" />
             <TextBlock Text="Wachtwoord" />
             <PasswordBox x:Name="passwordBox" />
             <Button x:Name="LoginEl"

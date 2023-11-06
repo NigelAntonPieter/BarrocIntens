@@ -1,3 +1,5 @@
+using BarrocIntens;
+using BarrocIntens.Date;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -12,6 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,6 +34,55 @@ namespace BarrocIntens
         private void LoginEl_Click(object sender, RoutedEventArgs e)
         {
 
+            using (var db = new AppDbContext())
+            {
+                var user = db.Users.Where(u => u.UserName == usernameTextbox.Text).FirstOrDefault();
+
+                if (user != null)
+                {
+                    MainWindow.loggedInUser = user;
+                    if (user.Role == "Sales")
+                    {
+                        var salesWindow = new SalesWindow();
+                        salesWindow.Activate();
+                    }
+                    else if(user.Role == "Maintenance")
+                    {
+                        var maintenanceWindow = new Maintenance();
+                        maintenanceWindow.Activate();
+                    }
+                    else if (user.Role == "Finance")
+                    {
+                        var financeWindow = new FinanceWindow();
+                        financeWindow.Activate();
+                    }
+                    else if (user.Role == "Purchase")
+                    {
+                        var purchaseWindow = new PurchaseWindow();
+                        purchaseWindow.Activate();
+                    }
+                    else
+                    {
+                        var clientWindow = new ClientWindow();
+                        clientWindow.Activate();
+                    }
+                }
+            }
+
         }
+
     }
 }
+
+
+
+        
+            
+        
+
+        
+
+
+
+
+
