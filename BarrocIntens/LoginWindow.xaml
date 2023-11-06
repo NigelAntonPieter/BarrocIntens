@@ -20,12 +20,17 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="10">
+            <TextBlock Text="Inloggen"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center" />
+            <TextBlock Text="Gebruikersnaam" />
             <TextBox x:Name="usernameEl" />
-            <Button x:Name="loginEl"
-                    HorizontalAlignment="Stretch"
-                    Click="loginEl_Click">Login</Button>
-            <Button x:Name="registerEl"
-                    Click="registerEl_Click">registeren</Button>
+            <TextBlock Text="Wachtwoord" />
+            <PasswordBox x:Name="passwordBox" />
+            <Button x:Name="LoginEl"
+                HorizontalAlignment="Stretch"
+                    Click="LoginEl_Click">Login></Button>
         </StackPanel>
     </Grid>
     

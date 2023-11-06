@@ -27,5 +27,10 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
         }
+
+        private void LoginEl_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

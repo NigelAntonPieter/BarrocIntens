@@ -23,13 +23,18 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+       
         public MainWindow()
         {
+            
             this.InitializeComponent();
-            mainFrame.Navigate(typeof(LoginWindow));
-
+           
         }
 
-
+        private void LoginPage_Click(object sender, RoutedEventArgs e)
+        {
+            var LoginWindow = new LoginWindow();
+            LoginWindow.Activate();
+        }
     }
 }
