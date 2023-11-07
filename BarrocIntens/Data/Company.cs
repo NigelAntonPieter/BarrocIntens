@@ -12,6 +12,8 @@ namespace BarrocIntens.Date
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Street { get; set; }
+
+        public ICollection<User> Users { get; set; }
         
     }
 }
