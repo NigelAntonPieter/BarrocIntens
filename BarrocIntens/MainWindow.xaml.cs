@@ -16,6 +16,7 @@ using Windows.Foundation.Collections;
 using BarrocIntens.Date;
 using System.Drawing;
 using System.Reflection.Emit;
+using Windows.UI.Input.Spatial;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,6 +29,7 @@ namespace BarrocIntens
     public sealed partial class MainWindow : Window
     {
         internal static User loggedInUser;
+       
        
         public MainWindow()
         {
@@ -42,8 +44,8 @@ namespace BarrocIntens
 
         private void LoginPage_Click(object sender, RoutedEventArgs e)
         {
-            var LoginWindow = new LoginWindow();
-            LoginWindow.Activate();
+            var loginWindow = new LoginWindow();
+            loginWindow.Activate();
         }  
     }
 }

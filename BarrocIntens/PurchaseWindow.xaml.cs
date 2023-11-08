@@ -27,5 +27,11 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var productAddWindow = new ProductAddWindow();
+            productAddWindow.Activate();
+        }
     }
 }

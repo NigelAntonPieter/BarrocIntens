@@ -13,16 +13,23 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0"
+                    Grid.RowSpan="2"
                     Background="#fdd716" />
         <StackPanel Grid.Column="1"
+                    Grid.Row="0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="10">
             <TextBlock Text="Purchase"
                        FontSize="50"
                        FontWeight="Bold" />
+            <Button Click="Button_Click">Add new product</Button>
         </StackPanel>
     </Grid>
 </Window>
