@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace BarrocIntens.Date
+namespace BarrocIntens.Data
 {
     internal class AppDbContext : DbContext
     {
@@ -32,11 +32,16 @@ namespace BarrocIntens.Date
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = "password123", Role = "Sales" },
                 new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance"},
-                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "password4321", Role = "client" }
+                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "password4321", Role = "Purchase" }
             );
 
             modelBuilder.Entity<Product>().HasData(
-               new Product { Id = 1, Name= "Balonga", Description = "kapot lekker"}
+               new Product { Id = 1, Name= "Balonga", Description = "kapot lekker", Price = 5},
+                new Product { Id = 2, Name = "spaans", Description = "niet lekker", Price = 50 },
+                 new Product { Id = 3, Name = "portaal", Description = "zwaar", Price = 2 },
+                  new Product { Id = 4, Name = "kortaa", Description = "wisa",Price = 5 },
+                   new Product { Id = 5, Name = "hans", Description = "lang" , Price = 5 },
+                    new Product { Id = 6, Name = "portyu", Description = "kapot lekker" , Price = 20 }
             );
         }
 

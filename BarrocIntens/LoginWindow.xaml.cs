@@ -1,5 +1,5 @@
 using BarrocIntens;
-using BarrocIntens.Date;
+using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -40,7 +40,7 @@ namespace BarrocIntens
 
                 if (user != null)
                 {
-                    MainWindow.loggedInUser = user;
+                    
                     if (user.Role == "Sales")
                     {
                         var salesWindow = new SalesWindow();
@@ -68,7 +68,7 @@ namespace BarrocIntens
                     }
                 }
             }
-
+            this.Close();
         }
 
     }

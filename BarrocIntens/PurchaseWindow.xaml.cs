@@ -1,3 +1,4 @@
+using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -26,12 +27,30 @@ namespace BarrocIntens
         public PurchaseWindow()
         {
             this.InitializeComponent();
+            using var db = new AppDbContext();
+            productListView.ItemsSource = db.Products;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void productListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var clickedMonkey = (Product)e.ClickedItem;
+            var changeProductsWindow = new
+            
+        }
+
+        private void addProduct_Click(object sender, RoutedEventArgs e)
         {
             var productAddWindow = new ProductAddWindow();
             productAddWindow.Activate();
+
+            productAddWindow.Closed += ProductAddWindow_Closed;
+        }
+
+        private void ProductAddWindow_Closed(object sender, WindowEventArgs args)
+        {
+            using var db = new AppDbContext();
+            productListView.ItemsSource = db.Products;
         }
     }
 }
