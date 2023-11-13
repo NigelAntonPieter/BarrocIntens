@@ -36,12 +36,10 @@ namespace BarrocIntens.Data
             );
 
             modelBuilder.Entity<Product>().HasData(
-               new Product { Id = 1, Name= "Balonga", Description = "kapot lekker", Price = 5},
-                new Product { Id = 2, Name = "spaans", Description = "niet lekker", Price = 50 },
-                 new Product { Id = 3, Name = "portaal", Description = "zwaar", Price = 2 },
-                  new Product { Id = 4, Name = "kortaa", Description = "wisa",Price = 5 },
-                   new Product { Id = 5, Name = "hans", Description = "lang" , Price = 5 },
-                    new Product { Id = 6, Name = "portyu", Description = "kapot lekker" , Price = 20 }
+               new Product { Id = "S234FREKT", Name= "Barroc Intens Italian Light", Description = "Light", Price = 499},
+                new Product { Id = "S234KNDPF", Name = "Barroc Intens Italian", Description = "Italian", Price = 599 },
+                 new Product { Id = "S234NNBMV", Name = "Barroc Intens Italian Deluxe", Description = "Deluxe", Price = 799 },
+                  new Product { Id = "S234MMPLA", Name = "Barroc Intens Italian Deluxe Special", Description = "Special",Price = 999}
             );
         }
 

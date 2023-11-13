@@ -14,39 +14,47 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.System;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace BarrocIntens
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class LoginWindow : Window
     {
+        // De sleutel voor het opslaan van de gebruikersnaam in de lokale instellingen
+        private const string LastUsernameKey = "LastUsername";
+        
+
         public LoginWindow()
         {
             this.InitializeComponent();
+
+            // Probeer de laatst ingevoerde gebruikersnaam op te halen en in te stellen
+            string lastUsername = LoadLastUsername();
+            if (!string.IsNullOrEmpty(lastUsername))
+            {
+                usernameTextbox.Text = lastUsername;
+            }
         }
 
         private void LoginEl_Click(object sender, RoutedEventArgs e)
         {
-
             using (var db = new AppDbContext())
             {
                 var user = db.Users.Where(u => u.UserName == usernameTextbox.Text).FirstOrDefault();
 
                 if (user != null)
                 {
-                    
+                    // Sla de laatst ingevoerde gebruikersnaam op
+                    SaveLastUsername(usernameTextbox.Text);
+
                     if (user.Role == "Sales")
                     {
                         var salesWindow = new SalesWindow();
                         salesWindow.Activate();
                     }
-                    else if(user.Role == "Maintenance")
+                    else if (user.Role == "Maintenance")
                     {
                         var maintenanceWindow = new Maintenance();
                         maintenanceWindow.Activate();
@@ -71,16 +79,40 @@ namespace BarrocIntens
             this.Close();
         }
 
+        // Methode om de laatst ingevoerde gebruikersnaam op te slaan in lokale instellingen
+        private void SaveLastUsername(string username)
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            localSettings.Values[LastUsernameKey] = username;
+        }
+
+        // Methode om de laatst ingevoerde gebruikersnaam op te halen uit lokale instellingen
+        private string LoadLastUsername()
+        {
+            var localSettings = ApplicationData.Current.LocalSettings;
+            if (localSettings.Values.TryGetValue(LastUsernameKey, out object value) && value is string lastUsername)
+            {
+                return lastUsername;
+            }
+
+            return string.Empty;
+        }
     }
 }
 
 
 
-        
-            
-        
 
-        
+
+
+
+
+
+
+
+
+
+
 
 
 

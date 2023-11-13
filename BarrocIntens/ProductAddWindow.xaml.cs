@@ -41,6 +41,7 @@ namespace BarrocIntens
             using var db = new AppDbContext();
             db.Products.Add(new Product
             {
+                Id = CodeTextBox.Text,
                 Name = NameTextBox.Text,
                 Description = DescriptionTextBox.Text,
                 Price = decimal.Parse(PriceTextBox.Text)

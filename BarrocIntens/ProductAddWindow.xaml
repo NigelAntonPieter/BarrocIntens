@@ -25,6 +25,11 @@
                 <TextBlock Text="Add Product" FontSize="50" FontWeight="Bold" FontFamily="arial"/>
             </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Code:"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10" />
+            <TextBox x:Name="CodeTextBox"
+                     PlaceholderText="Voer de naam in" />
             <TextBlock Text="Naam:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />

@@ -30,7 +30,7 @@
             <PasswordBox x:Name="passwordBox" />
             <Button x:Name="LoginEl"
                 HorizontalAlignment="Stretch"
-                    Click="LoginEl_Click">Login></Button>
+                    Click="LoginEl_Click">Login</Button>
         </StackPanel>
     </Grid>
     

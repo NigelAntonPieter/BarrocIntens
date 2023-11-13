@@ -18,12 +18,12 @@
     <Page Remove="NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="ChangeProductWindow.xaml" />
     <None Remove="ClientWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
     <None Remove="LoginWindow.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
     <None Remove="ProductAddWindow.xaml" />
+    <None Remove="ProductEditWindow.xaml" />
     <None Remove="PurchaseWindow.xaml" />
     <None Remove="SalesWindow.xaml" />
   </ItemGroup>
@@ -74,7 +74,7 @@
     <PRIResource Remove="NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="ChangeProductWindow.xaml">
+    <Page Update="ProductEditWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

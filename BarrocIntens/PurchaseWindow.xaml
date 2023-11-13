@@ -32,13 +32,16 @@
                        FontWeight="Bold" 
                        />
             <Button Name="addProduct" Click="addProduct_Click">Add new product</Button>
+            <Button Name="deleteProduct"
+                    Click="deleteProduct_Click">Delete selected product</Button>
         </StackPanel>
 
         <ListView x:Name="productListView"
                   Grid.Row="1"
                   Grid.Column="1"
                   IsItemClickEnabled="True"
-                  ItemClick="productListView_ItemClick">
+                  IsDoubleTapEnabled="True"
+                  DoubleTapped="productListView_DoubleTapped">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localData:Product">
                     <StackPanel Orientation="Vertical"
@@ -54,5 +57,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        
     </Grid>
 </Window>

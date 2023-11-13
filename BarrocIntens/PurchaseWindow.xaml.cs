@@ -32,12 +32,6 @@ namespace BarrocIntens
         }
 
 
-        private void productListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var clickedMonkey = (Product)e.ClickedItem;
-            var changeProductsWindow = new
-            
-        }
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -46,11 +40,39 @@ namespace BarrocIntens
 
             productAddWindow.Closed += ProductAddWindow_Closed;
         }
-
         private void ProductAddWindow_Closed(object sender, WindowEventArgs args)
         {
             using var db = new AppDbContext();
             productListView.ItemsSource = db.Products;
         }
+
+        private void deleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+            if(productListView.SelectedItem is Product selectedproduct)
+            {
+                using var db = new AppDbContext();
+                db.Products.Remove(selectedproduct);
+                db.SaveChanges();
+
+                productListView.ItemsSource = db.Products.ToList();
+            }
+        }
+
+        private void productListView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            if (e.OriginalSource is FrameworkElement element && element.DataContext is Product clickedProduct)
+            {   
+                    var productEditWindow = new ProductEditWindow(clickedProduct);
+                    productEditWindow.Closed += ProductEditWindow_Closed;
+                    productEditWindow.Activate();
+            }
+
+        }
+        private void ProductEditWindow_Closed(object sender, WindowEventArgs args)
+        {
+            using var db = new AppDbContext();
+            productListView.ItemsSource = db.Products;
+        }
+
     }
 }
