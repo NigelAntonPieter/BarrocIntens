@@ -1,3 +1,4 @@
+using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -26,6 +27,15 @@ namespace BarrocIntens
         public ClientWindow()
         {
             this.InitializeComponent();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+            var searchInput = searchTextbox.Text;
+
+            using var db = new AppDbContext();
+            productListView.ItemsSource = db.Products.Where(p => p.Name.Contains(searchInput));
         }
     }
 }

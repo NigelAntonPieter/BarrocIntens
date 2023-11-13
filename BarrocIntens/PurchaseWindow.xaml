@@ -53,10 +53,19 @@
                  <Run>Prijs:</Run>
                  <Run Text="{x:Bind PriceFormatted}" />
                         </TextBlock>
+                        <TextBlock Foreground="Green"
+                                   FontWeight="Bold">
+                    <Run>Hoeveelheid:</Run>
+                    <Run Text="{x:Bind StockQuantity}" />
+                        </TextBlock>
+                        <TextBlock Foreground="Red"
+                                   FontWeight="Bold">
+                    <Run>Besteld:</Run>
+                    <Run Text="{x:Bind IsOrdered}" />
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
     </Grid>
 </Window>
