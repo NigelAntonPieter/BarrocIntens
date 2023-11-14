@@ -19,13 +19,11 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="10">
+            <Image Source="/Assets/Logo6_klein.png"
+                   Width="210" />
             <TextBlock Text="Welkom bij BarrocIntens"
                        FontSize="50"
                        FontWeight="Bold" />
-            <Image Source="Asset/logo6_klein.png"
-                   Width="100"
-                   Height="100" />
-
             <Button x:Name="LoginPage"
                     HorizontalAlignment="Center"
                     Click="LoginPage_Click">Loginpagina</Button>

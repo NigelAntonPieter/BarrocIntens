@@ -16,6 +16,9 @@ using System.Collections.ObjectModel;
 using BarrocIntens.Data;
 using System.Diagnostics;
 using Windows.Gaming.UI;
+using Windows.Storage.Pickers;
+using WinRT.Interop;
+using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -35,8 +38,31 @@ namespace BarrocIntens
 
             
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            var fileopenPicker = new FileOpenPicker()
+            {
+                FileTypeFilter = { ".jpg", ".jpeg", ".png", ".gif" }
+            };
+
+            var windowHandle = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(fileopenPicker, windowHandle);
+
+            var file = await fileopenPicker.PickSingleFileAsync();
+
+            if (file == null)
+            {
+                return;
+            }
+
+            var localFolder = ApplicationData.Current.LocalFolder;
+
+            var fileExtension = file.FileType;
+
+            var currentTime = DateTime.Now;
+            var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
+
+            var copiedFile = await file.CopyAsync(localFolder, renamedFileName);
 
             using var db = new AppDbContext();
             db.Products.Add(new Product
@@ -44,19 +70,40 @@ namespace BarrocIntens
                 Id = CodeTextBox.Text,
                 Name = NameTextBox.Text,
                 Description = DescriptionTextBox.Text,
-                Price = decimal.Parse(PriceTextBox.Text)
+                Price = decimal.Parse(PriceTextBox.Text),
+                ImagePath = copiedFile.Path
         });
             db.SaveChanges();
 
             this.Close();
         }
+
+        private async void fileButton_Click(object sender, RoutedEventArgs e)
+        {
+            var fileopenPicker = new FileOpenPicker()
+            {
+                FileTypeFilter = {".jpg", ".jpeg", ".png", ".gif"}
+            };
+
+            var windowHandle = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(fileopenPicker, windowHandle);
+
+            var file = await fileopenPicker.PickSingleFileAsync();
+
+            if (file == null)
+            {
+                return;
+            }
+
+            var localFolder = ApplicationData.Current.LocalFolder;
+
+            var fileExtension = file.FileType;
+
+            var currentTime = DateTime.Now;
+            var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
+            
+            var copiedFile = await file.CopyAsync(localFolder, renamedFileName);
+
+        }
     }
 }
-    
-
-    
-        
-       
-
-        
-

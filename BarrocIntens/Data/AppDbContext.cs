@@ -33,8 +33,8 @@ namespace BarrocIntens.Data
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = "password123", Role = "Sales" },
                 new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance"},
-                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "password4321", Role = "Purchase" },
-                  new User { Id = 4, Name = "Luna Smedes", UserName = "lunasmedes", Password = "niggah", Role = "Client" }
+                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "a", Role = "Purchase" },
+                  new User { Id = 4, Name = "Luna Smedes", UserName = "lunasmedes", Password = "n", Role = "Client" }
             );
 
             modelBuilder.Entity<Product>().HasData(

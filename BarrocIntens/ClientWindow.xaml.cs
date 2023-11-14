@@ -37,5 +37,12 @@ namespace BarrocIntens
             using var db = new AppDbContext();
             productListView.ItemsSource = db.Products.Where(p => p.Name.Contains(searchInput));
         }
+
+        private void uitlogEl_Click(object sender, RoutedEventArgs e)
+        {
+            var loginwindow = new LoginWindow();
+            loginwindow.Activate();
+            this.Close();
+        }
     }
 }

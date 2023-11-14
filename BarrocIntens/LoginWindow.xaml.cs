@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -40,9 +41,12 @@ namespace BarrocIntens
 
         private void LoginEl_Click(object sender, RoutedEventArgs e)
         {
+            string enteredUsername = usernameTextbox.Text;
+            string enteredPassword = passwordBox.Password;
+
             using (var db = new AppDbContext())
             {
-                var user = db.Users.Where(u => u.UserName == usernameTextbox.Text).FirstOrDefault();
+                var user = db.Users.SingleOrDefault(u => u.UserName == usernameTextbox.Text && u.Password == enteredPassword);
 
                 if (user != null)
                 {
@@ -74,10 +78,17 @@ namespace BarrocIntens
                         var clientWindow = new ClientWindow();
                         clientWindow.Activate();
                     }
+                    this.Close();
                 }
+                else
+                {
+                    ErrorTextBlock.Text = "ongeldige inloggegvens";
+                }
+                
             }
-            this.Close();
+           
         }
+        
 
         // Methode om de laatst ingevoerde gebruikersnaam op te slaan in lokale instellingen
         private void SaveLastUsername(string username)
@@ -99,22 +110,3 @@ namespace BarrocIntens
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

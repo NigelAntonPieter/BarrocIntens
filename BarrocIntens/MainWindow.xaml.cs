@@ -17,6 +17,7 @@ using BarrocIntens.Data;
 using System.Drawing;
 using System.Reflection.Emit;
 using Windows.UI.Input.Spatial;
+using Microsoft.UI.Xaml.Automation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,8 +37,9 @@ namespace BarrocIntens
             this.InitializeComponent();
             using (var db = new AppDbContext())
             {
-                db.Database.EnsureDeleted();
+               
                 db.Database.EnsureCreated();
+                
             }
 
         }

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -61,10 +62,10 @@ namespace BarrocIntens
         private void productListView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if (e.OriginalSource is FrameworkElement element && element.DataContext is Product clickedProduct)
-            {   
-                    var productEditWindow = new ProductEditWindow(clickedProduct);
-                    productEditWindow.Closed += ProductEditWindow_Closed;
-                    productEditWindow.Activate();
+            {
+                var productEditWindow = new ProductEditWindow(clickedProduct);
+                productEditWindow.Closed += ProductEditWindow_Closed;
+                productEditWindow.Activate();
             }
 
         }
@@ -74,5 +75,11 @@ namespace BarrocIntens
             productListView.ItemsSource = db.Products;
         }
 
+        private void uitlogEL_Click(object sender, RoutedEventArgs e)
+        {
+            var loginwindow = new LoginWindow();
+            loginwindow.Activate();
+            this.Close();
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace BarrocIntens
         private Product _clickedProduct;
 
         public ProductEditWindow(Product clickedProduct)
-        {
+        {   
             this.InitializeComponent();
             _clickedProduct = clickedProduct;
 
@@ -45,7 +45,7 @@ namespace BarrocIntens
             using var db = new AppDbContext();
 
             var clickedProduct = db.Products.Find(_clickedProduct.Id);
-
+            
             // Werk de eigenschappen van het product bij met de waarden uit de tekstvakken
             clickedProduct.Name = NameTextBox.Text;
             clickedProduct.Description = DescriptionTextBox.Text;

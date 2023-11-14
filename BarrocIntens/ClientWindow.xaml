@@ -22,7 +22,10 @@
 
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2"
-                    Background="#fdd716" />
+                    Background="#fdd716">
+            <Button x:Name="uitlogEl"
+                    Click="uitlogEl_Click">Uitloggen</Button>
+        </StackPanel>
         <StackPanel Grid.Column="1"
                     Grid.Row="0"
                     HorizontalAlignment="Center"
@@ -43,20 +46,15 @@
                 <DataTemplate x:DataType="localData:Product">
                     <StackPanel Orientation="Vertical"
                                 Padding="5">
+                        <Image Source="{x:Bind ImagePath}"
+                               Width="150"
+                               HorizontalAlignment="Left" />
                         <TextBlock Text="{x:Bind Name}" />
                         <TextBlock Text="{x:Bind Description}"
                                    Foreground="DarkGray" />
                         <TextBlock Foreground="Gold">
                  <Run>Prijs:</Run>
                  <Run Text="{x:Bind PriceFormatted}" />
-                        </TextBlock>
-                        <TextBlock Foreground="Green"
-                                   FontWeight="Bold">
-                    <Run>Hoeveelheid:</Run>
-                    <Run Text="{x:Bind StockQuantity}" />
-                        </TextBlock>
-                        <TextBlock Foreground="Red"
-                                   FontWeight="Bold">
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>

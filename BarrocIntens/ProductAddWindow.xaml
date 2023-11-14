@@ -45,7 +45,8 @@
                        Margin="0,0,0,10"  />
             <TextBox x:Name="PriceTextBox"
                      PlaceholderText="Voer de prijs in" />
-
+            <Button x:Name="fileButton"
+                    Click="fileButton_Click">Voeg een Foto toe...</Button>
             <Button Content="Toevoegen"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
