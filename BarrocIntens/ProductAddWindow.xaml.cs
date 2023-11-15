@@ -30,8 +30,6 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class ProductAddWindow : Window
     {
-        
-
         public ProductAddWindow()
         {
             this.InitializeComponent();
