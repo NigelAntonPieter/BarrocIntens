@@ -69,6 +69,7 @@
                     <Run>Besteld:</Run>
                     <Run Text="{x:Bind IsOrdered}" />
                         </TextBlock>
+                       
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

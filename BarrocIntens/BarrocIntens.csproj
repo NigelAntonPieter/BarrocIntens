@@ -12,12 +12,6 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-    <Page Remove="NewFolder\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="ClientWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
     <None Remove="LoginWindow.xaml" />
@@ -71,9 +65,6 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
   <ItemGroup>
-    <PRIResource Remove="NewFolder\**" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="ProductEditWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -107,5 +98,8 @@
     <Page Update="SalesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Inkoop\" />
   </ItemGroup>
 </Project>

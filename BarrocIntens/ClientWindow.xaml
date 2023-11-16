@@ -46,7 +46,7 @@
                 <DataTemplate x:DataType="localData:Product">
                     <StackPanel Orientation="Vertical"
                                 Padding="5">
-                        <Image Source="{x:Bind ImagePath}"
+                        <Image Source="{x:Bind ImagePathWithFallBack}"
                                Width="150"
                                HorizontalAlignment="Left" />
                         <TextBlock Text="{x:Bind Name}" />

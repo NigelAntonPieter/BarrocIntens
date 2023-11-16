@@ -81,5 +81,10 @@ namespace BarrocIntens
             loginwindow.Activate();
             this.Close();
         }
+
+        private void Inkopen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
