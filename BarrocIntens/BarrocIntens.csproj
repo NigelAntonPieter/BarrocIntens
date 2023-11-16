@@ -12,7 +12,9 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="EditLeaseContractForm.xaml" />
     <None Remove="InstallationReceiptWindow.xaml" />
+    <None Remove="LeaseContractManagementPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +45,16 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="EditLeaseContractForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LeaseContractManagementPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="InstallationReceiptWindow.xaml">

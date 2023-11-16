@@ -26,13 +26,6 @@ namespace BarrocIntens.Data
         public decimal ConnectionCosts { get; set; }
     }
 
-    public class AppDbContext : DbContext
-    {
-        public DbSet<InstallationReceipt> InstallationReceipts { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost;port=3306;user=root;password=KutLuna;database=BarrocIntens");
-        }
     }
-}
+
