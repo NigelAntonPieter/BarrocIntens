@@ -1,4 +1,3 @@
-using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,11 +12,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using BarrocIntens.Data;
-using System.Drawing;
-using System.Reflection.Emit;
-using Windows.UI.Input.Spatial;
-using Microsoft.UI.Xaml.Automation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -27,30 +21,11 @@ namespace BarrocIntens
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainWindow : Window
+    public sealed partial class SalesWindow : Window
     {
-        //internal static User loggedInUser;
-       
-       
-        public MainWindow()
+        public SalesWindow()
         {
             this.InitializeComponent();
-            using (var db = new AppDbContext())
-            {
-               
-                db.Database.EnsureCreated();
-                
-            }
-
         }
-
-        private void LoginPage_Click(object sender, RoutedEventArgs e)
-        {
-            var loginWindow = new LoginWindow();
-            loginWindow.Activate();
-
-            this.Close();
-        }  
     }
 }
-
