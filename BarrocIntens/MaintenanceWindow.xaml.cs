@@ -29,12 +29,6 @@ namespace BarrocIntens
             this.InitializeComponent();
 
  
-            using (var dbContext = new AppDbContext())
-            {
-
-                var maintenanceAppointments = dbContext.MaintenanceAppointments.ToList();
-                MaintenanceListView.ItemsSource = maintenanceAppointments;
-            }
         }
     }
 }

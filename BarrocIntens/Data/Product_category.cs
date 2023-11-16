@@ -10,7 +10,7 @@ namespace BarrocIntens.Data
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Is_employee_only { get; set; }
+        public bool Is_employee_only { get; set; }
 
         
     }

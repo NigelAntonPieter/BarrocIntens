@@ -24,22 +24,7 @@
             <TextBlock Text="Maitenance"
                        FontSize="50"
                        FontWeight="Bold" />
-            <ListView x:Name="MaintenanceListView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="localData:Maintenance_appointment">
-                        <Grid Margin="5">
-                            <Border BorderBrush="Black" BorderThickness="1" Background="#fdd716" CornerRadius="5">
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Id}"  FontWeight="Bold" Margin="5"/>
-                                    <TextBlock Text="{Binding Company.Name}" Margin="5"/>
-                                    <TextBlock Text="{Binding Remark}" TextWrapping="Wrap" Margin="5"/>
-                                    <TextBlock Text="{Binding DateAdded}" Margin="5"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+
             <Image Source="Asset/logo6_klein.png"
                    Width="100"
                    Height="100" />
