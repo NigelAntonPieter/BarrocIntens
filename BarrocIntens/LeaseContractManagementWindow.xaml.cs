@@ -1,4 +1,3 @@
-using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,17 +12,16 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using BarrocIntens.Data;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace BarrocIntens
 {
-    public sealed partial class LeaseContractManagementPage : Page
+    public sealed partial class LeaseContractManagementWindow : Window
     {
         private AppDbContext dbContext;
 
-        public LeaseContractManagementPage()
+        public LeaseContractManagementWindow()
         {
             this.InitializeComponent();
             dbContext = new AppDbContext();
@@ -77,10 +75,10 @@ namespace BarrocIntens
 
                 };
 
-                dbContext.Invoices.Add(newInvoice);
+                dbContext.InvoicesFinance.Add(newInvoice);
                 dbContext.SaveChanges();
             }
-        }   
+        }
 
         private void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
         {

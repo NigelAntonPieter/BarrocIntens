@@ -15,6 +15,9 @@ namespace BarrocIntens.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Product_category> ProductCategories { get; set; }
 
+        public DbSet<LeaseContract> LeaseContracts { get; set; }
+        public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(

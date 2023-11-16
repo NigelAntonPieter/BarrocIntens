@@ -19,8 +19,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="AdminMaintenanceWindow.xaml" />
+    <None Remove="BlankPage1.xaml" />
     <None Remove="ClientWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
+    <None Remove="LeaseContractManagementWindow.xaml" />
     <None Remove="LoginWindow.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
     <None Remove="ProductAddWindow.xaml" />
@@ -73,6 +75,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PRIResource Remove="NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LeaseContractManagementWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BlankPage1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="AdminMaintenanceWindow.xaml">

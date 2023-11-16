@@ -19,34 +19,16 @@ using Windows.Foundation.Collections;
 
 namespace BarrocIntens
 {
-    public sealed partial class FinanceWindow : Window
+    public partial class LeaseContractOverviewWindow : Window
     {
         private AppDbContext dbContext;
 
-        public FinanceWindow()
+        public LeaseContractOverviewWindow()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             dbContext = new AppDbContext();
-        }
 
-        private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Your existing logic for saving lease contracts
-        }
-
-        // Handle other events and logic from both sections
-
-        private LeaseContract GetSelectedLeaseContract()
-        {
-            // Implement this method if needed
-            return null;
-        }
-
-        private InvoiceFinance GetSelectedInvoice()
-        {
-            // Implement this method if needed
-            return null;
+            LeaseContractsListView.ItemsSource = dbContext.LeaseContracts.ToList();
         }
     }
 }
-

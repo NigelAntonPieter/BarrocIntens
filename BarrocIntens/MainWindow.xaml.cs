@@ -13,7 +13,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using BarrocIntens.Data;
 using System.Drawing;
 using System.Reflection.Emit;
 using Windows.UI.Input.Spatial;
