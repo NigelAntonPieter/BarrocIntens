@@ -13,6 +13,7 @@ namespace BarrocIntens.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Maintenance_appointment> MaintenanceAppointments { get; set; }
         public DbSet<Product_category> ProductCategories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,6 +36,15 @@ namespace BarrocIntens.Data
                 new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance"},
                  new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "a", Role = "Purchase" },
                   new User { Id = 4, Name = "Luna Smedes", UserName = "lunasmedes", Password = "n", Role = "Client" }
+            );
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 1, Name = "Company1", Phone = "123-456-7890", Street = "123 Main Street" },
+                new Company { Id = 2, Name = "Company2", Phone = "987-654-3210", Street = "456 Oak Avenue" },
+                new Company { Id = 3, Name = "Company3", Phone = "555-123-4567", Street = "789 Pine Road" }
+            );
+            modelBuilder.Entity<Maintenance_appointment>().HasData(
+                new Maintenance_appointment { Id = 1, CompanyId = 1, Remark = "Some seeded remark 1", DateAdded = DateTime.Now },
+                new Maintenance_appointment { Id = 2, CompanyId = 2, Remark = "Some seeded remark 2", DateAdded = DateTime.Now }
             );
 
             modelBuilder.Entity<Product>().HasData(
@@ -64,6 +74,7 @@ namespace BarrocIntens.Data
                 new Product { Id = "S234XYZ20", Name = "Barroc Intens Italian Special Raspberry Mocha", Description = "Special Berry Chocolate Bliss", Price = 1599, StockQuantity = 24, IsOrdered = true }
 
             );
+
         }
 
     }
