@@ -32,10 +32,11 @@ namespace BarrocIntens
     public sealed partial class ProductAddWindow : Window
     {
         private StorageFile copiedFile;
+        public ObservableCollection<Product_category> ProductCategories { get; set; }
         public ProductAddWindow()
         {
             this.InitializeComponent();
-            public ObservableCollection<Product_category> ProductCategories { get; set; }
+            
 
             using (var dbContext = new AppDbContext())
             {
@@ -58,6 +59,7 @@ namespace BarrocIntens
             }
             else
             {
+                var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
                 using var db = new AppDbContext();
                 db.Products.Add(new Product
                 {
@@ -65,6 +67,7 @@ namespace BarrocIntens
                     Name = NameTextBox.Text,
                     Description = DescriptionTextBox.Text,
                     Price = decimal.Parse(PriceTextBox.Text),
+                    Product_categoryId = productCategoryId.Id,
                     ImagePath = copiedFile.Path
                 });
                 db.SaveChanges();
@@ -103,30 +106,11 @@ namespace BarrocIntens
             var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
 
             copiedFile = await file.CopyAsync(localFolder, renamedFileName);
-            var copiedFile = await file.CopyAsync(localFolder, renamedFileName);
+            
 
-            var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
+           
 
             using var db = new AppDbContext();
-            db.Products.Add(new Product
-            {
-                Id = CodeTextBox.Text,
-                Name = NameTextBox.Text,
-                Description = DescriptionTextBox.Text,
-                Price = decimal.Parse(PriceTextBox.Text),
-                Product_categoryId = productCategoryId.Id,
-                ImagePath = copiedFile.Path
-        });
-            db.SaveChanges();
-
-            this.Close();
-        }
-
-
-        private async void fileButton_Click(object sender, RoutedEventArgs e)
-        {
-            await SelectAndCopyFileAsync();
-
         }
     }
 }

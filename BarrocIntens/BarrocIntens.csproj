@@ -94,7 +94,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="ProductEditWindow.xaml">
+    <Page Update="ProductEditWindow.xaml"/>
     <Page Update="ClientRegisterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
