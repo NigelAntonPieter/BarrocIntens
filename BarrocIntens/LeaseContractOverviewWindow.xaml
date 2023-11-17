@@ -7,35 +7,18 @@
         Title="Lease Contracts Overview" >
     <Grid>
         <ListView x:Name="LeaseContractsListView" Margin="20">
-            <ListView>
-                <GridView>
-                    <GridViewColumn Header="Customer Name" Width="120">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding CustomerName}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
 
-                    <!-- Edit Button Column -->
-                    <GridViewColumn Header="Edit" Width="60">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Edit" Click="EditLeaseContractButton_Click"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-
-                    <!-- Delete Button Column -->
-                    <GridViewColumn Header="Delete" Width="60">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete" Click="DeleteLeaseContractButton_Click"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView>
+            <GridView>
+                <DataTemplate>
+                    <TextBlock Text="{Binding CustomerName}" />
+                </DataTemplate>
+                <DataTemplate>
+                    <Button Content="Edit" Click="EditLeaseContractButton_Click"/>
+                </DataTemplate>
+                <DataTemplate>
+                    <Button Content="Delete" Click="DeleteLeaseContractButton_Click"/>
+                </DataTemplate>
+            </GridView>
         </ListView>
     </Grid>
 </Window>

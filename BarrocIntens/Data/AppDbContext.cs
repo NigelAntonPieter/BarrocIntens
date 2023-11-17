@@ -24,6 +24,7 @@ namespace BarrocIntens.Data
                 ConfigurationManager.ConnectionStrings["BarrocIntens"].ConnectionString,
                 ServerVersion.Parse("5.7.33-winx64"));
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

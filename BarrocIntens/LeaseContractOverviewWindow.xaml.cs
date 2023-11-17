@@ -30,5 +30,36 @@ namespace BarrocIntens
 
             LeaseContractsListView.ItemsSource = dbContext.LeaseContracts.ToList();
         }
+
+        private LeaseContract GetSelectedLeaseContract()
+        {
+            //if (leaseContractsListView.SelectedItem is LeaseContract selectedLeaseContract)
+            //{
+            //    return selectedLeaseContract;
+            //}
+            return null;
+        }
+            private void EditLeaseContractButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
+
+            if (selectedLeaseContract != null)
+            {
+                var editForm = new EditLeaseContractForm(selectedLeaseContract);
+                editForm.ShowDialog();
+            }
+        }
+
+        private void DeleteLeaseContractButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
+
+            if (selectedLeaseContract != null)
+            {
+                dbContext.LeaseContracts.Remove(selectedLeaseContract);
+                dbContext.SaveChanges();
+            }
+        }
+
     }
 }
