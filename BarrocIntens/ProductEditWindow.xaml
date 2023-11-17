@@ -49,6 +49,11 @@
                  Grid.Row="2"
                  Grid.Column="1"
                  Margin="5" />
+        <ComboBox x:Name="ProductCategoryComboBox"
+              ItemsSource="{x:Bind ProductCategories}"
+              DisplayMemberPath="Name"
+              SelectedValuePath="Id"
+              PlaceholderText="Selecteer een categorie" />
 
         <Button Content="Update Product"
                 Grid.Row="3"

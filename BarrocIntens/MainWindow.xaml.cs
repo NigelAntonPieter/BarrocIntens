@@ -36,7 +36,7 @@ namespace BarrocIntens
             this.InitializeComponent();
             using (var db = new AppDbContext())
             {
-               
+               db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
                 
             }
