@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using BarrocIntens.Data;
+using System.Collections.ObjectModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,10 +26,16 @@ namespace BarrocIntens
     public sealed partial class ProductEditWindow : Window
     {
         private Product _clickedProduct;
+        public ObservableCollection<Product_category> ProductCategories { get; set; }
 
         public ProductEditWindow(Product clickedProduct)
         {   
             this.InitializeComponent();
+            using (var dbContext = new AppDbContext())
+            {
+                ProductCategories = new ObservableCollection<Product_category>(dbContext.ProductCategories.ToList());
+            }
+
             _clickedProduct = clickedProduct;
 
             using var db = new AppDbContext();
@@ -45,13 +52,22 @@ namespace BarrocIntens
             using var db = new AppDbContext();
 
             var clickedProduct = db.Products.Find(_clickedProduct.Id);
-            
-            // Werk de eigenschappen van het product bij met de waarden uit de tekstvakken
+            var selectedCategory = ProductCategoryComboBox.SelectedItem as Product_category;
+            if (selectedCategory != null)
+            {
+                clickedProduct.Product_categoryId = selectedCategory.Id;
+            }
+            else
+            {
+                clickedProduct.Product_categoryId = clickedProduct.Product_categoryId;
+            }
+
+
+                // Werk de eigenschappen van het product bij met de waarden uit de tekstvakken
             clickedProduct.Name = NameTextBox.Text;
             clickedProduct.Description = DescriptionTextBox.Text;
             // Zorg ervoor dat je de prijs op de juiste manier bijwerkt, afhankelijk van het type in je database
             clickedProduct.Price = decimal.Parse(PriceTextBox.Text);
-
             // Sla de wijzigingen op in de database
             db.SaveChanges();
 
