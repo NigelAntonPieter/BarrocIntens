@@ -53,6 +53,13 @@
                     Width="75"
                     Click="Button_Click" />
             </StackPanel>
+        <ContentDialog x:Name="dialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Vul alle velden in en selecteer een afbeelding." />
+            </StackPanel>
+        </ContentDialog>
 
     </Grid>
 </Window>

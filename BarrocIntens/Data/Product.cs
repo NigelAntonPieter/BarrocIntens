@@ -23,7 +23,7 @@ namespace BarrocIntens.Data
 
 
 
-        public string ImagePathWithFallBack => ImagePath ?? "/Assets/Logo6_klein.png";
+        public string ImagePathWithFallBack => ImagePath ?? "/Assets/Cross1.png";
         public string PriceFormatted => string.Format("{0:N2}", Price);
     }
 }

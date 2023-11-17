@@ -38,7 +38,7 @@
             <TextBox TextChanged="TextBox_TextChanged"
                      x:Name="searchTextbox" />
         </StackPanel>
-
+   
         <ListView x:Name="productListView"
                   Grid.Row="1"
                   Grid.Column="1">
@@ -46,7 +46,7 @@
                 <DataTemplate x:DataType="localData:Product">
                     <StackPanel Orientation="Vertical"
                                 Padding="5">
-                        <Image Source="{x:Bind ImagePath}"
+                        <Image Source="{x:Bind ImagePathWithFallBack}"
                                Width="150"
                                HorizontalAlignment="Left" />
                         <TextBlock Text="{x:Bind Name}" />
@@ -59,6 +59,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
         </ListView>
     </Grid>
 </Window>

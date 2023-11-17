@@ -44,5 +44,6 @@ namespace BarrocIntens
             loginwindow.Activate();
             this.Close();
         }
+
     }
 }
