@@ -32,8 +32,6 @@ namespace BarrocIntens
             productListView.ItemsSource = db.Products;
         }
 
-
-
         private void addProduct_Click(object sender, RoutedEventArgs e)
         {
             var productAddWindow = new ProductAddWindow();
@@ -49,7 +47,7 @@ namespace BarrocIntens
 
         private void deleteProduct_Click(object sender, RoutedEventArgs e)
         {
-            if(productListView.SelectedItem is Product selectedproduct)
+            if (productListView.SelectedItem is Product selectedproduct)
             {
                 using var db = new AppDbContext();
                 db.Products.Remove(selectedproduct);
@@ -77,14 +75,9 @@ namespace BarrocIntens
 
         private void uitlogEL_Click(object sender, RoutedEventArgs e)
         {
-            var loginwindow = new LoginWindow();
-            loginwindow.Activate();
+            var loginWindow = new LoginWindow();
+            loginWindow.Activate();
             this.Close();
-        }
-
-        private void Inkopen_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

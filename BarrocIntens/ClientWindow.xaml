@@ -38,7 +38,7 @@
             <TextBox TextChanged="TextBox_TextChanged"
                      x:Name="searchTextbox" />
         </StackPanel>
-
+   
         <ListView x:Name="productListView"
                   Grid.Row="1"
                   Grid.Column="1">
@@ -59,6 +59,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
         </ListView>
     </Grid>
 </Window>

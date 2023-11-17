@@ -19,6 +19,7 @@ using Windows.Gaming.UI;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
 using Windows.Storage;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,13 +31,35 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class ProductAddWindow : Window
     {
+        private StorageFile copiedFile;
         public ProductAddWindow()
         {
             this.InitializeComponent();
-
-            
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+            using var db = new AppDbContext();
+            db.Products.Add(new Product
+            {
+                Id = CodeTextBox.Text,
+                Name = NameTextBox.Text,
+                Description = DescriptionTextBox.Text,
+                Price = decimal.Parse(PriceTextBox.Text),
+                ImagePath = copiedFile.Path
+        });
+            db.SaveChanges();
+
+            this.Close();
+        }
+
+        private async void fileButton_Click(object sender, RoutedEventArgs e)
+        {
+            await SelectAndCopyFileAsync();
+        }
+
+        private async Task SelectAndCopyFileAsync()
         {
             var fileopenPicker = new FileOpenPicker()
             {
@@ -60,47 +83,8 @@ namespace BarrocIntens
             var currentTime = DateTime.Now;
             var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
 
-            var copiedFile = await file.CopyAsync(localFolder, renamedFileName);
+            copiedFile = await file.CopyAsync(localFolder, renamedFileName);
 
-            using var db = new AppDbContext();
-            db.Products.Add(new Product
-            {
-                Id = CodeTextBox.Text,
-                Name = NameTextBox.Text,
-                Description = DescriptionTextBox.Text,
-                Price = decimal.Parse(PriceTextBox.Text),
-                ImagePath = copiedFile.Path
-        });
-            db.SaveChanges();
-
-            this.Close();
-        }
-
-        private async void fileButton_Click(object sender, RoutedEventArgs e)
-        {
-            var fileopenPicker = new FileOpenPicker()
-            {
-                FileTypeFilter = {".jpg", ".jpeg", ".png", ".gif"}
-            };
-
-            var windowHandle = WindowNative.GetWindowHandle(this);
-            InitializeWithWindow.Initialize(fileopenPicker, windowHandle);
-
-            var file = await fileopenPicker.PickSingleFileAsync();
-
-            if (file == null)
-            {
-                return;
-            }
-
-            var localFolder = ApplicationData.Current.LocalFolder;
-
-            var fileExtension = file.FileType;
-
-            var currentTime = DateTime.Now;
-            var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
-            
-            var copiedFile = await file.CopyAsync(localFolder, renamedFileName);
 
         }
     }
