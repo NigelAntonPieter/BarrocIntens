@@ -20,9 +20,8 @@ namespace BarrocIntens.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(
-                ConfigurationManager.ConnectionStrings["BarrocIntens"].ConnectionString,
-                ServerVersion.Parse("5.7.33-winx64"));
+            string connectionString = "Server=localhost;port=3306;user=root;password=KutLuna;database=BarrocIntens";
+            optionsBuilder.UseMySql(connectionString, ServerVersion.Parse("5.7.33-winx64"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,7 +37,8 @@ namespace BarrocIntens.Data
                 new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = "password123", Role = "Sales" },
                 new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance"},
                  new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "a", Role = "Purchase" },
-                  new User { Id = 4, Name = "Luna Smedes", UserName = "lunasmedes", Password = "n", Role = "Client" }
+                  new User { Id = 4, Name = "Luna Smedes", UserName = "lunasmedes", Password = "n", Role = "Client" },
+                  new User { Id = 5, Name = "test", UserName = "test", Password = "test", Role = "Finance" }
             );
 
             modelBuilder.Entity<Product>().HasData(
