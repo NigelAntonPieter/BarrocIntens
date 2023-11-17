@@ -44,12 +44,8 @@ namespace BarrocIntens
 
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
         {
-            //var productAddWindow = new ProductAddWindow();
-            //productAddWindow.Activate();
             var LeaseContractOverview = new LeaseContractOverviewWindow();
                 LeaseContractOverview.Activate();
-            //LeaseContractOverviewWindow overviewWindow = new LeaseContractOverviewWindow();
-            //overviewWindow.Show();
             this.Close(); 
         }
 
