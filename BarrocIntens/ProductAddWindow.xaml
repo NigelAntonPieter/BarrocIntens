@@ -45,6 +45,15 @@
                        Margin="0,0,0,10"  />
             <TextBox x:Name="PriceTextBox"
                      PlaceholderText="Voer de prijs in" />
+            <TextBlock Text="Categorie:"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,10" />
+            <ComboBox x:Name="ProductCategoryComboBox"
+              ItemsSource="{x:Bind ProductCategories}"
+              DisplayMemberPath="Name"
+              SelectedValuePath="Id"
+              PlaceholderText="Selecteer een categorie" />
+
             <Button x:Name="fileButton"
                     Click="fileButton_Click">Voeg een Foto toe...</Button>
             <Button Content="Toevoegen"

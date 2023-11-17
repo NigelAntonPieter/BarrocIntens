@@ -36,7 +36,7 @@ namespace BarrocIntens
 
             using var db = new AppDbContext();
             productListView.ItemsSource = db.Products
-                .Where(p => p.Name.Contains(searchInput) && (!p.Product_category.Is_employee_only));
+                .Where(p => p.Name.Contains(searchInput) && (!p.Is_employee_only));
 
 
         }

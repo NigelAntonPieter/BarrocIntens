@@ -30,13 +30,18 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class ProductAddWindow : Window
     {
-        
+        public ObservableCollection<Product_category> ProductCategories { get; set; }
+
 
         public ProductAddWindow()
         {
             this.InitializeComponent();
 
-            
+            using (var dbContext = new AppDbContext())
+            {
+                ProductCategories = new ObservableCollection<Product_category>(dbContext.ProductCategories.ToList());
+            }
+
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -64,6 +69,8 @@ namespace BarrocIntens
 
             var copiedFile = await file.CopyAsync(localFolder, renamedFileName);
 
+            var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
+
             using var db = new AppDbContext();
             db.Products.Add(new Product
             {
@@ -71,12 +78,14 @@ namespace BarrocIntens
                 Name = NameTextBox.Text,
                 Description = DescriptionTextBox.Text,
                 Price = decimal.Parse(PriceTextBox.Text),
+                Product_categoryId = productCategoryId.Id,
                 ImagePath = copiedFile.Path
         });
             db.SaveChanges();
 
             this.Close();
         }
+
 
         private async void fileButton_Click(object sender, RoutedEventArgs e)
         {
