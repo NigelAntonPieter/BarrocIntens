@@ -11,6 +11,7 @@
             <GridView>
                 <DataTemplate>
                     <TextBlock Text="{Binding CustomerName}" />
+                    
                 </DataTemplate>
                 <DataTemplate>
                     <Button Content="Edit" Click="EditLeaseContractButton_Click"/>
