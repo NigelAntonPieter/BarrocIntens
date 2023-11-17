@@ -63,6 +63,11 @@ namespace BarrocIntens
                         var maintenanceWindow = new Maintenance();
                         maintenanceWindow.Activate();
                     }
+                    else if (user.Role == "MaintenanceAdmin")
+                    {
+                        var AdminMaintenanceWindow = new AdminMaintenanceWindow();
+                        AdminMaintenanceWindow.Activate();
+                    }
                     else if (user.Role == "Finance")
                     {
                         var financeWindow = new FinanceWindow();

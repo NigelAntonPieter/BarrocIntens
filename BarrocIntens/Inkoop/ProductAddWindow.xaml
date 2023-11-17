@@ -45,6 +45,15 @@
                        Margin="0,0,0,10"  />
             <TextBox x:Name="PriceTextBox"
                      PlaceholderText="Voer de prijs in" />
+            <TextBlock Text="Categorie:"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,10" />
+            <ComboBox x:Name="ProductCategoryComboBox"
+              ItemsSource="{x:Bind ProductCategories}"
+              DisplayMemberPath="Name"
+              SelectedValuePath="Id"
+              PlaceholderText="Selecteer een categorie" />
+
             <Button x:Name="fileButton"
                     Click="fileButton_Click">Voeg een Foto toe...</Button>
             <Button Content="Toevoegen"
@@ -53,6 +62,13 @@
                     Width="75"
                     Click="Button_Click" />
             </StackPanel>
+        <ContentDialog x:Name="dialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Vul alle velden in en selecteer een afbeelding." />
+            </StackPanel>
+        </ContentDialog>
 
     </Grid>
 </Window>

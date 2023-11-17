@@ -35,7 +35,10 @@ namespace BarrocIntens
             var searchInput = searchTextbox.Text;
 
             using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products.Where(p => p.Name.Contains(searchInput));
+            productListView.ItemsSource = db.Products
+                .Where(p => p.Name.Contains(searchInput) && (!p.Is_employee_only));
+
+
         }
 
         private void uitlogEl_Click(object sender, RoutedEventArgs e)
@@ -44,5 +47,6 @@ namespace BarrocIntens
             loginwindow.Activate();
             this.Close();
         }
+
     }
 }

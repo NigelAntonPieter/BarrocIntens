@@ -1,3 +1,5 @@
+using BarrocIntens.Date;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -26,6 +28,41 @@ namespace BarrocIntens
         public SalesWindow()
         {
             this.InitializeComponent();
+
+            var accountType = "client";
+
+            using (var db = new AppDbContext())
+            {
+                var users = db.Users
+                    .Where(u => u.Role == accountType);
+
+                clientsListView.ItemsSource = users;
+            }
+        }
+
+        private void MakeClientAccount_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new ClientRegisterWindow();
+            window.Activate();
+            window.Closed += Window_Closed;
+        }
+
+        private void Window_Closed(object sender, WindowEventArgs args)
+        {
+            var accountType = "client";
+
+            using (var db = new AppDbContext())
+            {
+                var users = db.Users
+                    .Where(u => u.Role == accountType);
+
+                clientsListView.ItemsSource = users;
+            }
+        }
+
+        private void clientsListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }
