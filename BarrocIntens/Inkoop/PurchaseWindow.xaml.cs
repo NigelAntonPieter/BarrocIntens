@@ -79,5 +79,54 @@ namespace BarrocIntens
             loginWindow.Activate();
             this.Close();
         }
+
+        private async void AddQuantity_Click(object sender, RoutedEventArgs e)
+        {
+            // Controleren of er een product is geselecteerd
+            if (productListView.SelectedItem is Product selectedProduct)
+            {
+                // Openen van de ContentDialog
+                ContentDialogResult result = await QuantityInputDialog.ShowAsync();
+
+                // Controleren of de gebruiker op 'Ok' heeft geklikt in de ContentDialog
+                if (result == ContentDialogResult.Primary)
+                {
+                    // Controleren of het ingevoerde cijfer geldig is
+                    if (int.TryParse(QuantityTextBox.Text, out int quantity))
+                    {
+                        // De hoeveelheid van het geselecteerde product bijwerken
+                        using var db = new AppDbContext();
+                        selectedProduct.StockQuantity += quantity;
+                        db.Update(selectedProduct);
+                        db.SaveChanges();
+
+                        // Productlijst vernieuwen
+                        productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
+                    }
+                    else
+                    {
+                        // Weergeven van een bericht dat het ingevoerde cijfer ongeldig is
+                        var invalidInputDialog = new ContentDialog
+                        {
+                            Title = "Ongeldige invoer",
+                            Content = "Voer een geldig getal in voor de hoeveelheid.",
+                            CloseButtonText = "Ok"
+                        };
+                        _ = await invalidInputDialog.ShowAsync();
+                    }
+                }
+            }
+            else
+            {
+                // Weergeven van een bericht dat er geen product is geselecteerd
+                var noProductSelectedDialog = new ContentDialog
+                {
+                    Title = "Geen product geselecteerd",
+                    Content = "Selecteer een product om de hoeveelheid te wijzigen.",
+                    CloseButtonText = "Ok"
+                };
+                _ = await noProductSelectedDialog.ShowAsync();
+            }
+        }
     }
 }

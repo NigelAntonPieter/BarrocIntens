@@ -96,8 +96,6 @@ namespace BarrocIntens
             var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
 
             copiedFile = await file.CopyAsync(localFolder, renamedFileName);
-
-
         }
     }
 }
