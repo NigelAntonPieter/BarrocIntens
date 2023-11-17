@@ -31,22 +31,95 @@ namespace BarrocIntens
 
         private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
         {
-            // Your existing logic for saving lease contracts
+            LeaseContract newLeaseContract = new LeaseContract
+            {
+                CustomerName = CustomerNameTextBox.Text,
+                BkrCheckPassed = BkrCheckCheckBox.IsChecked ?? false,
+                MonthlyInvoice = MonthlyInvoiceCheckBox.IsChecked ?? false,
+            };
+
+            dbContext.LeaseContracts.Add(newLeaseContract);
+            dbContext.SaveChanges();
         }
 
-        // Handle other events and logic from both sections
+        private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeaseContractOverviewWindow overviewWindow = new LeaseContractOverviewWindow();
+            overviewWindow.Show();
+            this.Close(); 
+        }
 
+        private void EditLeaseContractButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
+
+            if (selectedLeaseContract != null)
+            {
+                var editForm = new EditLeaseContractForm(selectedLeaseContract);
+                editForm.ShowDialog();
+            }
+        }
+
+        private void DeleteLeaseContractButton_Click(object sender, RoutedEventArgs e)
+        {
+            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
+
+            if (selectedLeaseContract != null)
+            {
+                dbContext.LeaseContracts.Remove(selectedLeaseContract);
+                dbContext.SaveChanges();
+            }
+        }
+
+        private void GenerateInvoiceButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Add code to generate an invoice for a lease contract
+
+            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
+
+            if (selectedLeaseContract != null)
+            {
+                // Create a new invoice based on the selected lease contract
+                InvoiceFinance newInvoice = new InvoiceFinance
+                {
+
+                };
+
+                dbContext.InvoicesFinance.Add(newInvoice);
+                dbContext.SaveChanges();
+            }
+        }
+
+        private void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Add code to send an invoice to the customer
+        }
+
+        private void MarkAsPaidButton_Click(object sender, RoutedEventArgs e)
+        {
+            InvoiceFinance selectedInvoice = GetSelectedInvoice();
+
+            if (selectedInvoice != null)
+            {
+                selectedInvoice.IsPaid = true;
+
+                dbContext.SaveChanges();
+
+            }
+        }
         private LeaseContract GetSelectedLeaseContract()
         {
-            // Implement this method if needed
+            //if (leaseContractsListView.SelectedItem is LeaseContract selectedLeaseContract)
+            //{
+            //    return selectedLeaseContract;
+            //}
             return null;
-        }
 
+        }
         private InvoiceFinance GetSelectedInvoice()
         {
-            // Implement this method if needed
+            // Add code to retrieve the selected invoice from the UI
             return null;
         }
     }
 }
-
