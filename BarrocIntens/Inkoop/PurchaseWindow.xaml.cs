@@ -29,7 +29,7 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
             using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products;
+            productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
         }
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace BarrocIntens
         private void ProductAddWindow_Closed(object sender, WindowEventArgs args)
         {
             using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products;
+            productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
         }
 
         private void deleteProduct_Click(object sender, RoutedEventArgs e)
@@ -70,7 +70,7 @@ namespace BarrocIntens
         private void ProductEditWindow_Closed(object sender, WindowEventArgs args)
         {
             using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products;
+            productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
         }
 
         private void uitlogEL_Click(object sender, RoutedEventArgs e)

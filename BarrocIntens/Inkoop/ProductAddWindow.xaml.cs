@@ -38,20 +38,32 @@ namespace BarrocIntens
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-           
 
-            using var db = new AppDbContext();
-            db.Products.Add(new Product
+
+            if (string.IsNullOrWhiteSpace(CodeTextBox.Text) ||
+                string.IsNullOrWhiteSpace(NameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(DescriptionTextBox.Text) ||
+                string.IsNullOrWhiteSpace(PriceTextBox.Text) ||
+                copiedFile == null)
             {
-                Id = CodeTextBox.Text,
-                Name = NameTextBox.Text,
-                Description = DescriptionTextBox.Text,
-                Price = decimal.Parse(PriceTextBox.Text),
-                ImagePath = copiedFile.Path
-        });
-            db.SaveChanges();
 
-            this.Close();
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                using var db = new AppDbContext();
+                db.Products.Add(new Product
+                {
+                    Id = CodeTextBox.Text,
+                    Name = NameTextBox.Text,
+                    Description = DescriptionTextBox.Text,
+                    Price = decimal.Parse(PriceTextBox.Text),
+                    ImagePath = copiedFile.Path
+                });
+                db.SaveChanges();
+
+                this.Close();
+            }
         }
 
         private async void fileButton_Click(object sender, RoutedEventArgs e)
