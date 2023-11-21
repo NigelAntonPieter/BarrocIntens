@@ -48,5 +48,49 @@ namespace BarrocIntens
             this.Close();
         }
 
+        private async void productListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Product clickedProduct)
+            {
+                // Toon de Orderdialog
+                ContentDialogResult result = await Orderdialog.ShowAsync();
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    if (int.TryParse(quantityTextBox.Text, out int quantity))
+                    {
+                        using var db = new AppDbContext();
+
+                        // Controleer of het aantal beschikbaar is om te bestellen
+                        if (clickedProduct.StockQuantity >= quantity)
+                        {
+                            // Werk de database bij met de nieuwe hoeveelheid
+                            clickedProduct.StockQuantity -= quantity;
+                            clickedProduct.IsOrdered = true; // Zet IsOrdered op true
+
+                            // Sla het product op in de database
+                            db.Products.Update(clickedProduct);
+                            await db.SaveChangesAsync();
+
+                            // Voeg een opmerking toe aan de bestelling (optioneel)
+                            string comment = commentTextBox.Text;
+                            // Hier kun je de logica toevoegen om de opmerking op te slaan in de database, indien nodig.
+                        }
+                        else
+                        {
+                            // Melding als de gevraagde hoeveelheid niet beschikbaar is
+                            _ = QuantityLevelDialog.ShowAsync();
+                        }
+                    }
+                    else
+                    {
+                        // Melding als de gebruiker geen geldige numerieke waarde heeft ingevoerd
+                       _ = QuantityParameterDialog.ShowAsync();
+                    }
+                }
+            }
+        }
+
+
     }
 }

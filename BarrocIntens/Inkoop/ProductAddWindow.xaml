@@ -45,6 +45,11 @@
                        Margin="0,0,0,10"  />
             <TextBox x:Name="PriceTextBox"
                      PlaceholderText="Voer de prijs in" />
+            <TextBlock Text="Hoeveelheid:"
+                       HorizontalAlignment="center"
+                       Margin="0,0,0,10" />
+            <TextBox x:Name="QuantityTextBox"
+                     PlaceholderText="Voer de hoeveelheid  in" />
             <TextBlock Text="Categorie:"
                HorizontalAlignment="Center"
                Margin="0,0,0,10" />
@@ -69,6 +74,5 @@
                 <TextBlock Text="Vul alle velden in en selecteer een afbeelding." />
             </StackPanel>
         </ContentDialog>
-
     </Grid>
 </Window>

@@ -52,6 +52,7 @@ namespace BarrocIntens
                 string.IsNullOrWhiteSpace(NameTextBox.Text) ||
                 string.IsNullOrWhiteSpace(DescriptionTextBox.Text) ||
                 string.IsNullOrWhiteSpace(PriceTextBox.Text) ||
+                 string.IsNullOrWhiteSpace(QuantityTextBox.Text) ||
                 copiedFile == null)
             {
 
@@ -67,6 +68,7 @@ namespace BarrocIntens
                     Name = NameTextBox.Text,
                     Description = DescriptionTextBox.Text,
                     Price = decimal.Parse(PriceTextBox.Text),
+                    StockQuantity = int.Parse(QuantityTextBox.Text),
                     Product_categoryId = productCategoryId.Id,
                     ImagePath = copiedFile.Path
                 });
@@ -106,11 +108,6 @@ namespace BarrocIntens
             var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
 
             copiedFile = await file.CopyAsync(localFolder, renamedFileName);
-            
-
-           
-
-            using var db = new AppDbContext();
         }
     }
 }

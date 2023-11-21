@@ -47,15 +47,26 @@ namespace BarrocIntens
 
         private void deleteProduct_Click(object sender, RoutedEventArgs e)
         {
-            if (productListView.SelectedItem is Product selectedproduct)
+            if (productListView.SelectedItem is Product selectedProduct)
             {
-                using var db = new AppDbContext();
-                db.Products.Remove(selectedproduct);
-                db.SaveChanges();
+                if (selectedProduct.IsOrdered)
+                {
+                    // Toon de dialog omdat het product al besteld is
+                    _ = IsOrderdDialog.ShowAsync();
+                }
+                else
+                {
+                    // Voer de verwijderingslogica uit als het product niet als besteld is gemarkeerd
+                    using var db = new AppDbContext();
+                    db.Products.Remove(selectedProduct);
+                    db.SaveChanges();
 
-                productListView.ItemsSource = db.Products.ToList();
+                    productListView.ItemsSource = db.Products.ToList();
+                }
             }
         }
+
+
 
         private void productListView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {

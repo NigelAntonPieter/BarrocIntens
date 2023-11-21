@@ -41,7 +41,9 @@
    
         <ListView x:Name="productListView"
                   Grid.Row="1"
-                  Grid.Column="1">
+                  Grid.Column="1"
+                  IsItemClickEnabled="True"
+                  ItemClick="productListView_ItemClick">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localData:Product">
                     <StackPanel Orientation="Vertical"
@@ -59,7 +61,35 @@
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
+        <ContentDialog x:Name="Orderdialog"
+                       Title="Hoeveelheid bestellen"
+                       PrimaryButtonText="bestellem"
+                       CloseButtonText="annuleer">
+            <StackPanel>
+                <TextBlock Text="Voer de hoeveelheid in die u wilt bestellen:" />
+                <TextBox x:Name="quantityTextBox"
+                         PlaceholderText="Hoeveelheid"
+                         Margin="0,5,0,10" />
+                <TextBlock Text="Opmerking (optioneel):" />
+                <TextBox x:Name="commentTextBox"
+                         PlaceholderText="Opmerking"
+                         Margin="0,5,0,10" />
+            </StackPanel>
+        </ContentDialog>
+        <ContentDialog x:Name="QuantityLevelDialog"
+                       Title="Fout bij bestellen"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Het opgegeven aantal is niet beschikbaar" />
+            </StackPanel>
+        </ContentDialog>
+        <ContentDialog x:Name="QuantityParameterDialog"
+                       Title="Ongeldige invoer"
+                       CloseButtonText="OK">
+            <StackPanel>
+            <TextBlock Text="Voer een geldig aantal in." />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Window>
