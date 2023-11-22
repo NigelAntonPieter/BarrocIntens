@@ -11,9 +11,7 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-
         <StackPanel Grid.Column="0" Background="#fdd716" />
-
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
             <TextBlock Text="Finance" FontSize="50" FontWeight="Bold" />
             <Button Content="View Lease Contracts" Click="ViewLeaseContractsButton_Click" Margin="0,20,0,0"/>
@@ -23,6 +21,17 @@
             <CheckBox x:Name="BkrCheckCheckBox" Content="BKR Check Passed" Margin="0,10,0,0"/>
             <CheckBox x:Name="MonthlyInvoiceCheckBox" Content="Monthly Invoice" Margin="0,10,0,0"/>
             <Button Content="Save Lease Contract" Click="SaveLeaseContractButton_Click" Margin="0,20,0,0"/>
+        </StackPanel>
+        <StackPanel Margin="20">
+            <TextBlock Text="Employee Information" FontWeight="Bold" FontSize="16"/>
+            <TextBox x:Name="EmployeeNameTextBox" PlaceholderText="Enter employee name"/>
+
+            <TextBlock Text="Installation Details" FontWeight="Bold" FontSize="16" Margin="0,20,0,0"/>
+            <TextBox x:Name="MachineModelTextBox" PlaceholderText="Enter coffee machine model"/>
+            <DatePicker x:Name="InstallationDatePicker"/>
+            <TextBox x:Name="ConnectionCostsTextBox" PlaceholderText="Enter connection costs"/>
+
+            <Button Content="Generate Receipt" Click="GenerateReceiptButton_Click" Margin="0,20,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

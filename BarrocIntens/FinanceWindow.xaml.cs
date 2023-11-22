@@ -41,14 +41,12 @@ namespace BarrocIntens
             dbContext.LeaseContracts.Add(newLeaseContract);
             dbContext.SaveChanges();
         }
-
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
         {
             var LeaseContractOverview = new LeaseContractOverviewWindow();
                 LeaseContractOverview.Activate();
             this.Close(); 
         }
-
         private void EditLeaseContractButton_Click(object sender, RoutedEventArgs e)
         {
             LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
@@ -59,7 +57,6 @@ namespace BarrocIntens
                 editForm.ShowDialog();
             }
         }
-
         private void DeleteLeaseContractButton_Click(object sender, RoutedEventArgs e)
         {
             LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
@@ -70,7 +67,6 @@ namespace BarrocIntens
                 dbContext.SaveChanges();
             }
         }
-
         private void GenerateInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
             // Add code to generate an invoice for a lease contract
@@ -122,4 +118,5 @@ namespace BarrocIntens
             return null;
         }
     }
+
 }

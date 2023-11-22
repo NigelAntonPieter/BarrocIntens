@@ -30,7 +30,6 @@ namespace BarrocIntens
 
             LeaseContractsListView.ItemsSource = dbContext.LeaseContracts.ToList();
         }
-
         private LeaseContract GetSelectedLeaseContract()
         {
             //if (leaseContractsListView.SelectedItem is LeaseContract selectedLeaseContract)
@@ -49,7 +48,6 @@ namespace BarrocIntens
                 editForm.ShowDialog();
             }
         }
-
         private void DeleteLeaseContractButton_Click(object sender, RoutedEventArgs e)
         {
             LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
@@ -60,6 +58,5 @@ namespace BarrocIntens
                 dbContext.SaveChanges();
             }
         }
-
     }
 }
