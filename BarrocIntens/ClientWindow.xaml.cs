@@ -43,7 +43,8 @@ namespace BarrocIntens
 
         private void uitlogEl_Click(object sender, RoutedEventArgs e)
         {
-            var loginwindow = new LoginWindow();
+            IWindowFactory windowFactory = new WindowFactory();
+            var loginwindow = new LoginWindow(windowFactory);
             loginwindow.Activate();
             this.Close();
         }

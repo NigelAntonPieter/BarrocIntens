@@ -25,10 +25,12 @@ namespace BarrocIntens
     {
         // De sleutel voor het opslaan van de gebruikersnaam in de lokale instellingen
         private const string LastUsernameKey = "LastUsername";
-        
 
-        public LoginWindow()
+        private readonly IWindowFactory _windowFactory;
+
+        public LoginWindow(IWindowFactory windowFactory)
         {
+            _windowFactory = windowFactory;
             this.InitializeComponent();
 
             // Probeer de laatst ingevoerde gebruikersnaam op te halen en in te stellen
@@ -48,54 +50,28 @@ namespace BarrocIntens
             {
                 var user = db.Users.SingleOrDefault(u => u.UserName == usernameTextbox.Text && u.Password == enteredPassword);
 
+
+
                 if (user != null)
                 {
-                    // Sla de laatst ingevoerde gebruikersnaam op
                     SaveLastUsername(usernameTextbox.Text);
-
-                    if (user.Role == "Sales")
-                    {
-                        var salesWindow = new SalesWindow();
-                        salesWindow.Activate();
-                    }
-                    else if (user.Role == "Maintenance")
-                    {
-                        var maintenanceWindow = new Maintenance();
-                        maintenanceWindow.Activate();
-                    }
-                    else if (user.Role == "MaintenanceAdmin")
-                    {
-                        var AdminMaintenanceWindow = new AdminMaintenanceWindow();
-                        AdminMaintenanceWindow.Activate();
-                    }
-                    else if (user.Role == "Finance")
-                    {
-                        var financeWindow = new FinanceWindow();
-                        financeWindow.Activate();
-                    }
-                    else if (user.Role == "Purchase")
-                    {
-                        var purchaseWindow = new PurchaseWindow();
-                        purchaseWindow.Activate();
-                    }
-                    else
-                    {
-                        var clientWindow = new ClientWindow();
-                        clientWindow.Activate();
-                    }
+                    ActivateWindow(user.Role);
                     this.Close();
                 }
                 else
                 {
                     ErrorTextBlock.Text = "ongeldige inloggegvens";
                 }
-                
-            }
-           
-        }
-        
 
-        // Methode om de laatst ingevoerde gebruikersnaam op te slaan in lokale instellingen
+            }
+
+        }
+        private void ActivateWindow(string role)
+        {
+            var window = _windowFactory.CreateWindow(role);
+            window.Activate();
+        }
+
         private void SaveLastUsername(string username)
         {
             var localSettings = ApplicationData.Current.LocalSettings;
