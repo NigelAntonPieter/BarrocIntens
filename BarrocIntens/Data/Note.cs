@@ -8,9 +8,11 @@ namespace BarrocIntens.Date
 {
     internal class Note
     {
-        public int Id { get; set; }
-        public string Notes { get; set; }
-        public string Comment { get; set; }
-        public string Appointment { get; set; }
+        public int NotesId { get; set; }
+        public string Comments { get; set; }
+        public string Appointments { get; set; }
+
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }
