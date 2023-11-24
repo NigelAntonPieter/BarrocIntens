@@ -75,6 +75,41 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <ListView x:Name="productListView"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  IsItemClickEnabled="True"
+                  IsDoubleTapEnabled="True"
+                  DoubleTapped="productListView_DoubleTapped"
+                  AllowFocusOnInteraction="False">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="localData:Product">
+                    <StackPanel Orientation="Vertical"
+                                Padding="5">
+                        <Image Source="{x:Bind ImagePathWithFallBack}"
+                               Width="150"
+                               HorizontalAlignment="Left" />
+                        <TextBlock Text="{x:Bind Name}" />
+                        <TextBlock Text="{x:Bind Description}"
+                                   Foreground="DarkGray" />
+                        <TextBlock Foreground="Gold">
+          <Run>Prijs:</Run>
+          <Run Text="{x:Bind PriceFormatted}" />
+                        </TextBlock>
+                        <TextBlock Foreground="Green"
+                                   FontWeight="Bold">
+             <Run>Hoeveelheid:</Run>
+             <Run Text="{x:Bind StockQuantity}" />
+                        </TextBlock>
+                        <TextBlock Foreground="Red"
+                                   FontWeight="Bold">
+             <Run>Besteld:</Run>
+             <Run Text="{x:Bind IsOrdered}" />
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <ContentDialog x:Name="QuantityInputDialog"
                        Title="Voer Hoeveelheid In"
                        PrimaryButtonText="Ok"

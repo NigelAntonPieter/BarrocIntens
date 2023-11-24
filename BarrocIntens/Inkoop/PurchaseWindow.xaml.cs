@@ -29,7 +29,7 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
             using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
+            productListView.ItemsSource = db.Products.OrderBy(p => p.Id);
         }
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
