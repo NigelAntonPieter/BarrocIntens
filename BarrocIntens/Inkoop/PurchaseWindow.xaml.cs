@@ -86,8 +86,9 @@ namespace BarrocIntens
 
         private void uitlogEL_Click(object sender, RoutedEventArgs e)
         {
+            AppDbContext db = new AppDbContext();
             IWindowFactory windowFactory = new WindowFactory();
-            var loginWindow = new LoginWindow(windowFactory);
+            var loginWindow = new LoginWindow(windowFactory, db);
             loginWindow.Activate();
             this.Close();
         }

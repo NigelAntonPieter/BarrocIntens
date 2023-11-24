@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace BarrocIntens.Data
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -37,7 +37,7 @@ namespace BarrocIntens.Data
 
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = "password123", Role = "Sales" },
-                new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance"},
+                new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance" },
                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "a", Role = "Purchase" },
                 new User { Id = 4, Name = "Luna Smedes", UserName = "lunasmedes", Password = "n", Role = "Client" },
                 new User { Id = 5, Name = "Merijn Sweep", UserName = "merijnsweep", Password = "m", Role = "Finance" },
@@ -54,15 +54,15 @@ namespace BarrocIntens.Data
                 new Maintenance_appointment { Id = 2, CompanyId = 2, Remark = "Some seeded remark 2", DateAdded = DateTime.Now }
             );
             modelBuilder.Entity<Product_category>().HasData(
-                new Product_category { Id = 1, Name = "testforclient"},
+                new Product_category { Id = 1, Name = "testforclient" },
                 new Product_category { Id = 2, Name = "testforemployee" }
                 );
 
             modelBuilder.Entity<Product>().HasData(
-                new Product { Id = "S234FREKT", Name= "Barroc Intens Italian Light",Product_categoryId = 2, Is_employee_only = true, Description = "Light", Price = 499, StockQuantity = 100, IsOrdered = false},
+                new Product { Id = "S234FREKT", Name = "Barroc Intens Italian Light", Product_categoryId = 2, Is_employee_only = true, Description = "Light", Price = 499, StockQuantity = 100, IsOrdered = false },
                 new Product { Id = "S234KNDPF", Name = "Barroc Intens Italian", Product_categoryId = 1, Is_employee_only = false, Description = "Italian", Price = 599, StockQuantity = 5, IsOrdered = true },
-                new Product {Id = "S234NNBMV", Name = "Barroc Intens Italian Deluxe", Product_categoryId = 1, Is_employee_only = false, Description = "Deluxe", Price = 799, StockQuantity = 50, IsOrdered = false },
-                new Product {Id = "S234MMPLA", Name = "Barroc Intens Italian Deluxe Special", Product_categoryId = 1, Is_employee_only = false, Description = "Special", Price = 999, StockQuantity = 200, IsOrdered = false },
+                new Product { Id = "S234NNBMV", Name = "Barroc Intens Italian Deluxe", Product_categoryId = 1, Is_employee_only = false, Description = "Deluxe", Price = 799, StockQuantity = 50, IsOrdered = false },
+                new Product { Id = "S234MMPLA", Name = "Barroc Intens Italian Deluxe Special", Product_categoryId = 1, Is_employee_only = false, Description = "Special", Price = 999, StockQuantity = 200, IsOrdered = false },
                 new Product { Id = "S234XYZ01", Name = "Barroc Intens Italian Special Espresso", Product_categoryId = 1, Is_employee_only = false, Description = "Exquisite and Unique Blend", Price = 999, StockQuantity = 20, IsOrdered = false },
                 new Product { Id = "S234XYZ02", Name = "Barroc Intens Italian Dark Roast", Product_categoryId = 1, Is_employee_only = false, Description = "Intensely Bold and Rich", Price = 1099, StockQuantity = 15, IsOrdered = false },
                 new Product { Id = "S234XYZ03", Name = "Barroc Intens Italian Light Brew", Product_categoryId = 1, Is_employee_only = false, Description = "Mild and Refreshing", Price = 899, StockQuantity = 25, IsOrdered = true },

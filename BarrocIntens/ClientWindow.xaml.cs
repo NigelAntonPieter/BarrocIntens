@@ -1,4 +1,5 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -43,8 +44,9 @@ namespace BarrocIntens
 
         private void uitlogEl_Click(object sender, RoutedEventArgs e)
         {
+            AppDbContext db = new AppDbContext();
             IWindowFactory windowFactory = new WindowFactory();
-            var loginwindow = new LoginWindow(windowFactory);
+            var loginwindow = new LoginWindow(windowFactory, db);
             loginwindow.Activate();
             this.Close();
         }

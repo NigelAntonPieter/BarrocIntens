@@ -1,4 +1,3 @@
-using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -17,6 +16,7 @@ using System.Drawing;
 using System.Reflection.Emit;
 using Windows.UI.Input.Spatial;
 using Microsoft.UI.Xaml.Automation;
+using BarrocIntens.Data;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -45,8 +45,9 @@ namespace BarrocIntens
 
         private void LoginPage_Click(object sender, RoutedEventArgs e)
         {
+            AppDbContext db = new AppDbContext();
             IWindowFactory windowFactory = new WindowFactory();
-            var loginWindow = new LoginWindow(windowFactory);
+            var loginWindow = new LoginWindow(windowFactory, db);
             loginWindow.Activate();
 
             this.Close();

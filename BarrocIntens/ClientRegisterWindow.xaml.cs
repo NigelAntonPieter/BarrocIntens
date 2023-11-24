@@ -54,7 +54,7 @@ namespace BarrocIntens
                 Role = role,
             };
 
-            newUser.SetPassword(password);
+           // newUser.SetPassword(password);
 
             context.Users.Add(newUser);
             context.SaveChanges();

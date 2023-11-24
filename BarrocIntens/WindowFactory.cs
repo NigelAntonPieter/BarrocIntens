@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BarrocIntens
 {
-    internal class WindowFactory : IWindowFactory
+    public class WindowFactory : IWindowFactory
     {
         public Window CreateWindow(string role)
         {

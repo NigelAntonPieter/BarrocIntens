@@ -1,4 +1,3 @@
-using BarrocIntens;
 using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -8,6 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
+using BarrocIntensTestlLibrary;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.IO;
@@ -25,10 +25,12 @@ namespace BarrocIntens
     {
         // De sleutel voor het opslaan van de gebruikersnaam in de lokale instellingen
         private const string LastUsernameKey = "LastUsername";
+        public bool IsLoggedIn { get; private set; }
+        public string UserRole { get; private set; }
 
         private readonly IWindowFactory _windowFactory;
 
-        public LoginWindow(IWindowFactory windowFactory)
+        public LoginWindow(IWindowFactory windowFactory, AppDbContext @object)
         {
             _windowFactory = windowFactory;
             this.InitializeComponent();
@@ -48,23 +50,25 @@ namespace BarrocIntens
 
             using (var db = new AppDbContext())
             {
-                var user = db.Users.SingleOrDefault(u => u.UserName == usernameTextbox.Text && u.Password == enteredPassword);
+                var user = db.Users.SingleOrDefault(u => u.UserName == enteredUsername && u.Password == enteredPassword);
 
-
-
-                if (user != null)
+                // Use the AuthenticationManager to authenticate the user
+                var authManager = new AuthenticationManager(new AppAuthenticationService());
+                if (user != null && authManager.Authenticate(enteredUsername, enteredPassword))
                 {
-                    SaveLastUsername(usernameTextbox.Text);
+                    // Authentication successful
+                    SaveLastUsername(enteredUsername);
                     ActivateWindow(user.Role);
+                    IsLoggedIn = true;
+                    UserRole = user.Role;
                     this.Close();
                 }
                 else
                 {
-                    ErrorTextBlock.Text = "ongeldige inloggegvens";
+                    // Authentication failed
+                    ErrorTextBlock.Text = "Ongeldige inloggegevens";
                 }
-
             }
-
         }
         private void ActivateWindow(string role)
         {

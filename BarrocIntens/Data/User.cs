@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BarrocIntens.Data
 {
-    internal class User
+    public class User
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,16 +15,19 @@ namespace BarrocIntens.Data
         public string Password { get; set; }
         public string Role { get; set; }
 
-        public void SetPassword(string password)
-        {
-            Password = BCrypt.Net.BCrypt.HashPassword(password);
-        }
+        //public void SetPassword(string password)
+        //{
+            //Password = BCrypt.Net.BCrypt.HashPassword(password);
+        //}
 
-        public bool VerifyPassword(string password)
-        {
-            return BCrypt.Net.BCrypt.Verify(password, Password);
-        }
+        //public bool VerifyPassword(string password)
+        //{
+          //  return BCrypt.Net.BCrypt.Verify(password, Password);
+        //}
 
         public ICollection<Company> Companys { get; set; }
+
+
+
     }
 }   

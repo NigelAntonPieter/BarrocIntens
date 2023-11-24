@@ -43,10 +43,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BCrypt.Net" Version="0.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+    <PackageReference Include="Moq" Version="4.20.69" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
@@ -94,7 +94,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="ProductEditWindow.xaml"/>
+    <Page Update="ProductEditWindow.xaml" />
     <Page Update="ClientRegisterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,5 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Inkoop\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
   </ItemGroup>
 </Project>
