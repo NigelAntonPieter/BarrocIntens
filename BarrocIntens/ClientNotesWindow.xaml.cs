@@ -49,7 +49,7 @@ namespace BarrocIntens
                     commentsTB.Text = userNotes.Comments;
                     appointmentTitleTB.Text = userNotes.AppointmentTitle;
                     companiesTB.Text = userNotes.CompanyId.ToString();
-                    appointmentDateTB.Text = userNotes.AppointmentDate.Date.ToString();
+                    appointmentDateTB.Text = userNotes.AppointmentDate.ToString();
                     appointmentDatePicker.Date = userNotes.AppointmentDate;
                 }
             }
@@ -64,7 +64,7 @@ namespace BarrocIntens
                     userNotes.Comments = commentsTB.Text;
                     userNotes.AppointmentTitle = appointmentTitleTB.Text;
                     userNotes.CompanyId = int.Parse(companiesTB.Text);
-                    userNotes.AppointmentDate = AppointmentDate.Date;
+                    userNotes.AppointmentDate = AppointmentDate;
 
                     db.Notes.Update(userNotes);
                 }
@@ -76,13 +76,15 @@ namespace BarrocIntens
                         AppointmentTitle = appointmentTitleTB.Text,
                         UserId = userId,
                         CompanyId = int.Parse(companiesTB.Text),
-                        AppointmentDate = AppointmentDate.Date
+                        AppointmentDate = AppointmentDate
                     };
 
                     db.Notes.Add(userNotes);
                 }
 
                 db.SaveChanges();
+
+                this.Close();
             }
         }
     }
