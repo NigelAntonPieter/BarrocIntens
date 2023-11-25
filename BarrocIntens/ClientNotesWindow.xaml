@@ -5,6 +5,7 @@
     x:Class="BarrocIntens.ClientNotesWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BarrocIntens"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -33,14 +34,30 @@
             <TextBlock Text="Afspraken:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
-            <TextBox x:Name="appointmentTitleTB"/>
+            <TextBox x:Name="appointmentTitleTB"
+                       Margin="0,0,0,10" />
+            <TextBlock Text="Datum van afspraak:"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10" />
+            <TextBlock x:Name="appointmentDateTB"
+                       HorizontalAlignment="Center"
+                       Width="75"
+                       Margin="0,0,0,10" />
+            <TextBlock Text="Wijzig datum van afspraak:"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10" />
+            <CalendarDatePicker x:Name="appointmentDatePicker"
+                       HorizontalAlignment="Center"
+                       Date="{x:Bind AppointmentDate, Mode=TwoWay}"
+                       Margin="0,0,0,10" />
             <TextBlock Text="Bedrijf (Id):"
-                       HorizontalAlignment="center"
+                       HorizontalAlignment="Center"
                        Margin="0,0,0,10"  />
-            <TextBox x:Name="companiesTB"/>
+            <TextBox x:Name="companiesTB"
+                       Margin="0,0,0,10"  />
 
             <Button Content="Opslaan"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Width="75"
                     Click="SaveButton_Click" />

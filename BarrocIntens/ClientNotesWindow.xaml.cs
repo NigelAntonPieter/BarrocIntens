@@ -29,6 +29,7 @@ namespace BarrocIntens
     {
         private int userId;
         private Note userNotes;
+        public DateTimeOffset AppointmentDate { get; set; }
 
         public ClientNotesWindow(int userId)
         {
@@ -48,6 +49,8 @@ namespace BarrocIntens
                     commentsTB.Text = userNotes.Comments;
                     appointmentTitleTB.Text = userNotes.AppointmentTitle;
                     companiesTB.Text = userNotes.CompanyId.ToString();
+                    appointmentDateTB.Text = userNotes.AppointmentDate.Date.ToString();
+                    appointmentDatePicker.Date = userNotes.AppointmentDate;
                 }
             }
         }
@@ -61,6 +64,7 @@ namespace BarrocIntens
                     userNotes.Comments = commentsTB.Text;
                     userNotes.AppointmentTitle = appointmentTitleTB.Text;
                     userNotes.CompanyId = int.Parse(companiesTB.Text);
+                    userNotes.AppointmentDate = AppointmentDate.Date;
 
                     db.Notes.Update(userNotes);
                 }
@@ -72,6 +76,7 @@ namespace BarrocIntens
                         AppointmentTitle = appointmentTitleTB.Text,
                         UserId = userId,
                         CompanyId = int.Parse(companiesTB.Text),
+                        AppointmentDate = AppointmentDate.Date
                     };
 
                     db.Notes.Add(userNotes);
