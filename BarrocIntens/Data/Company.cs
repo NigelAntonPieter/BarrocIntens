@@ -14,6 +14,7 @@ namespace BarrocIntens.Date
         public string Street { get; set; }
     
         public ICollection<User> Users { get; set; }
-        
+
+        public ICollection<Note> Notes { get; set; }
     }
 }
