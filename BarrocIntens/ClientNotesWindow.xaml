@@ -33,7 +33,7 @@
             <TextBlock Text="Afspraken:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
-            <TextBox x:Name="appointmentsTB"/>
+            <TextBox x:Name="appointmentTitleTB"/>
             <TextBlock Text="Bedrijf (Id):"
                        HorizontalAlignment="center"
                        Margin="0,0,0,10"  />

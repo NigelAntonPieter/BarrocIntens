@@ -46,7 +46,7 @@ namespace BarrocIntens
                 if (userNotes != null)
                 {
                     commentsTB.Text = userNotes.Comments;
-                    appointmentsTB.Text = userNotes.Appointments;
+                    appointmentTitleTB.Text = userNotes.AppointmentTitle;
                     companiesTB.Text = userNotes.CompanyId.ToString();
                 }
             }
@@ -59,7 +59,7 @@ namespace BarrocIntens
                 if (userNotes != null)
                 {
                     userNotes.Comments = commentsTB.Text;
-                    userNotes.Appointments = appointmentsTB.Text;
+                    userNotes.AppointmentTitle = appointmentTitleTB.Text;
                     userNotes.CompanyId = int.Parse(companiesTB.Text);
 
                     db.Notes.Update(userNotes);
@@ -69,7 +69,7 @@ namespace BarrocIntens
                     userNotes = new Note
                     {
                         Comments = commentsTB.Text,
-                        Appointments = appointmentsTB.Text,
+                        AppointmentTitle = appointmentTitleTB.Text,
                         UserId = userId,
                         CompanyId = int.Parse(companiesTB.Text),
                     };
