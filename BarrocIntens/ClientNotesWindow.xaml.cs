@@ -27,9 +27,58 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class ClientNotesWindow : Window
     {
+        private int userId;
+        private Note userNotes;
+
         public ClientNotesWindow(int userId)
         {
+            this.userId = userId;
             this.InitializeComponent();
+            LoadUserNotes();
+        }
+
+        private void LoadUserNotes()
+        {
+            using (var db = new AppDbContext())
+            {
+                userNotes = db.Notes.FirstOrDefault(n => n.UserId == userId);
+
+                if (userNotes != null)
+                {
+                    commentsTB.Text = userNotes.Comments;
+                    appointmentsTB.Text = userNotes.Appointments;
+                    companiesTB.Text = userNotes.CompanyId.ToString();
+                }
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new AppDbContext())
+            {
+                if (userNotes != null)
+                {
+                    userNotes.Comments = commentsTB.Text;
+                    userNotes.Appointments = appointmentsTB.Text;
+                    userNotes.CompanyId = int.Parse(companiesTB.Text);
+
+                    db.Notes.Update(userNotes);
+                }
+                else
+                {
+                    userNotes = new Note
+                    {
+                        Comments = commentsTB.Text,
+                        Appointments = appointmentsTB.Text,
+                        UserId = userId,
+                        CompanyId = int.Parse(companiesTB.Text),
+                    };
+
+                    db.Notes.Add(userNotes);
+                }
+
+                db.SaveChanges();
+            }
         }
     }
 }
