@@ -15,9 +15,9 @@ namespace BarrocIntens.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Maintenance_appointment> MaintenanceAppointments { get; set; }
         public DbSet<Product_category> ProductCategories { get; set; }
-
         public DbSet<LeaseContract> LeaseContracts { get; set; }
         public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
+        public DbSet<InstallationReceipt> InstallationReceipts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,7 +53,12 @@ namespace BarrocIntens.Data
                 new Maintenance_appointment { Id = 1, CompanyId = 1, Remark = "Some seeded remark 1", DateAdded = DateTime.Now },
                 new Maintenance_appointment { Id = 2, CompanyId = 2, Remark = "Some seeded remark 2", DateAdded = DateTime.Now }
             );
-            modelBuilder.Entity<Product_category>().HasData(
+            modelBuilder.Entity<InstallationReceipt>().HasData(
+         new InstallationReceipt { Id = 1, EmployeeName = "John", ProductId = "1", InstallationDate = DateTime.Now, ConnectionCosts = 500.00m },
+         new InstallationReceipt { Id = 2, EmployeeName = "Jane", ProductId = "1", InstallationDate = DateTime.Now, ConnectionCosts = 700.00m }
+         );
+
+     modelBuilder.Entity<Product_category>().HasData(
                 new Product_category { Id = 1, Name = "testforclient"},
                 new Product_category { Id = 2, Name = "testforemployee" }
                 );

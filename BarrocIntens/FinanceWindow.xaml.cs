@@ -41,36 +41,15 @@ namespace BarrocIntens
             dbContext.LeaseContracts.Add(newLeaseContract);
             dbContext.SaveChanges();
         }
+
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
         {
-            var LeaseContractOverview = new LeaseContractOverviewWindow();
-                LeaseContractOverview.Activate();
-            this.Close(); 
-        }
-        private void EditLeaseContractButton_Click(object sender, RoutedEventArgs e)
-        {
-            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
-
-            if (selectedLeaseContract != null)
-            {
-                var editForm = new EditLeaseContractForm(selectedLeaseContract);
-                editForm.ShowDialog();
-            }
-        }
-        private void DeleteLeaseContractButton_Click(object sender, RoutedEventArgs e)
-        {
-            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
-
-            if (selectedLeaseContract != null)
-            {
-                dbContext.LeaseContracts.Remove(selectedLeaseContract);
-                dbContext.SaveChanges();
-            }
+            var leaseContractOverview = new LeaseContractOverviewWindow();
+            leaseContractOverview.Activate();
+            this.Close();
         }
         private void GenerateInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            // Add code to generate an invoice for a lease contract
-
             LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
 
             if (selectedLeaseContract != null)
@@ -78,7 +57,7 @@ namespace BarrocIntens
                 // Create a new invoice based on the selected lease contract
                 InvoiceFinance newInvoice = new InvoiceFinance
                 {
-
+                    // Add properties for the invoice based on your business logic
                 };
 
                 dbContext.InvoicesFinance.Add(newInvoice);
@@ -100,23 +79,54 @@ namespace BarrocIntens
                 selectedInvoice.IsPaid = true;
 
                 dbContext.SaveChanges();
-
             }
         }
+
         private LeaseContract GetSelectedLeaseContract()
         {
-            //if (leaseContractsListView.SelectedItem is LeaseContract selectedLeaseContract)
-            //{
-            //    return selectedLeaseContract;
-            //}
+            // Implement the logic to get the selected lease contract
             return null;
-
         }
+
         private InvoiceFinance GetSelectedInvoice()
         {
-            // Add code to retrieve the selected invoice from the UI
+            // Implement the logic to get the selected invoice
             return null;
         }
-    }
 
+        private void GenerateReceiptButton_Click(object sender, RoutedEventArgs e)
+        {
+            string employeeName = (EmployeeComboBox.SelectedItem as User)?.Name;
+            int selectedProductIdInt = (int)ProductComboBox.SelectedValue;
+            string selectedProductId = selectedProductIdInt.ToString();
+            DateTime installationDate = InstallationDatePicker2.Date.DateTime;
+            decimal connectionCosts = decimal.Parse(ConnectionCostsTextBox2.Text);
+
+            SaveReceiptToDatabase(employeeName, selectedProductId, installationDate, connectionCosts);
+        }
+
+
+        private void SaveReceiptToDatabase(string employeeName, string selectedProductId, DateTime installationDate, decimal connectionCosts)
+        {
+            // Retrieve the user by name from the context
+            User selectedUser = dbContext.Users.FirstOrDefault(u => u.Name == employeeName);
+
+            if (selectedUser != null)
+            {
+                InstallationReceipt newReceipt = new InstallationReceipt
+                {
+                    EmployeeName = selectedUser.Name,
+                    ProductId = selectedProductId,
+                    InstallationDate = installationDate,
+                    ConnectionCosts = connectionCosts
+                };
+
+                dbContext.InstallationReceipts.Add(newReceipt);
+                dbContext.SaveChanges();
+            }
+        }
+
+    }
 }
+
+ 
