@@ -59,7 +59,7 @@ namespace BarrocIntens.Data
                 );
 
             modelBuilder.Entity<Product>().HasData(
-                new Product { Id = "S234FREKT", Name= "Barroc Intens Italian Light",Product_categoryId = 2, Is_employee_only = true, Description = "Light", Price = 499, StockQuantity = 100, IsOrdered = false},
+                new Product { Id = "S234FREKT", Name= "Barroc Intens Italian Light",Product_categoryId = 2, Is_employee_only = true, Description = "Light", Price = 499, StockQuantity = 0, IsOrdered = false},
                 new Product { Id = "S234KNDPF", Name = "Barroc Intens Italian", Product_categoryId = 1, Is_employee_only = false, Description = "Italian", Price = 599, StockQuantity = 5, IsOrdered = true },
                 new Product {Id = "S234NNBMV", Name = "Barroc Intens Italian Deluxe", Product_categoryId = 1, Is_employee_only = false, Description = "Deluxe", Price = 799, StockQuantity = 50, IsOrdered = false },
                 new Product {Id = "S234MMPLA", Name = "Barroc Intens Italian Deluxe Special", Product_categoryId = 1, Is_employee_only = false, Description = "Special", Price = 999, StockQuantity = 200, IsOrdered = false },

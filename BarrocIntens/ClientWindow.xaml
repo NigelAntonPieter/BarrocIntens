@@ -37,6 +37,13 @@
             <TextBlock Text="search" />
             <TextBox TextChanged="TextBox_TextChanged"
                      x:Name="searchTextbox" />
+            <ComboBox x:Name="stockStatusComboBox"
+                      SelectionChanged="stockStatusComboBox_SelectionChanged">
+                <ComboBoxItem Content="Alle producten"
+                              IsSelected="True" />
+                <ComboBoxItem Content="Momenteel leverbaar" />
+                <ComboBoxItem Content="Uit voorraad" />
+            </ComboBox>
         </StackPanel>
    
         <ListView x:Name="productListView"
@@ -54,7 +61,11 @@
                         <TextBlock Text="{x:Bind Name}" />
                         <TextBlock Text="{x:Bind Description}"
                                    Foreground="DarkGray" />
+                        <TextBlock Text="{x:Bind StockStatus}"
+                                   Foreground="Green"
+                                   FontWeight="Bold" />
                         <TextBlock Foreground="Gold">
+                            
                  <Run>Prijs:</Run>
                  <Run Text="{x:Bind PriceFormatted}" />
                         </TextBlock>
