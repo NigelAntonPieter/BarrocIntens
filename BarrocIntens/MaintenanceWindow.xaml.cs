@@ -25,11 +25,28 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class Maintenance : Window
     {
+        private readonly User _currentUser;
+
         public Maintenance(User user)
         {
+            _currentUser = user;
             this.InitializeComponent();
 
+            LoadMaintenanceAppointments();
+        }
 
+        private void LoadMaintenanceAppointments()
+        {
+            using (var dbContext = new AppDbContext())
+            {
+  
+                var maintenanceAppointments = dbContext.UserMaintenanceAppointments
+                    .Where(uma => uma.UserId == _currentUser.Id)
+                    .Select(uma => uma.MaintenanceAppointment)
+                    .ToList();
+
+                MaintenanceListView.ItemsSource = maintenanceAppointments;
+            }
         }
     }
 }

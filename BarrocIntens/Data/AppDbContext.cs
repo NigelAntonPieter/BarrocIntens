@@ -18,7 +18,7 @@ namespace BarrocIntens.Data
         public DbSet<Product_category> ProductCategories { get; set; }
         public DbSet<LeaseContract> LeaseContracts { get; set; }
         public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
-        public DbSet<UserMaintenanceAppointment> UserMaintenanceAppointment { get; set; }
+        public DbSet<UserMaintenanceAppointment> UserMaintenanceAppointments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

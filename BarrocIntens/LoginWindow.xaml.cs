@@ -56,20 +56,12 @@ namespace BarrocIntens
                 var authManager = new AuthenticationManager(new AppAuthenticationService());
                 if (user != null && authManager.Authenticate(enteredUsername, enteredPassword))
                 {
-
-                    // Authentication successful
-
-                    // Save the last username
                     UserSettingsManager.SaveLastUsername(enteredUsername);
 
-                    // Activate the window based on the user's role
                     var windowFactory = new WindowFactory();
                     var newWindow = windowFactory.CreateWindow(user);
                     ActivateWindow(user);
-                    // Perform any additional actions specific to the user or window
-                    // For example, set properties on the window based on the user
 
-                    // Close the current login window
                     this.Close();
                 }
                 else
