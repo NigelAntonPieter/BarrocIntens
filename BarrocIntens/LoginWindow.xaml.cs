@@ -7,7 +7,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
-using BarrocIntensTestlLibrary;
+using BarrocIntensTestlLibrary.LoginWindow;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.IO;
@@ -36,7 +36,7 @@ namespace BarrocIntens
             this.InitializeComponent();
 
             // Probeer de laatst ingevoerde gebruikersnaam op te halen en in te stellen
-            string lastUsername = LoadLastUsername();
+            string lastUsername = UserSettingsManager.LoadLastUsername();
             if (!string.IsNullOrEmpty(lastUsername))
             {
                 usernameTextbox.Text = lastUsername;
@@ -57,7 +57,7 @@ namespace BarrocIntens
                 if (user != null && authManager.Authenticate(enteredUsername, enteredPassword))
                 {
                     // Authentication successful
-                    SaveLastUsername(enteredUsername);
+                    UserSettingsManager.SaveLastUsername( enteredUsername);
                     ActivateWindow(user.Role);
                     IsLoggedIn = true;
                     UserRole = user.Role;
@@ -76,22 +76,5 @@ namespace BarrocIntens
             window.Activate();
         }
 
-        private void SaveLastUsername(string username)
-        {
-            var localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values[LastUsernameKey] = username;
-        }
-
-        // Methode om de laatst ingevoerde gebruikersnaam op te halen uit lokale instellingen
-        private string LoadLastUsername()
-        {
-            var localSettings = ApplicationData.Current.LocalSettings;
-            if (localSettings.Values.TryGetValue(LastUsernameKey, out object value) && value is string lastUsername)
-            {
-                return lastUsername;
-            }
-
-            return string.Empty;
-        }
     }
 }

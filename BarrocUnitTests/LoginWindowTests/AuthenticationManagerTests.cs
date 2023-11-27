@@ -1,4 +1,4 @@
-﻿using BarrocIntensTestlLibrary;
+﻿using BarrocIntensTestlLibrary.LoginWindow;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;

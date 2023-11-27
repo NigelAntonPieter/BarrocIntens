@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BarrocIntens.Data;
-using BarrocIntensTestlLibrary;
+using BarrocIntensTestlLibrary.LoginWindow;
 
 namespace BarrocIntens
 {
