@@ -17,6 +17,7 @@ namespace BarrocIntens.Data
         [Required]
         public string EmployeeName { get; set; }
 
+
         [Required]
         public string ProductId { get; set; }
 
@@ -26,8 +27,6 @@ namespace BarrocIntens.Data
 
         [Required]
         public decimal ConnectionCosts { get; set; }
-
-
     }
 }
 

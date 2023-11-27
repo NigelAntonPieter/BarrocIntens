@@ -27,6 +27,11 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
             dbContext = new AppDbContext();
+
+            EmployeeComboBox.ItemsSource = dbContext.Users.ToList();
+            ProductComboBox.ItemsSource = dbContext.Products.ToList();
+            ProductComboBox.DisplayMemberPath = "Name";
+            ProductComboBox.SelectedValuePath = "Id";
         }
 
         private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
@@ -57,7 +62,7 @@ namespace BarrocIntens
                 // Create a new invoice based on the selected lease contract
                 InvoiceFinance newInvoice = new InvoiceFinance
                 {
-                    // Add properties for the invoice based on your business logic
+                    // Add properties for the invoice based on your logic
                 };
 
                 dbContext.InvoicesFinance.Add(newInvoice);
@@ -96,19 +101,53 @@ namespace BarrocIntens
 
         private void GenerateReceiptButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearErrorMessages();
+
             string employeeName = (EmployeeComboBox.SelectedItem as User)?.Name;
-            int selectedProductIdInt = (int)ProductComboBox.SelectedValue;
-            string selectedProductId = selectedProductIdInt.ToString();
-            DateTime installationDate = InstallationDatePicker2.Date.DateTime;
-            decimal connectionCosts = decimal.Parse(ConnectionCostsTextBox2.Text);
+
+            if (string.IsNullOrEmpty(employeeName))
+            {
+                ShowErrorMessage("Please select an employee.");
+                return;
+            }
+
+            if (ProductComboBox.SelectedValue == null)
+            {
+                ShowErrorMessage("Please select a product.");
+                return;
+            }
+
+            // Directly use the selected value as a string (assuming it's a string)
+            string selectedProductId = ProductComboBox.SelectedValue.ToString();
+
+            DateTime installationDate = InstallationDatePicker.Date.DateTime;
+            if (installationDate == DateTime.MinValue)
+            {
+                ShowErrorMessage("Please select a valid installation date.");
+                return;
+            }
+
+            if (!decimal.TryParse(ConnectionCostsTextBox.Text, out decimal connectionCosts))
+            {
+                ShowErrorMessage("Error converting connection costs.");
+                return;
+            }
 
             SaveReceiptToDatabase(employeeName, selectedProductId, installationDate, connectionCosts);
         }
 
+        private void ClearErrorMessages()
+        {
+            ErrorMessageTextBlock.Text = string.Empty;
+        }
+
+        private void ShowErrorMessage(string errorMessage)
+        {
+            ErrorMessageTextBlock.Text = errorMessage;
+        }
 
         private void SaveReceiptToDatabase(string employeeName, string selectedProductId, DateTime installationDate, decimal connectionCosts)
         {
-            // Retrieve the user by name from the context
             User selectedUser = dbContext.Users.FirstOrDefault(u => u.Name == employeeName);
 
             if (selectedUser != null)
@@ -116,7 +155,7 @@ namespace BarrocIntens
                 InstallationReceipt newReceipt = new InstallationReceipt
                 {
                     EmployeeName = selectedUser.Name,
-                    ProductId = selectedProductId,
+                    ProductId = selectedProductId, // Use the selectedProductId directly as a string
                     InstallationDate = installationDate,
                     ConnectionCosts = connectionCosts
                 };
@@ -125,8 +164,6 @@ namespace BarrocIntens
                 dbContext.SaveChanges();
             }
         }
-
     }
 }
-
  

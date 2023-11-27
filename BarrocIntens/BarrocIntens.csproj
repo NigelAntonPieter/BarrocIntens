@@ -22,6 +22,7 @@
     <None Remove="ClientRegisterWindow.xaml" />
     <None Remove="ClientWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
+    <None Remove="LeaseContractOverviewWindow.xaml" />
     <None Remove="LoginWindow.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
     <None Remove="ProductAddWindow.xaml" />
@@ -119,5 +120,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Inkoop\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LeaseContractOverviewWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

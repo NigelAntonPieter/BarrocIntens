@@ -54,8 +54,8 @@ namespace BarrocIntens.Data
                 new Maintenance_appointment { Id = 2, CompanyId = 2, Remark = "Some seeded remark 2", DateAdded = DateTime.Now }
             );
             modelBuilder.Entity<InstallationReceipt>().HasData(
-         new InstallationReceipt { Id = 1, EmployeeName = "John", ProductId = "1", InstallationDate = DateTime.Now, ConnectionCosts = 500.00m },
-         new InstallationReceipt { Id = 2, EmployeeName = "Jane", ProductId = "1", InstallationDate = DateTime.Now, ConnectionCosts = 700.00m }
+         new InstallationReceipt { Id = 1, EmployeeName = "John", ProductId = "S234XYZ03", InstallationDate = DateTime.Now, ConnectionCosts = 500.00m },
+         new InstallationReceipt { Id = 2, EmployeeName = "Jane", ProductId = "S234NNBMV", InstallationDate = DateTime.Now, ConnectionCosts = 700.00m }
          );
 
      modelBuilder.Entity<Product_category>().HasData(

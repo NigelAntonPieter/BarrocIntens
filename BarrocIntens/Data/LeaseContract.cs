@@ -17,5 +17,6 @@ public class LeaseContract
 
     public bool MonthlyInvoice { get; set; }
 
+
     public virtual ICollection<InvoiceFinance> Invoices { get; set; }
 }
