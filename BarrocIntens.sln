@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarrocUnitTests", "BarrocUn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarrocIntensTestlLibrary", "BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj", "{2918E924-32D0-4CD8-88F0-453E14CC0509}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarrocIntensDatabase", "BarrocIntensDatabase\BarrocIntensDatabase.csproj", "{32D62FC2-674A-4D9E-966D-AD6AE5347557}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,30 +77,6 @@ Global
 		{2918E924-32D0-4CD8-88F0-453E14CC0509}.Release|x64.Build.0 = Release|Any CPU
 		{2918E924-32D0-4CD8-88F0-453E14CC0509}.Release|x86.ActiveCfg = Release|Any CPU
 		{2918E924-32D0-4CD8-88F0-453E14CC0509}.Release|x86.Build.0 = Release|Any CPU
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|Any CPU.Build.0 = Debug|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|Any CPU.Deploy.0 = Debug|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|ARM64.Build.0 = Debug|ARM64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|ARM64.Deploy.0 = Debug|ARM64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|x64.ActiveCfg = Debug|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|x64.Build.0 = Debug|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|x64.Deploy.0 = Debug|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|x86.ActiveCfg = Debug|x86
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|x86.Build.0 = Debug|x86
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Debug|x86.Deploy.0 = Debug|x86
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|Any CPU.ActiveCfg = Release|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|Any CPU.Build.0 = Release|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|Any CPU.Deploy.0 = Release|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|ARM64.ActiveCfg = Release|ARM64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|ARM64.Build.0 = Release|ARM64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|ARM64.Deploy.0 = Release|ARM64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|x64.ActiveCfg = Release|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|x64.Build.0 = Release|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|x64.Deploy.0 = Release|x64
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|x86.ActiveCfg = Release|x86
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|x86.Build.0 = Release|x86
-		{32D62FC2-674A-4D9E-966D-AD6AE5347557}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
