@@ -116,27 +116,13 @@ namespace BarrocIntens
                     }
                     else
                     {
-                        // Weergeven van een bericht dat het ingevoerde cijfer ongeldig is
-                        var invalidInputDialog = new ContentDialog
-                        {
-                            Title = "Ongeldige invoer",
-                            Content = "Voer een geldig getal in voor de hoeveelheid.",
-                            CloseButtonText = "Ok"
-                        };
-                        _ = await invalidInputDialog.ShowAsync();
+                         await QuantityInputDialog.ShowAsync();
                     }
                 }
             }
             else
             {
-                // Weergeven van een bericht dat er geen product is geselecteerd
-                var noProductSelectedDialog = new ContentDialog
-                {
-                    Title = "Geen product geselecteerd",
-                    Content = "Selecteer een product om de hoeveelheid te wijzigen.",
-                    CloseButtonText = "Ok"
-                };
-                _ = await noProductSelectedDialog.ShowAsync();
+                await noProductClicked.ShowAsync();
             }
         }
     }

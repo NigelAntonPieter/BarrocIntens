@@ -74,5 +74,12 @@
                 <TextBlock Text="Vul alle velden in en selecteer een afbeelding." />
             </StackPanel>
         </ContentDialog>
+        <ContentDialog x:Name="priceDialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Vul de cijfers in." />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Window>
