@@ -16,9 +16,9 @@ namespace BarrocIntens.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Maintenance_appointment> MaintenanceAppointments { get; set; }
         public DbSet<Product_category> ProductCategories { get; set; }
-
         public DbSet<LeaseContract> LeaseContracts { get; set; }
         public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
+        public DbSet<UserMaintenanceAppointment> UserMaintenanceAppointment { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,12 +30,12 @@ namespace BarrocIntens.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new Maintenance_appointmentConfiguration());
+            modelBuilder.ApplyConfiguration(new UserMaintenanceAppointmentConfiguration());
 
         }
 

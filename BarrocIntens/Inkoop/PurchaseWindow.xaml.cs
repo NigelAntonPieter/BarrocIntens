@@ -25,7 +25,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class PurchaseWindow : Window
     {
-        public PurchaseWindow()
+        public PurchaseWindow(User user)
         {
             this.InitializeComponent();
             using var db = new AppDbContext();

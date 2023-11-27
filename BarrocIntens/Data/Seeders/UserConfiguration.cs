@@ -27,7 +27,8 @@ namespace BarrocIntens.Data.Seeders
                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "a", Role = "Purchase" },
                 new User { Id = 4, Name = "Luna Smedes", UserName = "lunasmedes", Password = "n", Role = "Client" },
                 new User { Id = 5, Name = "Merijn Sweep", UserName = "merijnsweep", Password = "m", Role = "Finance" },
-                new User { Id = 6, Name = "Brent Albers", UserName = "balbers", Password = "n", Role = "MaintenanceAdmin" }
+                new User { Id = 6, Name = "Brent Albers", UserName = "balbers", Password = "n", Role = "MaintenanceAdmin" },
+                new User { Id = 7, Name = "Jennet Smit", UserName = "jennetsmit", Password = "password456", Role = "Maintenance" }
             );
         }
     }
