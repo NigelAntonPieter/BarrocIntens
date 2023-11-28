@@ -47,10 +47,6 @@ namespace BarrocIntens.Data
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new Maintenance_appointmentConfiguration());
             modelBuilder.ApplyConfiguration(new UserMaintenanceAppointmentConfiguration());
-
-            modelBuilder.Entity<Product>().HasData(
-               new Product { Id = 1, Name= "Balonga", Description = "kapot lekker"}
-            );
         }
 
     }
