@@ -22,7 +22,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="10">
-            <TextBlock Text="Inloggen"
+            <TextBlock Text="Registreer klant"
                        FontSize="16"
                        FontWeight="Bold"
                        HorizontalAlignment="Center" />
