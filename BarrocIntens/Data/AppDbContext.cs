@@ -97,10 +97,6 @@ namespace BarrocIntens.Data
                 new Product { Id = "S234XYZ20", Name = "Barroc Intens Italian Special Raspberry Mocha", Product_categoryId = 1, Is_employee_only = true, Description = "Special Berry Chocolate Bliss", Price = 1599, StockQuantity = 24, IsOrdered = true }
 
             );
-
-            modelBuilder.Entity<Company>().HasData(
-               new Company { Id = 1, Name = "Google", Phone = "0612345678", Street = "googlestreet 1" }
-            );
         }
 
     }

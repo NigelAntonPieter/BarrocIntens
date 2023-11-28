@@ -142,5 +142,14 @@ namespace BarrocIntens
                 }
             }
         }
+
+        private void searchTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchInput = searchTextbox.Text;
+
+            using var db = new AppDbContext();
+            productListView.ItemsSource = db.Products
+                .Where(p => p.Name.Contains(searchInput) && (!p.Is_employee_only));
+        }
     }
 }
