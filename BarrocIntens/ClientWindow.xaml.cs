@@ -93,7 +93,22 @@ namespace BarrocIntens
                 }
             }
         }
+        private void stockStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            using var db = new AppDbContext();
 
+            if (stockStatusComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                if (selectedItem.Content.ToString() == "Momenteel leverbaar")
+                {
+                    productListView.ItemsSource = db.Products.Where(p => p.StockQuantity > 1).OrderBy(p => p.Id).ToList();
+                }
+                else if (selectedItem.Content.ToString() == "Uit voorraad")
+                {
+                    productListView.ItemsSource = db.Products.Where(p => p.StockQuantity <= 0).OrderBy(p => p.Id).ToList();
+                }
+            }
+        }
 
     }
 }

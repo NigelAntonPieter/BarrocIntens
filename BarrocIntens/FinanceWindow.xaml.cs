@@ -27,6 +27,11 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
             dbContext = new AppDbContext();
+
+            EmployeeComboBox.ItemsSource = dbContext.Users.ToList();
+            ProductComboBox.ItemsSource = dbContext.Products.ToList();
+            ProductComboBox.DisplayMemberPath = "Name";
+            ProductComboBox.SelectedValuePath = "Id";
         }
 
         private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
@@ -41,36 +46,15 @@ namespace BarrocIntens
             dbContext.LeaseContracts.Add(newLeaseContract);
             dbContext.SaveChanges();
         }
+
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
         {
-            var LeaseContractOverview = new LeaseContractOverviewWindow();
-                LeaseContractOverview.Activate();
-            this.Close(); 
-        }
-        private void EditLeaseContractButton_Click(object sender, RoutedEventArgs e)
-        {
-            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
-
-            if (selectedLeaseContract != null)
-            {
-                var editForm = new EditLeaseContractForm(selectedLeaseContract);
-                editForm.ShowDialog();
-            }
-        }
-        private void DeleteLeaseContractButton_Click(object sender, RoutedEventArgs e)
-        {
-            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
-
-            if (selectedLeaseContract != null)
-            {
-                dbContext.LeaseContracts.Remove(selectedLeaseContract);
-                dbContext.SaveChanges();
-            }
+            var leaseContractOverview = new LeaseContractOverviewWindow();
+            leaseContractOverview.Activate();
+            this.Close();
         }
         private void GenerateInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            // Add code to generate an invoice for a lease contract
-
             LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
 
             if (selectedLeaseContract != null)
@@ -78,7 +62,7 @@ namespace BarrocIntens
                 // Create a new invoice based on the selected lease contract
                 InvoiceFinance newInvoice = new InvoiceFinance
                 {
-
+                    // Add properties for the invoice based on your logic
                 };
 
                 dbContext.InvoicesFinance.Add(newInvoice);
@@ -100,23 +84,86 @@ namespace BarrocIntens
                 selectedInvoice.IsPaid = true;
 
                 dbContext.SaveChanges();
-
             }
         }
+
         private LeaseContract GetSelectedLeaseContract()
         {
-            //if (leaseContractsListView.SelectedItem is LeaseContract selectedLeaseContract)
-            //{
-            //    return selectedLeaseContract;
-            //}
+            // Implement the logic to get the selected lease contract
             return null;
-
         }
+
         private InvoiceFinance GetSelectedInvoice()
         {
-            // Add code to retrieve the selected invoice from the UI
+            // Implement the logic to get the selected invoice
             return null;
         }
-    }
 
+        private void GenerateReceiptButton_Click(object sender, RoutedEventArgs e)
+        {
+            ClearErrorMessages();
+
+            string employeeName = (EmployeeComboBox.SelectedItem as User)?.Name;
+
+            if (string.IsNullOrEmpty(employeeName))
+            {
+                ShowErrorMessage("Please select an employee.");
+                return;
+            }
+
+            if (ProductComboBox.SelectedValue == null)
+            {
+                ShowErrorMessage("Please select a product.");
+                return;
+            }
+
+            // Directly use the selected value as a string (assuming it's a string)
+            string selectedProductId = ProductComboBox.SelectedValue.ToString();
+
+            DateTime installationDate = InstallationDatePicker.Date.DateTime;
+            if (installationDate == DateTime.MinValue)
+            {
+                ShowErrorMessage("Please select a valid installation date.");
+                return;
+            }
+
+            if (!decimal.TryParse(ConnectionCostsTextBox.Text, out decimal connectionCosts))
+            {
+                ShowErrorMessage("Error converting connection costs.");
+                return;
+            }
+
+            SaveReceiptToDatabase(employeeName, selectedProductId, installationDate, connectionCosts);
+        }
+
+        private void ClearErrorMessages()
+        {
+            ErrorMessageTextBlock.Text = string.Empty;
+        }
+
+        private void ShowErrorMessage(string errorMessage)
+        {
+            ErrorMessageTextBlock.Text = errorMessage;
+        }
+
+        private void SaveReceiptToDatabase(string employeeName, string selectedProductId, DateTime installationDate, decimal connectionCosts)
+        {
+            User selectedUser = dbContext.Users.FirstOrDefault(u => u.Name == employeeName);
+
+            if (selectedUser != null)
+            {
+                InstallationReceipt newReceipt = new InstallationReceipt
+                {
+                    EmployeeName = selectedUser.Name,
+                    ProductId = selectedProductId, // Use the selectedProductId directly as a string
+                    InstallationDate = installationDate,
+                    ConnectionCosts = connectionCosts
+                };
+
+                dbContext.InstallationReceipts.Add(newReceipt);
+                dbContext.SaveChanges();
+            }
+        }
+    }
 }
+ 

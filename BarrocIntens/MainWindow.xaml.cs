@@ -38,7 +38,6 @@ namespace BarrocIntens
             {
                db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
-                
             }
 
         }

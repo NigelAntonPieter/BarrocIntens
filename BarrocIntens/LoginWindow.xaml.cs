@@ -43,7 +43,7 @@ namespace BarrocIntens
             }
         }
 
-        private void LoginEl_Click(object sender, RoutedEventArgs e)
+        private async void LoginEl_Click(object sender, RoutedEventArgs e)
         {
             string enteredUsername = usernameTextbox.Text;
             string enteredPassword = passwordBox.Password;
@@ -68,6 +68,7 @@ namespace BarrocIntens
                 {
                     // Authentication failed
                     ErrorTextBlock.Text = "Ongeldige inloggegevens";
+                    await inlogDialog.ShowAsync();
                 }
             }
         }

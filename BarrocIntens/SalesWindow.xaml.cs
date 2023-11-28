@@ -62,7 +62,10 @@ namespace BarrocIntens
 
         private void clientsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var clickedItem = (User)e.ClickedItem;
 
+            var window = new ClientNotesWindow(clickedItem.Id);
+            window.Activate();
         }
     }
 }

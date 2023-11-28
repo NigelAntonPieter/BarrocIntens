@@ -46,35 +46,45 @@ namespace BarrocIntens
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-
-
             if (string.IsNullOrWhiteSpace(CodeTextBox.Text) ||
                 string.IsNullOrWhiteSpace(NameTextBox.Text) ||
                 string.IsNullOrWhiteSpace(DescriptionTextBox.Text) ||
                 string.IsNullOrWhiteSpace(PriceTextBox.Text) ||
-                 string.IsNullOrWhiteSpace(QuantityTextBox.Text) ||
+                string.IsNullOrWhiteSpace(QuantityTextBox.Text) ||
                 copiedFile == null)
             {
-
                 await dialog.ShowAsync();
             }
             else
             {
-                var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
-                using var db = new AppDbContext();
-                db.Products.Add(new Product
-                {
-                    Id = CodeTextBox.Text,
-                    Name = NameTextBox.Text,
-                    Description = DescriptionTextBox.Text,
-                    Price = decimal.Parse(PriceTextBox.Text),
-                    StockQuantity = int.Parse(QuantityTextBox.Text),
-                    Product_categoryId = productCategoryId.Id,
-                    ImagePath = copiedFile.Path
-                });
-                db.SaveChanges();
+                bool isCodeValid = !int.TryParse(CodeTextBox.Text, out _);
+                bool isNameValid = !int.TryParse(NameTextBox.Text, out _);
+                bool isDescriptionValid = !int.TryParse(DescriptionTextBox.Text, out _);
+                bool isPriceValid = decimal.TryParse(PriceTextBox.Text, out decimal price);
+                bool isQuantityValid = int.TryParse(QuantityTextBox.Text, out int quantity);
 
-                this.Close();
+                if (isCodeValid && isNameValid && isDescriptionValid && isPriceValid && isQuantityValid)
+                {
+                    var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
+                    using var db = new AppDbContext();
+                    db.Products.Add(new Product
+                    {
+                        Id = CodeTextBox.Text,
+                        Name = NameTextBox.Text,
+                        Description = DescriptionTextBox.Text,
+                        Price = price, // Gebruik de eerder gecontroleerde geconverteerde waarde
+                        StockQuantity = quantity, // Gebruik de eerder gecontroleerde geconverteerde waarde
+                        Product_categoryId = productCategoryId.Id,
+                        ImagePath = copiedFile.Path
+                    });
+                    db.SaveChanges();
+
+                    this.Close();
+                }
+                else
+                {
+                    await priceDialog.ShowAsync(); // Toon foutmelding als invoer ongeldig is
+                }
             }
         }
 
