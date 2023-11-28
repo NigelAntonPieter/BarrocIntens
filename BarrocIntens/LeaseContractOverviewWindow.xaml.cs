@@ -12,9 +12,6 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using System.Collections.ObjectModel;
-using BarrocIntens.Date;
-using System.Diagnostics;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,34 +21,11 @@ namespace BarrocIntens
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ProductAddWindow : Window
+    public sealed partial class LeaseContractOverviewWindow : Window
     {
-        
-
-        public ProductAddWindow()
+        public LeaseContractOverviewWindow()
         {
             this.InitializeComponent();
-            
-           
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            using var db = new AppDbContext();
-            db.Products.Add(new Product
-            {
-                Name = NameTextBox.Text,
-                Description = DescriptionTextBox.Text,
-            });
-            db.SaveChanges();
         }
     }
 }
-    
-
-    
-        
-       
-
-        
-

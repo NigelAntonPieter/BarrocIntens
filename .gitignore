@@ -398,3 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 BarrocIntens/App.config
 BarrocIntens/App.config.example
+BarrocIntens/Data/CustomInvoice.cs
+BarrocIntens/Data/Custom_invoice.cs
+BarrocIntens/Data/custom_invoice_product.cs
+BarrocIntens/Data/CustomInvoiceProduct.cs

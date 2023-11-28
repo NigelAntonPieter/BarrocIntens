@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
@@ -18,13 +18,16 @@
     <Page Remove="NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="AdminMaintenanceWindow.xaml" />
     <None Remove="ClientNotesWindow.xaml" />
     <None Remove="ClientRegisterWindow.xaml" />
     <None Remove="ClientWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
+    <None Remove="LeaseContractOverviewWindow.xaml" />
     <None Remove="LoginWindow.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
     <None Remove="ProductAddWindow.xaml" />
+    <None Remove="ProductEditWindow.xaml" />
     <None Remove="PurchaseWindow.xaml" />
     <None Remove="SalesWindow.xaml" />
   </ItemGroup>
@@ -40,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BCrypt.Net" Version="0.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.3.230602002" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
@@ -76,11 +78,17 @@
     <PRIResource Remove="NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AdminMaintenanceWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="ClientNotesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="ProductEditWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="ClientRegisterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -114,5 +122,11 @@
     <Page Update="SalesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Inkoop\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
   </ItemGroup>
 </Project>

@@ -25,6 +25,11 @@
                 <TextBlock Text="Add Product" FontSize="50" FontWeight="Bold" FontFamily="arial"/>
             </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Code:"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10" />
+            <TextBox x:Name="CodeTextBox"
+                     PlaceholderText="Voer de naam in" />
             <TextBlock Text="Naam:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
@@ -40,13 +45,41 @@
                        Margin="0,0,0,10"  />
             <TextBox x:Name="PriceTextBox"
                      PlaceholderText="Voer de prijs in" />
+            <TextBlock Text="Hoeveelheid:"
+                       HorizontalAlignment="center"
+                       Margin="0,0,0,10" />
+            <TextBox x:Name="QuantityTextBox"
+                     PlaceholderText="Voer de hoeveelheid  in" />
+            <TextBlock Text="Categorie:"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,10" />
+            <ComboBox x:Name="ProductCategoryComboBox"
+              ItemsSource="{x:Bind ProductCategories}"
+              DisplayMemberPath="Name"
+              SelectedValuePath="Id"
+              PlaceholderText="Selecteer een categorie" />
 
+            <Button x:Name="fileButton"
+                    Click="fileButton_Click">Voeg een Foto toe...</Button>
             <Button Content="Toevoegen"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Width="75"
                     Click="Button_Click" />
             </StackPanel>
-
+        <ContentDialog x:Name="dialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Vul alle velden in en selecteer een afbeelding." />
+            </StackPanel>
+        </ContentDialog>
+        <ContentDialog x:Name="priceDialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Vul de cijfers in." />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Window>

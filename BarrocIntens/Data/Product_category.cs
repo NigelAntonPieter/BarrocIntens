@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarrocIntens.Date
+namespace BarrocIntens.Data
 {
-    internal class Product_category
+    public class Product_category
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Is_employee_only { get; set; }
+        
+
+        
     }
 }

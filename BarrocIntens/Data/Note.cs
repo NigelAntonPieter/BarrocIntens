@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarrocIntens.Date
+namespace BarrocIntens.Data
 {
-    internal class Note
+    public class Note
     {
         public int Id { get; set; }
         public string Comments { get; set; }

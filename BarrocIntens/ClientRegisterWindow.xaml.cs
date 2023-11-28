@@ -15,7 +15,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using BarrocIntens.Date;
+using BarrocIntens.Data;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -54,7 +54,7 @@ namespace BarrocIntens
                 Role = role,
             };
 
-            newUser.SetPassword(password);
+           // newUser.SetPassword(password);
 
             context.Users.Add(newUser);
             context.SaveChanges();

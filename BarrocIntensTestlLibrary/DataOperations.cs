@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarrocIntens.Date
+namespace BarrocIntensTestlLibrary
 {
-    internal class custom_invoice_product
+    public static class DataOperations
     {
+
     }
 }

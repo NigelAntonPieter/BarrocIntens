@@ -6,41 +6,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using BarrocIntens.Data.Seeders;
 
-namespace BarrocIntens.Date
+namespace BarrocIntens.Data
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Maintenance_appointment> MaintenanceAppointments { get; set; }
+        public DbSet<Product_category> ProductCategories { get; set; }
+        public DbSet<LeaseContract> LeaseContracts { get; set; }
+        public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
+
+        public DbSet<UserMaintenanceAppointment> UserMaintenanceAppointments { get; set; }
+        public DbSet<InstallationReceipt> InstallationReceipts { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Company> Companies { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(
-                ConfigurationManager.ConnectionStrings["BarrocIntens"].ConnectionString,
-                ServerVersion.Parse("5.7.33-winx64"));
+               ConfigurationManager.ConnectionStrings["BarrocIntens"].ConnectionString,
+               ServerVersion.Parse("5.7.33-winx64"));
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
-               .HasMany(u => u.Companys)
-               .WithMany(c => c.Users)
-               .UsingEntity<Note>();
-
             modelBuilder.Entity<Note>()
-               .HasOne(n => n.Company)
-               .WithMany(c => c.Notes)
-               .HasForeignKey(n => n.CompanyId);
+           .HasOne(n => n.Company)
+           .WithMany(c => c.Notes)
+           .HasForeignKey(n => n.CompanyId);
 
-        modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = "password123", Role = "Sales" },
-                new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance"},
-                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "password4321", Role = "client"}
-            );
+            modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new CompanyConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new Maintenance_appointmentConfiguration());
+            modelBuilder.ApplyConfiguration(new UserMaintenanceAppointmentConfiguration());
 
             modelBuilder.Entity<Product>().HasData(
                new Product { Id = 1, Name= "Balonga", Description = "kapot lekker"}

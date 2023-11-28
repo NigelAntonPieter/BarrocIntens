@@ -1,4 +1,4 @@
-using BarrocIntens.Date;
+using BarrocIntens.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -25,7 +25,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class SalesWindow : Window
     {
-        public SalesWindow()
+        public SalesWindow(User user)
         {
             this.InitializeComponent();
 

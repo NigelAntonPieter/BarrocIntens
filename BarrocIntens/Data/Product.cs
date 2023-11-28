@@ -4,17 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarrocIntens.Date
+namespace BarrocIntens.Data
 {
-    internal class Product
+    public class Product
     {
-        public int Id { get; set; } 
+        public string Id { get; set; } 
         public string Name { get; set; }
         public string Description { get; set; }
-        //public string Image_path { get; set; }
-        //public decimal Price { get; set; }
+       
+        public decimal Price { get; set; }
+        public int StockQuantity {  get; set; }
 
-        //public Product_category category { get; set; }
-        //public int Product_catogory { get; set; }
+        public string StockStatus => StockQuantity > 0 ? "Momenteel leverbaar" : "Uit voorraad";
+
+        public bool IsOrdered { get; set; }
+
+        public string ImagePath { get; set; }
+
+       
+        public int Product_categoryId { get; set; }
+        public  Product_category Product_category { get; set; }
+        public bool Is_employee_only { get; set; }
+        public string ImagePathWithFallBack => ImagePath ?? "/Assets/Logo6_klein.png";
+        public string PriceFormatted => string.Format("{0:N2}", Price);
     }
 }
