@@ -18,6 +18,8 @@ namespace BarrocIntens.Data
         public DbSet<LeaseContract> LeaseContracts { get; set; }
         public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
         public DbSet<InstallationReceipt> InstallationReceipts { get; set; }
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<Company> Companies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,7 +37,12 @@ namespace BarrocIntens.Data
                .WithMany(c => c.Users)
                .UsingEntity<Note>();
 
-            modelBuilder.Entity<User>().HasData(
+            modelBuilder.Entity<Note>()
+               .HasOne(n => n.Company)
+               .WithMany(c => c.Notes)
+               .HasForeignKey(n => n.CompanyId);
+
+        modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = "password123", Role = "Sales" },
                 new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = "password456", Role = "Maintenance"},
                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = "a", Role = "Purchase" },
@@ -64,7 +71,7 @@ namespace BarrocIntens.Data
                 );
 
             modelBuilder.Entity<Product>().HasData(
-                new Product { Id = "S234FREKT", Name= "Barroc Intens Italian Light",Product_categoryId = 2, Is_employee_only = true, Description = "Light", Price = 499, StockQuantity = 100, IsOrdered = false},
+                new Product { Id = "S234FREKT", Name= "Barroc Intens Italian Light",Product_categoryId = 2, Is_employee_only = true, Description = "Light", Price = 499, StockQuantity = 0, IsOrdered = false},
                 new Product { Id = "S234KNDPF", Name = "Barroc Intens Italian", Product_categoryId = 1, Is_employee_only = false, Description = "Italian", Price = 599, StockQuantity = 5, IsOrdered = true },
                 new Product {Id = "S234NNBMV", Name = "Barroc Intens Italian Deluxe", Product_categoryId = 1, Is_employee_only = false, Description = "Deluxe", Price = 799, StockQuantity = 50, IsOrdered = false },
                 new Product {Id = "S234MMPLA", Name = "Barroc Intens Italian Deluxe Special", Product_categoryId = 1, Is_employee_only = false, Description = "Special", Price = 999, StockQuantity = 200, IsOrdered = false },
@@ -91,6 +98,9 @@ namespace BarrocIntens.Data
 
             );
 
+            modelBuilder.Entity<Company>().HasData(
+               new Company { Id = 1, Name = "Google", Phone = "0612345678", Street = "googlestreet 1" }
+            );
         }
 
     }

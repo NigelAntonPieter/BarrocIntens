@@ -30,9 +30,15 @@
             <TextBlock Text="Wachtwoord" />
             <PasswordBox x:Name="passwordBox" />
             <Button x:Name="LoginEl"
-                HorizontalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
                     Click="LoginEl_Click">Login</Button>
         </StackPanel>
+        <ContentDialog x:Name="inlogDialog"
+                       Title="Inloggegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Inlog gegevens kloppen niet." />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
-    
 </Window>

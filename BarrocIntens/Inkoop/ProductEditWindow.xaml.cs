@@ -45,7 +45,7 @@ namespace BarrocIntens
             PriceTextBox.Text = clickedProduct.PriceFormatted;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var product = _clickedProduct;
 
@@ -62,16 +62,28 @@ namespace BarrocIntens
                 clickedProduct.Product_categoryId = clickedProduct.Product_categoryId;
             }
 
+            // Validatie voor prijs
+            if (!decimal.TryParse(PriceTextBox.Text, out decimal price))
+            {
+                await EditDialog.ShowAsync();
+            }
+            clickedProduct.Price = price;
 
-                // Werk de eigenschappen van het product bij met de waarden uit de tekstvakken
+            // Validatie voor naam
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text))
+            {
+                await EditDialog.ShowAsync();
+            }
             clickedProduct.Name = NameTextBox.Text;
+
+            // Validatie voor beschrijving (optioneel)
             clickedProduct.Description = DescriptionTextBox.Text;
-            // Zorg ervoor dat je de prijs op de juiste manier bijwerkt, afhankelijk van het type in je database
-            clickedProduct.Price = decimal.Parse(PriceTextBox.Text);
+
             // Sla de wijzigingen op in de database
             db.SaveChanges();
 
             this.Close();
         }
+
     }
 }

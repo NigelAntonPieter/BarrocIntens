@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" /> 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -53,13 +54,22 @@
               ItemsSource="{x:Bind ProductCategories}"
               DisplayMemberPath="Name"
               SelectedValuePath="Id"
-              PlaceholderText="Selecteer een categorie" />
+              PlaceholderText="Selecteer een categorie"
+                  Grid.Row="3"
+                  Grid.Column="1"/>
 
         <Button Content="Update Product"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Click="Button_Click"
                 Margin="5" />
+        <ContentDialog x:Name="EditDialog"
+                       Title="Onjuiste gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Vul de juiste gegevens in ." />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Window>
