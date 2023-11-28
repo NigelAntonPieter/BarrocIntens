@@ -17,6 +17,7 @@ using System.Reflection.Emit;
 using Windows.UI.Input.Spatial;
 using Microsoft.UI.Xaml.Automation;
 using BarrocIntens.Data;
+using Microsoft.UI.Windowing;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -39,7 +40,6 @@ namespace BarrocIntens
                db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
             }
-
         }
 
         private void LoginPage_Click(object sender, RoutedEventArgs e)
