@@ -25,7 +25,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class AdminMaintenanceWindow : Window
     {
-        public AdminMaintenanceWindow()
+        public AdminMaintenanceWindow(User user)
         {
             this.InitializeComponent();
 

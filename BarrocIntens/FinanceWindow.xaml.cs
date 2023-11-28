@@ -23,7 +23,7 @@ namespace BarrocIntens
     {
         private AppDbContext dbContext;
 
-        public FinanceWindow()
+        public FinanceWindow(User user)
         {
             this.InitializeComponent();
             dbContext = new AppDbContext();

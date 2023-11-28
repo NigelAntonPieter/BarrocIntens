@@ -25,7 +25,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class PurchaseWindow : Window
     {
-        public PurchaseWindow()
+        public PurchaseWindow(User user)
         {
             this.InitializeComponent();
             using var db = new AppDbContext();
@@ -86,7 +86,9 @@ namespace BarrocIntens
 
         private void uitlogEL_Click(object sender, RoutedEventArgs e)
         {
-            var loginWindow = new LoginWindow();
+            AppDbContext db = new AppDbContext();
+            IWindowFactory windowFactory = new WindowFactory();
+            var loginWindow = new LoginWindow(windowFactory, db);
             loginWindow.Activate();
             this.Close();
         }

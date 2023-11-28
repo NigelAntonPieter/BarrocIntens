@@ -7,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace BarrocIntens.Data
 {
-    internal class Maintenance_appointment
+    public class Maintenance_appointment
     {
         public int Id {  get; set; }
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         [Column(TypeName = "longtext")]public string Remark { get; set; }
         public DateTime DateAdded { get; set; }
+        public ICollection<UserMaintenanceAppointment> UserMaintenanceAppointments { get; set; }
 
+    }
+    public class UserMaintenanceAppointment
+    {
+        public int UserId { get; set; }
+        public User User { get; set; }
+
+        public int MaintenanceAppointmentId { get; set; }
+        public Maintenance_appointment MaintenanceAppointment { get; set; }
     }
 }

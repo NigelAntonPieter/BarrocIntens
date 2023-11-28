@@ -25,7 +25,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class SalesWindow : Window
     {
-        public SalesWindow()
+        public SalesWindow(User user)
         {
             this.InitializeComponent();
 
