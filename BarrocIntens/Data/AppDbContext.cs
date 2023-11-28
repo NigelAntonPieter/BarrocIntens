@@ -45,10 +45,6 @@ namespace BarrocIntens.Date
             modelBuilder.Entity<Product>().HasData(
                new Product { Id = 1, Name= "Balonga", Description = "kapot lekker"}
             );
-
-            modelBuilder.Entity<Company>().HasData(
-               new Company { Id = 1, Name = "Google", Phone = "0612345678", Street = "googlestreet 1" }
-            );
         }
 
     }
