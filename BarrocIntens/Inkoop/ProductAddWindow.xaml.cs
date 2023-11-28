@@ -69,7 +69,7 @@ namespace BarrocIntens
                     using var db = new AppDbContext();
                     db.Products.Add(new Product
                     {
-                        Id = CodeTextBox.Text,
+                        Code = CodeTextBox.Text,
                         Name = NameTextBox.Text,
                         Description = DescriptionTextBox.Text,
                         Price = price, // Gebruik de eerder gecontroleerde geconverteerde waarde
