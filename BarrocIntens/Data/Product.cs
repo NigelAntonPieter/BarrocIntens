@@ -14,6 +14,9 @@ namespace BarrocIntens.Data
        
         public decimal Price { get; set; }
         public int StockQuantity {  get; set; }
+
+        public string StockStatus => StockQuantity > 0 ? "Momenteel leverbaar" : "Uit voorraad";
+
         public bool IsOrdered { get; set; }
 
         public string ImagePath { get; set; }

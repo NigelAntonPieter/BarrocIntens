@@ -29,7 +29,7 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
             using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
+            productListView.ItemsSource = db.Products.OrderBy(p => p.Id);
         }
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
@@ -116,27 +116,30 @@ namespace BarrocIntens
                     }
                     else
                     {
-                        // Weergeven van een bericht dat het ingevoerde cijfer ongeldig is
-                        var invalidInputDialog = new ContentDialog
-                        {
-                            Title = "Ongeldige invoer",
-                            Content = "Voer een geldig getal in voor de hoeveelheid.",
-                            CloseButtonText = "Ok"
-                        };
-                        _ = await invalidInputDialog.ShowAsync();
+                         await QuantityInputDialog.ShowAsync();
                     }
                 }
             }
             else
             {
-                // Weergeven van een bericht dat er geen product is geselecteerd
-                var noProductSelectedDialog = new ContentDialog
+                await noProductClicked.ShowAsync();
+            }
+        }
+
+        private void stockStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            using var db = new AppDbContext();
+
+            if (stockStatusComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                if (selectedItem.Content.ToString() == "Momenteel leverbaar")
                 {
-                    Title = "Geen product geselecteerd",
-                    Content = "Selecteer een product om de hoeveelheid te wijzigen.",
-                    CloseButtonText = "Ok"
-                };
-                _ = await noProductSelectedDialog.ShowAsync();
+                    productListView.ItemsSource = db.Products.Where(p => p.StockQuantity > 1).OrderBy(p => p.Id).ToList();
+                }
+                else if (selectedItem.Content.ToString() == "Uit voorraad")
+                {
+                    productListView.ItemsSource = db.Products.Where(p => p.StockQuantity <= 0).OrderBy(p => p.Id).ToList();
+                }
             }
         }
     }
