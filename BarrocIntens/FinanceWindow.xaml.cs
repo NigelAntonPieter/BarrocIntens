@@ -36,6 +36,30 @@ namespace BarrocIntens
 
         private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearErrorMessages();
+
+            // Check if CustomerNameTextBox is empty
+            if (string.IsNullOrEmpty(CustomerNameTextBox.Text))
+            {
+                ShowLeaseContractErrorMessage("Please enter customer name.");
+                return;
+            }
+
+            // Check if BkrCheckCheckBox is not checked
+            if (BkrCheckCheckBox.IsChecked == null || !BkrCheckCheckBox.IsChecked.Value)
+            {
+                ShowLeaseContractErrorMessage("BKR check must be passed.");
+                return;
+            }
+
+            // Check if MonthlyInvoiceCheckBox is not checked
+            if (MonthlyInvoiceCheckBox.IsChecked == null || !MonthlyInvoiceCheckBox.IsChecked.Value)
+            {
+                ShowLeaseContractErrorMessage("Monthly invoice must be selected.");
+                return;
+            }
+
+            // All fields are valid, proceed to create and save LeaseContract
             LeaseContract newLeaseContract = new LeaseContract
             {
                 CustomerName = CustomerNameTextBox.Text,
@@ -44,8 +68,22 @@ namespace BarrocIntens
             };
 
             dbContext.LeaseContracts.Add(newLeaseContract);
-            dbContext.SaveChanges();
+
+            
+                dbContext.SaveChanges();
+            
         }
+
+        private void ShowLeaseContractErrorMessage(string errorMessage)
+        {
+            LeaseContractErrorMessageTextBlock.Text = errorMessage;
+        }
+
+        private void ClearLeaseContractErrorMessages()
+        {
+            LeaseContractErrorMessageTextBlock.Text = string.Empty;
+        }
+
 
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
         {
@@ -155,7 +193,7 @@ namespace BarrocIntens
                 InstallationReceipt newReceipt = new InstallationReceipt
                 {
                     EmployeeName = selectedUser.Name,
-                    ProductId = selectedProductId, // Use the selectedProductId directly as a string
+                    ProductId = selectedProductId,
                     InstallationDate = installationDate,
                     ConnectionCosts = connectionCosts
                 };
