@@ -80,12 +80,16 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="AdminMaintenanceWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="ClientNotesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="ProductEditWindow.xaml" />
+    <Page Update="ProductEditWindow.xaml" >
+    <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="ClientRegisterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
