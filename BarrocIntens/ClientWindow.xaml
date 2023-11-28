@@ -75,7 +75,7 @@
         </ListView>
         <ContentDialog x:Name="Orderdialog"
                        Title="Hoeveelheid bestellen"
-                       PrimaryButtonText="bestellem"
+                       PrimaryButtonText="bestellen"
                        CloseButtonText="annuleer">
             <StackPanel>
                 <TextBlock Text="Voer de hoeveelheid in die u wilt bestellen:" />
