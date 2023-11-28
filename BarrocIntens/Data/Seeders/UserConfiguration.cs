@@ -15,11 +15,7 @@ namespace BarrocIntens.Data.Seeders
             builder.HasKey(u => u.Id);
 
             builder.HasMany(u => u.Companys)
-                   .WithMany(c => c.Users)
-                   .UsingEntity<Note>(
-                        j => j.HasOne<Company>().WithMany(),
-                        j => j.HasOne<User>().WithMany()
-                   );
+          .WithMany(c => c.Users).UsingEntity<Note>();
 
             builder.HasData(
                 new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = "password123", Role = "Sales" },

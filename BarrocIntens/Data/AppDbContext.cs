@@ -35,6 +35,12 @@ namespace BarrocIntens.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Note>()
+           .HasOne(n => n.Company)
+           .WithMany(c => c.Notes)
+           .HasForeignKey(n => n.CompanyId);
+
             modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
@@ -42,9 +48,6 @@ namespace BarrocIntens.Data
             modelBuilder.ApplyConfiguration(new Maintenance_appointmentConfiguration());
             modelBuilder.ApplyConfiguration(new UserMaintenanceAppointmentConfiguration());
 
-            modelBuilder.Entity<Company>().HasData(
-               new Company { Id = 1, Name = "Google", Phone = "0612345678", Street = "googlestreet 1" }
-            );
         }
 
     }
