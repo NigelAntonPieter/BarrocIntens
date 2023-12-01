@@ -1,4 +1,5 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,9 +14,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace BarrocIntens
 {
@@ -68,10 +66,7 @@ namespace BarrocIntens
             };
 
             dbContext.LeaseContracts.Add(newLeaseContract);
-
-            
-                dbContext.SaveChanges();
-            
+            dbContext.SaveChanges();
         }
 
         private void ShowLeaseContractErrorMessage(string errorMessage)
@@ -84,13 +79,13 @@ namespace BarrocIntens
             LeaseContractErrorMessageTextBlock.Text = string.Empty;
         }
 
-
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
         {
             var leaseContractOverview = new LeaseContractOverviewWindow();
             leaseContractOverview.Activate();
             this.Close();
         }
+
         private void GenerateInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
             LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
@@ -120,7 +115,6 @@ namespace BarrocIntens
             if (selectedInvoice != null)
             {
                 selectedInvoice.IsPaid = true;
-
                 dbContext.SaveChanges();
             }
         }
@@ -155,7 +149,6 @@ namespace BarrocIntens
                 return;
             }
 
-            // Directly use the selected value as a string (assuming it's a string)
             string selectedProductId = ProductComboBox.SelectedValue.ToString();
 
             DateTime installationDate = InstallationDatePicker.Date.DateTime;
@@ -171,7 +164,47 @@ namespace BarrocIntens
                 return;
             }
 
-            SaveReceiptToDatabase(employeeName, selectedProductId, installationDate, connectionCosts);
+            // Get the selected product from the database
+            Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Id == selectedProductId);
+
+            if (selectedProduct == null)
+            {
+                ShowErrorMessage("Selected product not found.");
+                return;
+            }
+
+            // Calculate total price including machine price, installation cost, and VAT
+            decimal machinePrice = selectedProduct.Price;
+            decimal vatRate = 0.21m; // Example VAT rate (21%)
+
+            decimal totalPrice = machinePrice + connectionCosts + (machinePrice + connectionCosts) * vatRate;
+
+            // Display receipt information on the UI
+            string receiptText = $"Receipt for Coffee Machine Installation\n\n" +
+                                 $"Employee: {employeeName}\n" +
+                                 $"Product: {selectedProduct.Name}\n" +
+                                 $"Machine Price: {machinePrice:C}\n" +
+                                 $"Installation Cost: {connectionCosts:C}\n" +
+                                 $"VAT (btw): {(machinePrice + connectionCosts) * vatRate:C}\n" +
+                                 $"Total Price: {totalPrice:C}\n" +
+                                 $"Installation Date: {installationDate.ToShortDateString()}";
+
+            ShowReceipt(receiptText);
+
+            // Save receipt to the database
+            SaveReceiptToDatabase(employeeName, selectedProductId, installationDate, connectionCosts, totalPrice);
+        }
+
+        private void ShowReceipt(string receiptText)
+        {
+            // Display receipt information on the UI (assuming you have a TextBlock named ReceiptTextBlock)
+            ReceiptTextBlock.Text = receiptText;
+        }
+
+        private void ClearReceipt()
+        {
+            // Clear the receipt information on the UI
+            ReceiptTextBlock.Text = string.Empty;
         }
 
         private void ClearErrorMessages()
@@ -184,18 +217,20 @@ namespace BarrocIntens
             ErrorMessageTextBlock.Text = errorMessage;
         }
 
-        private void SaveReceiptToDatabase(string employeeName, string selectedProductId, DateTime installationDate, decimal connectionCosts)
+        private void SaveReceiptToDatabase(string employeeName, string selectedProductId, DateTime installationDate, decimal connectionCosts, decimal totalPrice)
         {
             User selectedUser = dbContext.Users.FirstOrDefault(u => u.Name == employeeName);
+            Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Id == selectedProductId);
 
-            if (selectedUser != null)
+            if (selectedUser != null && selectedProduct != null)
             {
                 InstallationReceipt newReceipt = new InstallationReceipt
                 {
                     EmployeeName = selectedUser.Name,
                     ProductId = selectedProductId,
                     InstallationDate = installationDate,
-                    ConnectionCosts = connectionCosts
+                    ConnectionCosts = connectionCosts,
+                    TotalPrice = totalPrice
                 };
 
                 dbContext.InstallationReceipts.Add(newReceipt);
@@ -204,4 +239,3 @@ namespace BarrocIntens
         }
     }
 }
- 
