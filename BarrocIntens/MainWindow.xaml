@@ -7,27 +7,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="3*" />
-        </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0"
-                    Background="#fdd716" />
-        <StackPanel Grid.Column="1"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Spacing="10">
-            <Image Source="/Assets/Logo6_klein.png"
-                   Width="210" />
-            <TextBlock Text="Welkom bij BarrocIntens"
-                       FontSize="50"
-                       FontWeight="Bold" />
-            <Button x:Name="LoginPage"
-                    HorizontalAlignment="Center"
-                    Click="LoginPage_Click">Loginpagina</Button>
-        </StackPanel>
-    </Grid>
-
+    <Frame x:Name="mainFrame" />
 </Window>

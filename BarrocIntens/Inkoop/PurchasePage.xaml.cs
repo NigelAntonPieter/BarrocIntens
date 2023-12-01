@@ -1,4 +1,5 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -8,6 +9,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,72 +25,46 @@ namespace BarrocIntens
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PurchaseWindow : Window
+    public sealed partial class PurchasePage : Page
     {
-        public PurchaseWindow()
+        public static PurchasePage Instance { get; private set; }
+        public ObservableCollection<Product> allProducts { get; private set; }
+
+        public PurchasePage()
         {
             this.InitializeComponent();
             using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products.OrderBy(p => p.Id);
+            var products = db.Products.ToList();
+            allProducts = new ObservableCollection<Product>(products);
+            productListView.ItemsSource = allProducts;
         }
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
         {
-            var productAddWindow = new ProductAddWindow();
-            productAddWindow.Activate();
+           this.Frame.Navigate(typeof(ProductAddPage));
 
-            productAddWindow.Closed += ProductAddWindow_Closed;
         }
-        private void ProductAddWindow_Closed(object sender, WindowEventArgs args)
-        {
-            using var db = new AppDbContext();
-            productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
-        }
-
-        private void deleteProduct_Click(object sender, RoutedEventArgs e)
-        {
-            if (productListView.SelectedItem is Product selectedProduct)
-            {
-                if (selectedProduct.IsOrdered)
-                {
-                    // Toon de dialog omdat het product al besteld is
-                    _ = IsOrderdDialog.ShowAsync();
-                }
-                else
-                {
-                    // Voer de verwijderingslogica uit als het product niet als besteld is gemarkeerd
-                    using var db = new AppDbContext();
-                    db.Products.Remove(selectedProduct);
-                    db.SaveChanges();
-
-                    productListView.ItemsSource = db.Products.ToList();
-                }
-            }
-        }
-
 
 
         private void productListView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             if (e.OriginalSource is FrameworkElement element && element.DataContext is Product clickedProduct)
             {
-                var productEditWindow = new ProductEditWindow(clickedProduct);
-                productEditWindow.Closed += ProductEditWindow_Closed;
-                productEditWindow.Activate();
+                this.Frame.Navigate(typeof(ProductEditPage), clickedProduct);
             }
 
         }
-        private void ProductEditWindow_Closed(object sender, WindowEventArgs args)
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             using var db = new AppDbContext();
             productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
+            productListView.ScrollIntoView(allProducts);
         }
 
         private void uitlogEL_Click(object sender, RoutedEventArgs e)
         {
-            var loginWindow = new LoginWindow();
-            loginWindow.Activate();
-            this.Close();
+           this.Frame.GoBack();
         }
 
         private async void AddQuantity_Click(object sender, RoutedEventArgs e)
@@ -142,5 +118,54 @@ namespace BarrocIntens
                 }
             }
         }
+
+        private async void productListView_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            var listViewItem = (FrameworkElement)e.OriginalSource;
+            var selectedProduct = (Product)listViewItem.DataContext;
+
+            // Als we rechtsklikken in de ListView, maar niet op een item, dan is er geen aap aangeklikt
+            if (selectedProduct == null)
+            {
+                return;
+            }
+
+            using var db = new AppDbContext();
+
+            db.Products.Remove(selectedProduct);
+            allProducts.Remove(selectedProduct);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            // Concurrency = gelijktijdigheid
+            catch (DbUpdateConcurrencyException ex)
+            {
+                foreach (var entry in ex.Entries)
+                {
+                    // Wijzigingen die gemaakt moesten worden, maar waarbij een Exception gebeurde
+                    var proposedValues = entry.CurrentValues;
+                    // Gegevens zoals ze in de database staan
+                    var databaseValues = entry.GetDatabaseValues();
+
+                    // Geen databas egegevens? Dan was de aap al verwijdert en geven we simpelweg een melding
+                    if (databaseValues == null)
+                    {
+                        // We tonen een melding
+                        //await databaseErrorDialog.ShowAsync();
+                        // BUG:     https://github.com/microsoft/microsoft-ui-xaml/issues/1679
+                        //          Wanneer al een ContentDialog geopent is, terwijl er nog een opent, dan
+                        //          crasht de bovenstaande regel. Microsoft is bekend met het probleem en
+                        //          werkt (erg langzaam) aan een oplossing.
+                    }
+                    else
+                    {
+                        // Anders hebben we een probleem waar we nog niks voor bedacht hebben.
+                        throw ex;
+                    }
+                }
+            }
+        }
     }
-}
+ }

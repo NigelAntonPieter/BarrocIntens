@@ -45,6 +45,6 @@ namespace BarrocIntens
             m_window.Activate();
         }
 
-        private Window m_window;
+        public static Window m_window;
     }
 }

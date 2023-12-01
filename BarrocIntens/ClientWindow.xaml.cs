@@ -43,9 +43,7 @@ namespace BarrocIntens
 
         private void uitlogEl_Click(object sender, RoutedEventArgs e)
         {
-            var loginwindow = new LoginWindow();
-            loginwindow.Activate();
-            this.Close();
+            
         }
 
         private async void productListView_ItemClick(object sender, ItemClickEventArgs e)

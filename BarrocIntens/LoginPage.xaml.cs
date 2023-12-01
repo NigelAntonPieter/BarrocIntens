@@ -21,13 +21,13 @@ using Windows.System;
 
 namespace BarrocIntens
 {
-    public sealed partial class LoginWindow : Window
+    public sealed partial class LoginPage : Page
     {
         // De sleutel voor het opslaan van de gebruikersnaam in de lokale instellingen
         private const string LastUsernameKey = "LastUsername";
         
 
-        public LoginWindow()
+        public LoginPage()
         {
             this.InitializeComponent();
 
@@ -75,15 +75,14 @@ namespace BarrocIntens
                     }
                     else if (user.Role == "Purchase")
                     {
-                        var purchaseWindow = new PurchaseWindow();
-                        purchaseWindow.Activate();
+                        this.Frame.Navigate(typeof(PurchasePage));
                     }
                     else
                     {
                         var clientWindow = new ClientWindow();
                         clientWindow.Activate();
                     }
-                    this.Close();
+                    
                 }
                 else
                 {
