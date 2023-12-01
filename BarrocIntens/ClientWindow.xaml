@@ -64,11 +64,6 @@
                         <TextBlock Text="{x:Bind StockStatus}"
                                    Foreground="Green"
                                    FontWeight="Bold" />
-                        <TextBlock Foreground="Gold">
-                            
-                 <Run>Prijs:</Run>
-                 <Run Text="{x:Bind PriceFormatted}" />
-                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -41,7 +41,7 @@ namespace BarrocIntens
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
         {
-           this.Frame.Navigate(typeof(ProductAddPage));
+            this.Frame.Navigate(typeof(ProductAddPage));
 
         }
 
@@ -64,7 +64,7 @@ namespace BarrocIntens
 
         private void uitlogEL_Click(object sender, RoutedEventArgs e)
         {
-           this.Frame.GoBack();
+            this.Frame.GoBack();
         }
 
         private async void AddQuantity_Click(object sender, RoutedEventArgs e)
@@ -92,7 +92,7 @@ namespace BarrocIntens
                     }
                     else
                     {
-                         await QuantityInputDialog.ShowAsync();
+                        await QuantityInputDialog.ShowAsync();
                     }
                 }
             }
@@ -166,6 +166,15 @@ namespace BarrocIntens
                     }
                 }
             }
+           
+        }
+        private void searchTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchInput = searchTextbox.Text;
+
+            using var db = new AppDbContext();
+            productListView.ItemsSource = db.Products
+                .Where(p => p.Name.Contains(searchInput) && (!p.Is_employee_only));
         }
     }
- }
+}

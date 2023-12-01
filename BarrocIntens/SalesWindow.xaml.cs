@@ -25,7 +25,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class SalesWindow : Window
     {
-        public SalesWindow()
+        public SalesWindow(User user)
         {
             this.InitializeComponent();
 
@@ -62,7 +62,10 @@ namespace BarrocIntens
 
         private void clientsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var clickedItem = (User)e.ClickedItem;
 
+            var window = new ClientNotesWindow(clickedItem.Id);
+            window.Activate();
         }
     }
 }

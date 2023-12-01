@@ -23,9 +23,6 @@ namespace BarrocIntens.Data
         public string ImagePath { get; set; }
 
        
-
-
-       
         public int Product_categoryId { get; set; }
         public  Product_category Product_category { get; set; }
         public bool Is_employee_only { get; set; }

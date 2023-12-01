@@ -1,4 +1,5 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -24,7 +25,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class ClientWindow : Window
     {
-        public ClientWindow()
+        public ClientWindow(User user)
         {
             this.InitializeComponent();
         }

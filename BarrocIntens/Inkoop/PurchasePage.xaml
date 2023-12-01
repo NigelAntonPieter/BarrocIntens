@@ -23,6 +23,8 @@
                     Background="#fdd716">
             <Button x:Name="uitlogEL"
                     Click="uitlogEL_Click">Uitloggen</Button>
+            <TextBox TextChanged="searchTextbox_TextChanged"
+                     x:Name="searchTextbox" />
         </StackPanel>
         <StackPanel Grid.Column="1"
                     Grid.Row="0"
