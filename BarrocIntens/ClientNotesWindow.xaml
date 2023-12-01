@@ -61,6 +61,20 @@
                     VerticalAlignment="Top"
                     Width="75"
                     Click="SaveButton_Click" />
+            <ContentDialog x:Name="wrongCompanyCD"
+                    Title="Ongeldige gegevens"
+                    CloseButtonText="OK">
+          <StackPanel>
+            <TextBlock Text="Ongeldig bedrijf. Deze bestaat niet in de lijst van bedrijven." />
+          </StackPanel>
+          </ContentDialog>
+          <ContentDialog x:Name="wrongInputCD"
+                    Title="Ongeldige gegevens"
+                    CloseButtonText="OK">
+          <StackPanel>
+            <TextBlock Text="Ongeldige invoer. Voer een geldig getal in." />
+          </StackPanel>
+          </ContentDialog>
         </StackPanel>
 
     </Grid>

@@ -1,7 +1,5 @@
-// Copyright (c) Microsoft Corporation and Contributors.
-// Licensed under the MIT License.
-
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -55,7 +53,7 @@ namespace BarrocIntens
             }
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new AppDbContext())
             {
@@ -63,26 +61,64 @@ namespace BarrocIntens
                 {
                     userNotes.Comments = commentsTB.Text;
                     userNotes.AppointmentTitle = appointmentTitleTB.Text;
-                    userNotes.CompanyId = int.Parse(companiesTB.Text);
+
+                    if (int.TryParse(companiesTB.Text, out int companyId))
+                    {
+                        var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
+
+                        if (existingCompany != null)
+                        {
+                            userNotes.CompanyId = companyId;
+                        }
+                        else
+                        {
+                            await wrongCompanyCD.ShowAsync();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        await wrongInputCD.ShowAsync();
+                        return;
+                    }
+
                     userNotes.AppointmentDate = AppointmentDate;
 
                     db.Notes.Update(userNotes);
                 }
                 else
                 {
-                    userNotes = new Note
+                    if (int.TryParse(companiesTB.Text, out int companyId))
                     {
-                        Comments = commentsTB.Text,
-                        AppointmentTitle = appointmentTitleTB.Text,
-                        UserId = userId,
-                        CompanyId = int.Parse(companiesTB.Text),
-                        AppointmentDate = AppointmentDate
-                    };
+                        var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
 
-                    db.Notes.Add(userNotes);
+                        if (existingCompany != null)
+                        {
+                            userNotes = new Note
+                            {
+                                Comments = commentsTB.Text,
+                                AppointmentTitle = appointmentTitleTB.Text,
+                                UserId = userId,
+                                CompanyId = companyId,
+                                AppointmentDate = AppointmentDate
+                            };
+
+                            db.Notes.Add(userNotes);
+                        }
+                        else
+                        {
+                            await wrongCompanyCD.ShowAsync();
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        await wrongInputCD.ShowAsync();
+                        return;
+                    }
                 }
 
-                db.SaveChanges();
+                await db.SaveChangesAsync();
 
                 this.Close();
             }

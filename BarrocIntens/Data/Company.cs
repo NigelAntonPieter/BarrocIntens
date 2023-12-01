@@ -8,7 +8,7 @@ using Windows.Security.ExchangeActiveSyncProvisioning;
 
 namespace BarrocIntens.Data
 {
-    internal class Company
+    public class Company
     {
         public int Id { get; set; }
 
