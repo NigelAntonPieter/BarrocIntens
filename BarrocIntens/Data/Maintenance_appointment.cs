@@ -13,8 +13,13 @@ namespace BarrocIntens.Data
         public int CompanyId { get; set; }
         public Company Company { get; set; }
         [Column(TypeName = "longtext")]public string Remark { get; set; }
+        public string Location { get; set; }
         public DateTime DateAdded { get; set; }
+        public DateOnly DateOfMaintenanceAppointment { get; set; }
+        public bool IsFinished { get; set; }
         public ICollection<UserMaintenanceAppointment> UserMaintenanceAppointments { get; set; }
+        public int Maintenance_ReceiptId { get; set; }
+        public Maintenance_Receipt Maintenance_Receipt { get; set; }
 
     }
     public class UserMaintenanceAppointment
