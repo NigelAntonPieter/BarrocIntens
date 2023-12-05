@@ -39,7 +39,7 @@
                             <ControlTemplate>
                                 <ListView ItemsSource="{Binding}"
                                           IsItemClickEnabled="True"
-                                          ItemClick="ListView_ItemClick">
+                                          ItemClick="DayListView_ItemClick">
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="localData:Maintenance_appointment">
                                             <StackPanel Orientation="Horizontal">

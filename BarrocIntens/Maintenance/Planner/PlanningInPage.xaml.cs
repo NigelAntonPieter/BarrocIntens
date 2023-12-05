@@ -39,9 +39,9 @@ namespace BarrocIntens.Maintenance.Planner
             App.DashboardWindow.Close();
         }
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void DayListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(PurchaseWindow));
         }
 
         private void CalendarView_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs args)

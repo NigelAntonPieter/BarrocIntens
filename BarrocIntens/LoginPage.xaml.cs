@@ -30,7 +30,6 @@ namespace BarrocIntens
 
         public LoginPage()
         {
-            
             this.InitializeComponent();
 
             // Probeer de laatst ingevoerde gebruikersnaam op te halen en in te stellen
@@ -72,6 +71,5 @@ namespace BarrocIntens
             newWindow.Activate();
             App.DashboardWindow = newWindow;
         }
-
     }
 }
