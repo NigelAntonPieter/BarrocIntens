@@ -15,6 +15,7 @@ namespace BarrocIntens.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Maintenance_appointment> MaintenanceAppointments { get; set; }
+        public DbSet<Maintenance_Receipt> MaintenanceReceipts { get; set; }
         public DbSet<Product_category> ProductCategories { get; set; }
         public DbSet<LeaseContract> LeaseContracts { get; set; }
         public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
@@ -43,6 +44,7 @@ namespace BarrocIntens.Data
 
             modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new Maintenance_ReceiptConfiguration());
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new Maintenance_appointmentConfiguration());
