@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Page x:Class="BarrocIntens.PurchasePage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="using:BarrocIntens"
-        xmlns:localData="using:BarrocIntens.Data"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d">
+<Page
+    x:Class="BarrocIntens.Inkoop.ProductListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BarrocIntens.Inkoop"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:localData="using:BarrocIntens.Data"
+      mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -70,18 +72,18 @@
                                    Foreground="Green"
                                    FontWeight="Bold" />
                         <TextBlock Foreground="Gold">
-                 <Run>Prijs:</Run>
-                 <Run Text="{x:Bind PriceFormatted}" />
+          <Run>Prijs:</Run>
+          <Run Text="{x:Bind PriceFormatted}" />
                         </TextBlock>
                         <TextBlock Foreground="Green"
                                    FontWeight="Bold">
-                    <Run>Hoeveelheid:</Run>
-                    <Run Text="{x:Bind StockQuantity}" />
+             <Run>Hoeveelheid:</Run>
+             <Run Text="{x:Bind StockQuantity}" />
                         </TextBlock>
                         <TextBlock Foreground="Red"
                                    FontWeight="Bold">
-                    <Run>Besteld:</Run>
-                    <Run Text="{x:Bind IsOrdered}" />
+             <Run>Besteld:</Run>
+             <Run Text="{x:Bind IsOrdered}" />
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>

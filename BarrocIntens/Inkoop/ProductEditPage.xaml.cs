@@ -91,7 +91,7 @@ namespace BarrocIntens
             // Sla de wijzigingen op in de database
             db.SaveChanges();
 
-            this.Frame.Navigate(typeof(PurchasePage));
+            this.Frame.Navigate(typeof(PurchaseWindow));
 
             
         }

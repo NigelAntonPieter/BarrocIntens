@@ -83,7 +83,7 @@ namespace BarrocIntens
                     db.Products.Add(newProduct);
                     db.SaveChanges();
                     
-                    this.Frame.Navigate(typeof(PurchasePage));
+                    this.Frame.Navigate(typeof(PurchaseWindow));
                 }
                 else
                 {
@@ -129,7 +129,7 @@ namespace BarrocIntens
             ////var filePickerInterop = fileopenPicker.As<IInitializeWithWindow>();
             //filePickerInterop.Initialize(windowHandle);
 
-            nint windowHandle = WindowNative.GetWindowHandle(App.m_window);
+            nint windowHandle = WindowNative.GetWindowHandle(App.ParentWindow);
             InitializeWithWindow.Initialize(fileopenPicker, windowHandle);
 
             var file = await fileopenPicker.PickSingleFileAsync();

@@ -1,4 +1,4 @@
-    using BarrocIntens.Data;
+using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -30,7 +30,7 @@ namespace BarrocIntens
 
         public LoginPage()
         {
-            _windowFactory = windowFactory;
+            
             this.InitializeComponent();
 
             // Probeer de laatst ingevoerde gebruikersnaam op te halen en in te stellen
@@ -55,12 +55,7 @@ namespace BarrocIntens
                 if (user != null && authManager.Authenticate(enteredUsername, enteredPassword))
                 {
                     UserSettingsManager.SaveLastUsername(enteredUsername);
-
-                    var windowFactory = new WindowFactory();
-                    var newWindow = windowFactory.CreateWindow(user);
                     ActivateWindow(user);
-
-                    this.Close();
                 }
                 else
                 {
@@ -72,8 +67,10 @@ namespace BarrocIntens
         }
         private void ActivateWindow(Data.User user)
         {
-            var window = _windowFactory.CreateWindow(user);
-            window.Activate();
+            var windowFactory = new WindowFactory();
+            var newWindow = windowFactory.CreateWindow(user);
+            newWindow.Activate();
+            App.DashboardWindow = newWindow;
         }
 
     }

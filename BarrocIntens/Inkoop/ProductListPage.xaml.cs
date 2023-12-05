@@ -1,5 +1,4 @@
 using BarrocIntens.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -10,27 +9,27 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace BarrocIntens
+namespace BarrocIntens.Inkoop
 {
     /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
+    /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PurchasePage : Page
+    public sealed partial class ProductListPage : Page
     {
-        public static PurchasePage Instance { get; private set; }
+        public static ProductListPage Instance { get; private set; }
         public ObservableCollection<Product> allProducts { get; private set; }
 
-        public PurchasePage()
+        public ProductListPage()
         {
             this.InitializeComponent();
             using var db = new AppDbContext();
@@ -64,7 +63,7 @@ namespace BarrocIntens
 
         private void uitlogEL_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.GoBack();
+            App.DashboardWindow.Close();
         }
 
         private async void AddQuantity_Click(object sender, RoutedEventArgs e)
@@ -166,7 +165,7 @@ namespace BarrocIntens
                     }
                 }
             }
-           
+
         }
         private void searchTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
