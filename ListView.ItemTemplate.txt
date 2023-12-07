@@ -1,0 +1,24 @@
+    <ListView.ItemTemplate>
+        <DataTemplate x:DataType="localData:User">
+            <Grid Margin="5">
+                <Border BorderBrush="Black"
+                        BorderThickness="1"
+                        Background="#fdd716"
+                        CornerRadius="5">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"
+                                   Foreground="Black"
+                                   Margin="5" />
+                        <TextBlock Text="{Binding Remark}"
+                                   Foreground="Black"
+                                   TextWrapping="Wrap"
+                                   Margin="5" />
+                        <TextBlock Text="{Binding DateAdded}"
+                                   Foreground="Black"
+                                   Margin="5" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>

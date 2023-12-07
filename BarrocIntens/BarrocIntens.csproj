@@ -22,6 +22,7 @@
     <None Remove="LoginPage.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
     <None Remove="Maintenance\PlannerWindow.xaml" />
+    <None Remove="Maintenance\Planner\AppointMaintenance.xaml" />
     <None Remove="Maintenance\Planner\PlanningInPage.xaml" />
     <None Remove="MainWindow.xaml" />
     <None Remove="ProductAddWindow.xaml" />
@@ -125,6 +126,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Maintenance\Planner\AppointMaintenance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Inkoop\ProductListPage.xaml">

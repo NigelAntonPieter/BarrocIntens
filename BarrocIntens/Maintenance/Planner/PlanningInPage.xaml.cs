@@ -1,4 +1,6 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -12,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -25,7 +28,6 @@ namespace BarrocIntens.Maintenance.Planner
     /// </summary>
     public sealed partial class PlanningInPage : Page
     {
-        static ObservableCollection<Maintenance_appointment> AllAppointments = new ObservableCollection<Maintenance_appointment>();
         private readonly User _currentUser;
         public PlanningInPage()
         {
@@ -41,21 +43,32 @@ namespace BarrocIntens.Maintenance.Planner
 
         private void DayListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.Frame.Navigate(typeof(PurchaseWindow));
+
         }
+
+        private Dictionary<DateTime, List<string>> appointmentData = new Dictionary<DateTime, List<string>>();
 
         private void CalendarView_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs args)
         {
-            var calendarItemDate = args.Item.Date;
-            var relevantCalendarItems = AllAppointments.Where(item => item.DateAdded.Date == calendarItemDate.Date);
-
-            // De DataContext is vanuit de xaml te benaderen met {Binding}
-            args.Item.DataContext = relevantCalendarItems;
-
-            if (relevantCalendarItems.Count() == 0)
+            if (args.Item is CalendarViewDayItem calendarItem)
             {
-                args.Item.IsBlackout = true;
+                using var db = new AppDbContext();
+                var calendarItemDate = args.Item.Date.Date;
+                var allAppointments = db.MaintenanceAppointments.Include(m => m.Company).Where(m => m.DateOfMaintenanceAppointment == DateOnly.FromDateTime( calendarItemDate)).ToList();
+
+                calendarItem.DataContext = allAppointments;
+
+                if (allAppointments.Count() == 0)
+                {
+                    args.Item.IsBlackout = true;
+                }
             }
+        }
+
+        private void MaintenanceListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var selectedMaintenance = (Maintenance_appointment)e.ClickedItem;
+            this.Frame.Navigate(typeof(AppointMaintenance), selectedMaintenance);
         }
     }
 }

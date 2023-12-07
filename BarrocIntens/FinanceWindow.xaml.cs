@@ -165,7 +165,7 @@ namespace BarrocIntens
             }
 
             // Get the selected product from the database
-            Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Id == selectedProductId);
+            Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Code == selectedProductId);
 
             if (selectedProduct == null)
             {
@@ -220,7 +220,7 @@ namespace BarrocIntens
         private void SaveReceiptToDatabase(string employeeName, string selectedProductId, DateTime installationDate, decimal connectionCosts, decimal totalPrice)
         {
             User selectedUser = dbContext.Users.FirstOrDefault(u => u.Name == employeeName);
-            Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Id == selectedProductId);
+            Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Code == selectedProductId);
 
             if (selectedUser != null && selectedProduct != null)
             {

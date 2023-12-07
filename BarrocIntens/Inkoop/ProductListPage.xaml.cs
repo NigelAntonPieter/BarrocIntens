@@ -36,6 +36,7 @@ namespace BarrocIntens.Inkoop
             var products = db.Products.ToList();
             allProducts = new ObservableCollection<Product>(products);
             productListView.ItemsSource = allProducts;
+            
         }
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
