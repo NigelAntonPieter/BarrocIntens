@@ -55,7 +55,6 @@
                        Margin="0,0,0,10"  />
             <TextBox x:Name="companiesTB"
                        Margin="0,0,0,10"  />
-
             <Button Content="Opslaan"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
