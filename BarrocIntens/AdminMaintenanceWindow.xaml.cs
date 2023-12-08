@@ -1,4 +1,5 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -31,7 +32,7 @@ namespace BarrocIntens
 
             using (var dbContext = new AppDbContext())
             {
-                var maintenanceAppointments = dbContext.MaintenanceAppointments.ToList();
+                var maintenanceAppointments = dbContext.MaintenanceAppointments.Include(ma =>ma.UserMaintenanceAppointments).ToList();
                 MaintenanceListView.ItemsSource = maintenanceAppointments;
             }
         }
