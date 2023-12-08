@@ -33,9 +33,9 @@
                                     <TextBlock Text="{Binding Id}" Foreground="Black"  FontWeight="Bold" Margin="5"/>
                                     <ListView x:Name="UserMaintenanceListView">
                                         <ListView.ItemTemplate>
-                                            <DataTemplate x:DataType="localData:UserMaintenanceAppointment">
-                                            <TextBlock Text="{Binding User}"></TextBlock>
-                                        </DataTemplate>
+                                            <DataTemplate x:DataType="localData:User">
+                                                <TextBlock Text="{Binding Name}" Foreground="Black" Margin="5"/>
+                                            </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
                                     <TextBlock Text="{Binding Company.Name}" Foreground="Black" Margin="5"/>
@@ -50,7 +50,6 @@
             <Image Source="Asset/logo6_klein.png"
                    Width="100"
                    Height="100" />
-
         </StackPanel>
     </Grid>
 </Window>
