@@ -31,10 +31,10 @@
                             <Border BorderBrush="Black" BorderThickness="1" Background="#fdd716" CornerRadius="5">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Id}" Foreground="Black"  FontWeight="Bold" Margin="5"/>
-                                    <ListView x:Name="UserMaintenanceListView">
+                                    <ListView ItemsSource="{Binding UserMaintenanceAppointments}">
                                         <ListView.ItemTemplate>
-                                            <DataTemplate x:DataType="localData:User">
-                                                <TextBlock Text="{Binding Name}" Foreground="Black" Margin="5"/>
+                                            <DataTemplate x:DataType="localData:UserMaintenanceAppointment">
+                                                <TextBlock Text="{Binding User.Name}" Foreground="Black" Margin="5"/>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
