@@ -41,9 +41,19 @@ namespace BarrocIntens.Maintenance.Planner
             App.DashboardWindow.Close();
         }
 
-        private void DayListView_ItemClick(object sender, ItemClickEventArgs e)
+        private async void DayListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var clickedCalendarItem = (Maintenance_appointment)e.ClickedItem;
 
+            var dialog = new ContentDialog()
+            {
+                Title = clickedCalendarItem.Company.Name,
+                Content = $"\nLocation: {clickedCalendarItem.Location}",
+                CloseButtonText = "Close",
+                XamlRoot = this.XamlRoot,
+            };
+
+            await dialog.ShowAsync();
         }
 
         private Dictionary<DateTime, List<string>> appointmentData = new Dictionary<DateTime, List<string>>();
