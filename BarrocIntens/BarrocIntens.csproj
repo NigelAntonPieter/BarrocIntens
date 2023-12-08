@@ -19,9 +19,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="AdminMaintenanceWindow.xaml" />
+    <None Remove="ClientNotesListWindow.xaml" />
     <None Remove="ClientNotesWindow.xaml" />
     <None Remove="ClientRegisterWindow.xaml" />
     <None Remove="ClientWindow.xaml" />
+    <None Remove="CreateClientNoteWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
     <None Remove="LeaseContractOverviewWindow.xaml" />
     <None Remove="LoginWindow.xaml" />
@@ -128,5 +130,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="CreateClientNoteWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ClientNotesListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
