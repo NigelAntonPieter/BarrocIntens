@@ -74,9 +74,12 @@ namespace BarrocIntens
             LeaseContractErrorMessageTextBlock.Text = errorMessage;
         }
 
-        private void ClearLeaseContractErrorMessages()
+        private void ClearErrorMessages()
         {
             LeaseContractErrorMessageTextBlock.Text = string.Empty;
+            InvoiceErrorMessageTextBlock.Text = string.Empty;
+            ErrorMessageTextBlock.Text = string.Empty;
+            // Add more error message clearing logic if needed
         }
 
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
@@ -86,22 +89,58 @@ namespace BarrocIntens
             this.Close();
         }
 
-        private void GenerateInvoiceButton_Click(object sender, RoutedEventArgs e)
+        private void CreateInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            LeaseContract selectedLeaseContract = GetSelectedLeaseContract();
+            ClearErrorMessages();
 
-            if (selectedLeaseContract != null)
+            // Check if LeaseContractIdTextBox is empty
+            if (string.IsNullOrEmpty(LeaseContractIdTextBox.Text))
             {
-                // Create a new invoice based on the selected lease contract
-                InvoiceFinance newInvoice = new InvoiceFinance
-                {
-                    // Add properties for the invoice based on your logic
-                };
-
-                dbContext.InvoicesFinance.Add(newInvoice);
-                dbContext.SaveChanges();
+                ShowInvoiceErrorMessage("Please enter Lease Contract ID.");
+                return;
             }
+
+            // Check if DueDatePicker has a valid date
+            if (!DueDatePicker.Date.HasValue)
+            {
+                ShowInvoiceErrorMessage("Please select a valid Due Date.");
+                return;
+            }
+
+            // Check if AmountTextBox is a valid decimal
+            if (!decimal.TryParse(AmountTextBox.Text, out decimal amount))
+            {
+                ShowInvoiceErrorMessage("Please enter a valid Amount.");
+                return;
+            }
+
+            // All fields are valid create and save InvoiceFinance
+            InvoiceFinance newInvoice = new InvoiceFinance
+            {
+                LeaseContractId = int.Parse(LeaseContractIdTextBox.Text),
+                DueDate = DueDatePicker.Date.Value.DateTime,
+                Amount = amount,
+                IsPaid = IsPaidCheckBox.IsChecked ?? false,
+            };
+            CreateAndSaveInvoice(newInvoice);
         }
+
+        private void CreateAndSaveInvoice(InvoiceFinance newInvoice)
+        {
+            dbContext.InvoicesFinance.Add(newInvoice);
+            dbContext.SaveChanges();
+        }
+
+        private void ShowInvoiceErrorMessage(string errorMessage)
+        {
+            InvoiceErrorMessageTextBlock.Text = errorMessage;
+        }
+
+        private void ClearInvoiceErrorMessages()
+        {
+            InvoiceErrorMessageTextBlock.Text = string.Empty;
+        }
+
 
         private void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
@@ -197,19 +236,12 @@ namespace BarrocIntens
 
         private void ShowReceipt(string receiptText)
         {
-            // Display receipt information on the UI (assuming you have a TextBlock named ReceiptTextBlock)
             ReceiptTextBlock.Text = receiptText;
         }
 
         private void ClearReceipt()
         {
-            // Clear the receipt information on the UI
             ReceiptTextBlock.Text = string.Empty;
-        }
-
-        private void ClearErrorMessages()
-        {
-            ErrorMessageTextBlock.Text = string.Empty;
         }
 
         private void ShowErrorMessage(string errorMessage)
@@ -239,3 +271,4 @@ namespace BarrocIntens
         }
     }
 }
+
