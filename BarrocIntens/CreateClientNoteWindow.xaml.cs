@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -37,10 +38,19 @@ namespace BarrocIntens
         {
             this.InitializeComponent();
             this.userId = userId;
+
+            using (var db = new AppDbContext())
+            {
+                CompaniesCB.ItemsSource = db.Companies.ToList();
+                CompaniesCB.DisplayMemberPath = "Name";
+                CompaniesCB.SelectedValuePath = "Id";
+            }
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            var selectedCompany = (Company)CompaniesCB.SelectedItem;
+            var companyId = selectedCompany.Id;
             using (var db = new AppDbContext())
             {
                 if (userNotes != null)
@@ -48,8 +58,7 @@ namespace BarrocIntens
                     userNotes.Comments = commentsTB.Text;
                     userNotes.AppointmentTitle = appointmentTitleTB.Text;
 
-                    if (int.TryParse(companiesTB.Text, out int companyId))
-                    {
+
                         var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
 
                         if (existingCompany != null)
@@ -61,12 +70,6 @@ namespace BarrocIntens
                             await wrongCompanyCD.ShowAsync();
                             return;
                         }
-                    }
-                    else
-                    {
-                        await wrongInputCD.ShowAsync();
-                        return;
-                    }
 
                     userNotes.AppointmentDate = AppointmentDate;
 
@@ -74,8 +77,6 @@ namespace BarrocIntens
                 }
                 else
                 {
-                    if (int.TryParse(companiesTB.Text, out int companyId))
-                    {
                         var existingCompany = db.Companies.FirstOrDefault(c => c.Id == companyId);
 
                         if (existingCompany != null)
@@ -96,12 +97,6 @@ namespace BarrocIntens
                             await wrongCompanyCD.ShowAsync();
                             return;
                         }
-                    }
-                    else
-                    {
-                        await wrongInputCD.ShowAsync();
-                        return;
-                    }
                 }
 
                 await db.SaveChangesAsync();
