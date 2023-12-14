@@ -17,6 +17,10 @@ using System.Drawing;
 using System.Reflection.Emit;
 using Windows.UI.Input.Spatial;
 using Microsoft.UI.Xaml.Automation;
+using BarrocIntensTestlLibrary.LoginWindow;
+using System.Threading.Tasks;
+using Windows.Storage;
+using BarrocUser = BarrocIntens.Data.User;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -42,10 +46,30 @@ namespace BarrocIntens
 
         }
 
-        private void LoginPage_Click(object sender, RoutedEventArgs e)
+        private async void LoginPage_Click(object sender, RoutedEventArgs e)
         {
+            //await GetUserFromSessionToken();
             this.Frame.Navigate(typeof(LoginPage));
-        }  
+        }
+
+        private async Task<BarrocUser> GetUserFromSessionToken()
+        {
+            string lastUsername = UserSettingsManager.LoadLastUsername();
+            string sessionTokenFileName = $"_sessionToken.txt";
+            string sessionTokenPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, sessionTokenFileName);
+
+            if (File.Exists(sessionTokenPath))
+            {
+                string sessionToken = await FileIO.ReadTextAsync(await StorageFile.GetFileFromPathAsync(sessionTokenPath));
+
+                using (var db = new AppDbContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.SessionToken == sessionToken);
+                    return user; // Return the user if found
+                }
+            }
+            return null; // Geen sessietoken gevonden of fout bij lezen bestand
+        }
     }
 }
 

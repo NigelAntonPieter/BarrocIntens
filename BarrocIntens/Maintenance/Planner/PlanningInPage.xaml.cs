@@ -43,18 +43,32 @@ namespace BarrocIntens.Maintenance.Planner
 
         private async void DayListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var clickedCalendarItem = (Maintenance_appointment)e.ClickedItem;
-
-            var dialog = new ContentDialog()
+            if (e.ClickedItem is Maintenance_appointment clickedMaintenance)
             {
-                Title = clickedCalendarItem.Company.Name,
-                Content = $"\nLocation: {clickedCalendarItem.Location}",
-                CloseButtonText = "Close",
-                XamlRoot = this.XamlRoot,
-            };
+                var dialog = new ContentDialog()
+                {
+                    Title = clickedMaintenance.Company.Name,
+                    Content = $"\nLocation: {clickedMaintenance.Location}",
+                    CloseButtonText = "Close",
+                    XamlRoot = this.XamlRoot,
+                };
 
-            await dialog.ShowAsync();
+                await dialog.ShowAsync();
+            }
+            else if (e.ClickedItem is Routine clickedRoutine)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = clickedRoutine.Company.Name,
+                    Content = $"\nLocation: {clickedRoutine.Location}",
+                    CloseButtonText = "Close",
+                    XamlRoot = this.XamlRoot,
+                };
+
+                await dialog.ShowAsync();
+            }
         }
+
 
         private Dictionary<DateTime, List<string>> appointmentData = new Dictionary<DateTime, List<string>>();
 
@@ -64,7 +78,20 @@ namespace BarrocIntens.Maintenance.Planner
             {
                 using var db = new AppDbContext();
                 var calendarItemDate = args.Item.Date.Date;
-                var allAppointments = db.MaintenanceAppointments.Include(m => m.Company).Where(m => m.DateOfMaintenanceAppointment == DateOnly.FromDateTime( calendarItemDate)).ToList();
+
+                var maintenanceAppointments = db.MaintenanceAppointments
+                .Include(m => m.Company)
+                .Where(m => m.DateOfMaintenanceAppointment == DateOnly.FromDateTime(calendarItemDate))
+                .ToList();
+
+                var routineAppointments = db.Routines
+                    .Include(r => r.Company)
+                    .Where(r => r.DateOfRoutineAppointment == DateOnly.FromDateTime(calendarItemDate))
+                    .ToList();
+
+                var allAppointments = new List<BaseAppointment>();
+                allAppointments.AddRange(maintenanceAppointments);
+                allAppointments.AddRange(routineAppointments);
 
                 calendarItem.DataContext = allAppointments;
 
@@ -80,5 +107,11 @@ namespace BarrocIntens.Maintenance.Planner
             var selectedMaintenance = (Maintenance_appointment)e.ClickedItem;
             this.Frame.Navigate(typeof(AppointMaintenance), selectedMaintenance);
         }
+
+        private void AddRoutine_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RoutineAppointmentPage));
+        }
+
     }
 }

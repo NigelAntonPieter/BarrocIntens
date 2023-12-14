@@ -14,8 +14,18 @@ namespace BarrocIntens
         {
             using (var db = new AppDbContext())
             {
-                var user = db.Users.SingleOrDefault(u => u.UserName == username && u.Password == password);
-                return user != null;
+                var user = db.Users.SingleOrDefault(u => u.UserName == username);
+                if (user != null)
+                {
+                    bool isValidPassword = SecureHasher.Verify(password, user.Password);
+                    if (isValidPassword) 
+                    {
+                        User.LoggedInUser = user;
+                    }
+                    return isValidPassword;
+                }
+                
+                return false;
             }
         }
     }

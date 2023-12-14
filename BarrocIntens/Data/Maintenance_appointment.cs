@@ -7,11 +7,9 @@
 
     namespace BarrocIntens.Data
     {
-        public class Maintenance_appointment
-        {
+        public class Maintenance_appointment: BaseAppointment
+    {
             public int Id {  get; set; }
-            public int CompanyId { get; set; }
-            public Company Company { get; set; }
             [Column(TypeName = "longtext")]public string Remark { get; set; }
             public string Location { get; set; }
             public DateTime DateAdded { get; set; }

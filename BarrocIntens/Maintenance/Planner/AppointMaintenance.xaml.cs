@@ -68,11 +68,7 @@ namespace BarrocIntens.Maintenance.Planner
                 selectedMaintenance.DateOfMaintenanceAppointment = DateOnly.Parse(AppointmentDate.SelectedDate.ToString().Split(" ")[0]);
 
                 db.MaintenanceAppointments.Update(selectedMaintenance);
-
-
                 db.SaveChanges();
-
-
 
                 // Navigeer terug naar PlanningInPage
                 this.Frame.Navigate(typeof(PlanningInPage));

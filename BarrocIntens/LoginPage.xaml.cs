@@ -17,6 +17,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.System;
+using System.Threading.Tasks;
+using BarrocUser = BarrocIntens.Data.User;
 
 
 namespace BarrocIntens
@@ -47,19 +49,20 @@ namespace BarrocIntens
 
             using (var db = new AppDbContext())
             {
-                var user = db.Users.SingleOrDefault(u => u.UserName == enteredUsername && u.Password == enteredPassword);
-
-                // Use the AuthenticationManager to authenticate the user
                 var authManager = new AuthenticationManager(new AppAuthenticationService());
-                if (user != null && authManager.Authenticate(enteredUsername, enteredPassword))
+                if ( authManager.Authenticate(enteredUsername, enteredPassword))
                 {
                     UserSettingsManager.SaveLastUsername(enteredUsername);
-                    ActivateWindow(user);
+                    string sessionToken = GenerateSessionToken.SessionTokenGenerator(32); // Generate session token
+                    db.Attach(BarrocUser.LoggedInUser);
+                    SaveSessionTokenToFile(BarrocUser.LoggedInUser.Id, sessionToken);
+
+                    BarrocUser.LoggedInUser.SessionToken = sessionToken; // Set session token for the user in the database
+                    db.SaveChanges(); // Save changes to persist the session token
+                    ActivateWindow(BarrocUser.LoggedInUser);
                 }
                 else
                 {
-                    // Authentication failed
-                    ErrorTextBlock.Text = "Ongeldige inloggegevens";
                     await inlogDialog.ShowAsync();
                 }
             }
@@ -71,5 +74,14 @@ namespace BarrocIntens
             newWindow.Activate();
             App.DashboardWindow = newWindow;
         }
+
+        private async void SaveSessionTokenToFile(int userId, string sessionToken)
+        {
+            string fileName = $"_sessionToken.txt";
+            string sessionTokenPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, fileName);
+            File.WriteAllText(sessionTokenPath, sessionToken);
+        }
+
     }
 }
+

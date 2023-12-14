@@ -121,13 +121,7 @@ namespace BarrocIntens
                 FileTypeFilter = { ".jpg", ".jpeg", ".png", ".gif" }
             };
 
-            //var windowHandle = WindowNative.GetWindowHandle(this);
-            //InitializeWithWindow.Initialize(fileopenPicker, windowHandle);
-
-            //var windowHandle = GetWindowHandle();
-
-            ////var filePickerInterop = fileopenPicker.As<IInitializeWithWindow>();
-            //filePickerInterop.Initialize(windowHandle);
+           
 
             nint windowHandle = WindowNative.GetWindowHandle(App.ParentWindow);
             InitializeWithWindow.Initialize(fileopenPicker, windowHandle);

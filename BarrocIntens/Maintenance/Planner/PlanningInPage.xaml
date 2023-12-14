@@ -21,6 +21,10 @@
             <Button Name="uitLogEL"
                     Click="uitLogEL_Click">Uitloggen
             </Button>
+            <Button Name="AddRoutine"
+                    Click="AddRoutine_Click">Routinematige bezoek
+                
+            </Button>
         </StackPanel>
         <CalendarView x:Name="MaintanceCalendar"
                       Grid.Column="1"
@@ -41,7 +45,7 @@
                                           IsItemClickEnabled="True"
                                           ItemClick="DayListView_ItemClick">
                                     <ListView.ItemTemplate>
-                                        <DataTemplate x:DataType="localData:Maintenance_appointment">
+                                        <DataTemplate x:DataType="localData:BaseAppointment">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="{x:Bind Company.Name}"
                                                            FontWeight="Bold" />

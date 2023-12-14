@@ -26,11 +26,9 @@ namespace BarrocIntens.Data.Seeders
                 new User { Id = 6, Name = "Brent Albers", UserName = "balbers", Password = SecureHasher.Hash("n"), Role = "MaintenanceAdmin" },
                 new User { Id = 7, Name = "Jennet Smit", UserName = "jennetsmit", Password = SecureHasher.Hash("password456"), Role = "Maintenance" },
                 new User { Id = 8, Name = "Britt Lips", UserName = "brittlips", Password = SecureHasher.Hash("kl"), Role = "Planner" },
-                new User { Id = 9, Name = "Jennet Smit", UserName = "jennetsmit", Password = SecureHasher.Hash("password456"), Role = "Maintenance" },
-                new User { Id = 10, Name = "Jennet Smit", UserName = "jennetsmit", Password = SecureHasher.Hash("password456"), Role = "Maintenance" },
-                new User { Id = 11, Name = "Liever Niet", UserName = "lieverniet", Password = SecureHasher.Hash("password654"), Role = "Maintenance" },
-                new User { Id = 12, Name = "Sam Smit", UserName = "samsmit", Password = SecureHasher.Hash("password789"), Role = "Maintenance" },
-                new User { Id = 13, Name = "Bart Smit", UserName = "bartsmit", Password = SecureHasher.Hash("password987"), Role = "Maintenance" }
+                new User { Id = 9, Name = "Liever Niet", UserName = "lieverniet", Password = SecureHasher.Hash("password654"), Role = "Maintenance" },
+                new User { Id = 10, Name = "Sam Smit", UserName = "samsmit", Password = SecureHasher.Hash("password789"), Role = "Maintenance" },
+                new User { Id = 11, Name = "Bart Smit", UserName = "bartsmit", Password = SecureHasher.Hash("password987"), Role = "Maintenance" }
             );
         }
     }
