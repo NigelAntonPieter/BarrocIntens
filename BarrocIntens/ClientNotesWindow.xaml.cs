@@ -29,24 +29,32 @@ namespace BarrocIntens
         private Note userNotes;
         public DateTimeOffset AppointmentDate { get; set; }
 
-        public ClientNotesWindow(int userId)
+        public ClientNotesWindow(int userId, int noteId)
         {
             this.userId = userId;
             this.InitializeComponent();
-            LoadUserNotes();
+
+            using (var db = new AppDbContext())
+            {
+                companiesCB.ItemsSource = db.Companies.ToList();
+                companiesCB.DisplayMemberPath = "Name";
+                companiesCB.SelectedValuePath = "Id";
+            }
+            LoadUserNotes(noteId);
         }
 
-        private void LoadUserNotes()
+        private void LoadUserNotes(int noteId)
         {
             using (var db = new AppDbContext())
             {
-                userNotes = db.Notes.FirstOrDefault(n => n.UserId == userId);
+                userNotes = db.Notes.FirstOrDefault(n => n.Id == noteId);
 
                 if (userNotes != null)
                 {
                     commentsTB.Text = userNotes.Comments;
                     appointmentTitleTB.Text = userNotes.AppointmentTitle;
-                    companiesTB.Text = userNotes.CompanyId.ToString();
+                    //companiesCB.Text = userNotes.Company.Name;
+                    companiesCB.SelectedValue = userNotes.CompanyId;
                     appointmentDateTB.Text = userNotes.AppointmentDate.ToString();
                     appointmentDatePicker.Date = userNotes.AppointmentDate;
                 }
@@ -55,6 +63,8 @@ namespace BarrocIntens
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            var selectedCompany = (Company)companiesCB.SelectedItem;
+            var companyId = selectedCompany.Id;
             using (var db = new AppDbContext())
             {
                 if (userNotes != null)
@@ -62,25 +72,10 @@ namespace BarrocIntens
                     userNotes.Comments = commentsTB.Text;
                     userNotes.AppointmentTitle = appointmentTitleTB.Text;
 
-                    if (int.TryParse(companiesTB.Text, out int companyId))
-                    {
-                        var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
 
-                        if (existingCompany != null)
-                        {
-                            userNotes.CompanyId = companyId;
-                        }
-                        else
-                        {
-                            await wrongCompanyCD.ShowAsync();
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        await wrongInputCD.ShowAsync();
-                        return;
-                    }
+                    var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
+
+                    userNotes.CompanyId = companyId;
 
                     userNotes.AppointmentDate = AppointmentDate;
 
@@ -88,12 +83,7 @@ namespace BarrocIntens
                 }
                 else
                 {
-                    if (int.TryParse(companiesTB.Text, out int companyId))
-                    {
                         var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
-
-                        if (existingCompany != null)
-                        {
                             userNotes = new Note
                             {
                                 Comments = commentsTB.Text,
@@ -104,18 +94,6 @@ namespace BarrocIntens
                             };
 
                             db.Notes.Add(userNotes);
-                        }
-                        else
-                        {
-                            await wrongCompanyCD.ShowAsync();
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        await wrongInputCD.ShowAsync();
-                        return;
-                    }
                 }
 
                 await db.SaveChangesAsync();

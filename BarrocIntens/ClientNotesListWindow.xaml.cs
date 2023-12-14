@@ -1,7 +1,9 @@
+
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -11,7 +13,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -54,7 +55,9 @@ namespace BarrocIntens
 
         private void EditNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            var window = new ClientNotesWindow(userId);
+            var button = (Button)sender;
+            var note = (Note)button.DataContext;
+            var window = new ClientNotesWindow(userId, note.Id);
             window.Closed += Window_Closed;
             window.Activate();
         }

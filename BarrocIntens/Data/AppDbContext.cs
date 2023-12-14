@@ -36,11 +36,6 @@ namespace BarrocIntens.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Note>()
-           .HasOne(n => n.Company)
-           .WithMany(c => c.Notes)
-           .HasForeignKey(n => n.CompanyId);
-
             modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());

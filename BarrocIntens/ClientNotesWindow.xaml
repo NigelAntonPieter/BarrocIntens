@@ -50,11 +50,15 @@
                        HorizontalAlignment="Center"
                        Date="{x:Bind AppointmentDate, Mode=TwoWay}"
                        Margin="0,0,0,10" />
-            <TextBlock Text="Bedrijf (Id):"
+            <TextBlock Text="Bedrijf: "
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10"  />
-            <TextBox x:Name="companiesTB"
-                       Margin="0,0,0,10"  />
+            <ComboBox x:Name="companiesCB"
+                      PlaceholderText="Select Company"
+                      HorizontalAlignment="Center"
+                      Margin="0,0,0,10"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id" />
             <Button Content="Opslaan"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"

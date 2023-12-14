@@ -40,7 +40,7 @@
                             BorderThickness="2"
                             Margin="5">
                         <Grid Width="200"
-                              Height="360">
+                              Height="330">
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Center">
                                 <StackPanel Margin="10"

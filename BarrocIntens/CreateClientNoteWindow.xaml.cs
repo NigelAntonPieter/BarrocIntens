@@ -58,18 +58,17 @@ namespace BarrocIntens
                     userNotes.Comments = commentsTB.Text;
                     userNotes.AppointmentTitle = appointmentTitleTB.Text;
 
+                    var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
 
-                        var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
-
-                        if (existingCompany != null)
-                        {
-                            userNotes.CompanyId = companyId;
-                        }
-                        else
-                        {
-                            await wrongCompanyCD.ShowAsync();
-                            return;
-                        }
+                    if (existingCompany != null)
+                    {
+                        userNotes.CompanyId = companyId;
+                    }
+                    else
+                    {
+                        await wrongCompanyCD.ShowAsync();
+                        return;
+                    }
 
                     userNotes.AppointmentDate = AppointmentDate;
 
@@ -77,26 +76,26 @@ namespace BarrocIntens
                 }
                 else
                 {
-                        var existingCompany = db.Companies.FirstOrDefault(c => c.Id == companyId);
+                    var existingCompany = db.Companies.FirstOrDefault(c => c.Id == companyId);
 
-                        if (existingCompany != null)
+                    if (existingCompany != null)
+                    {
+                        userNotes = new Note
                         {
-                            userNotes = new Note
-                            {
-                                Comments = commentsTB.Text,
-                                AppointmentTitle = appointmentTitleTB.Text,
-                                UserId = userId,
-                                CompanyId = companyId,
-                                AppointmentDate = AppointmentDate
-                            };
+                            Comments = commentsTB.Text,
+                            AppointmentTitle = appointmentTitleTB.Text,
+                            UserId = userId,
+                            CompanyId = companyId,
+                            AppointmentDate = AppointmentDate
+                        };
 
-                            db.Notes.Add(userNotes);
-                        }
-                        else
-                        {
-                            await wrongCompanyCD.ShowAsync();
-                            return;
-                        }
+                        db.Notes.Add(userNotes);
+                    }
+                    else
+                    {
+                        await wrongCompanyCD.ShowAsync();
+                        return;
+                    }
                 }
 
                 await db.SaveChangesAsync();
