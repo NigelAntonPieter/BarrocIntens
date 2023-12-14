@@ -1,4 +1,5 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -15,14 +16,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace BarrocIntens
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class AdminMaintenanceWindow : Window
     {
         public AdminMaintenanceWindow(User user)
@@ -31,7 +26,8 @@ namespace BarrocIntens
 
             using (var dbContext = new AppDbContext())
             {
-                var maintenanceAppointments = dbContext.MaintenanceAppointments.ToList();
+                var maintenanceAppointments = dbContext.MaintenanceAppointments.Include(ma =>ma.UserMaintenanceAppointments).ToList();
+                var Users = dbContext.Users.Include(u => u.UserMaintenanceAppointments).ToList();
                 MaintenanceListView.ItemsSource = maintenanceAppointments;
             }
         }

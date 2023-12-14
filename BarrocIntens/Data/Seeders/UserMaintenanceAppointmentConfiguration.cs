@@ -24,7 +24,7 @@ namespace BarrocIntens.Data.Seeders
 
             builder.HasData(
                 new UserMaintenanceAppointment { UserId = 2, MaintenanceAppointmentId = 1 },
-                new UserMaintenanceAppointment { UserId = 7, MaintenanceAppointmentId = 1 }
+                new UserMaintenanceAppointment { UserId = 7, MaintenanceAppointmentId = 2 }
             );
 
         }
