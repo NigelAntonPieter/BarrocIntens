@@ -30,6 +30,9 @@ namespace BarrocIntens
             ProductComboBox.ItemsSource = dbContext.Products.ToList();
             ProductComboBox.DisplayMemberPath = "Name";
             ProductComboBox.SelectedValuePath = "Id";
+            LeaseContractComboBox.ItemsSource = dbContext.LeaseContracts.ToList();
+            LeaseContractComboBox.DisplayMemberPath = "CustomerName";
+            LeaseContractComboBox.SelectedValuePath = "Id";
         }
 
         private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
@@ -93,15 +96,15 @@ namespace BarrocIntens
         {
             ClearErrorMessages();
 
-            // Check if LeaseContractIdTextBox is empty
-            if (string.IsNullOrEmpty(LeaseContractIdTextBox.Text))
+            // Check if LeaseContractComboBox is empty
+            if (LeaseContractComboBox.SelectedValue == null)
             {
-                ShowInvoiceErrorMessage("Please enter Lease Contract ID.");
+                ShowInvoiceErrorMessage("Please select a Lease Contract.");
                 return;
             }
 
             // Check if DueDatePicker has a valid date
-            if (!DueDatePicker.Date.HasValue)
+            if (DueDatePicker.Date == default(DateTimeOffset))
             {
                 ShowInvoiceErrorMessage("Please select a valid Due Date.");
                 return;
@@ -117,13 +120,14 @@ namespace BarrocIntens
             // All fields are valid create and save InvoiceFinance
             InvoiceFinance newInvoice = new InvoiceFinance
             {
-                LeaseContractId = int.Parse(LeaseContractIdTextBox.Text),
-                DueDate = DueDatePicker.Date.Value.DateTime,
+                LeaseContractId = int.Parse(LeaseContractComboBox.SelectedValue.ToString()),
+                DueDate = DueDatePicker.Date.DateTime,
                 Amount = amount,
                 IsPaid = IsPaidCheckBox.IsChecked ?? false,
             };
             CreateAndSaveInvoice(newInvoice);
         }
+
 
         private void CreateAndSaveInvoice(InvoiceFinance newInvoice)
         {
