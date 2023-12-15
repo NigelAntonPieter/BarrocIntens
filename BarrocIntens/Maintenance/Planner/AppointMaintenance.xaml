@@ -20,11 +20,13 @@
                     Background="#fdd716" />
         <StackPanel Grid.Column="1"
                     Grid.Row="1">
-           
+            <TextBlock Text="Medewerker">
+            </TextBlock>
             <ComboBox x:Name="UserComboBox">
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="localData:User">
                         <StackPanel>
+
                             <TextBlock Text="{x:Bind Name }">
                                 <Run Text="{x:Bind Role}"></Run>
                             </TextBlock>
