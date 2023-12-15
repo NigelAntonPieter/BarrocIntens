@@ -81,8 +81,7 @@ namespace BarrocIntens
         {
             LeaseContractErrorMessageTextBlock.Text = string.Empty;
             InvoiceErrorMessageTextBlock.Text = string.Empty;
-            ErrorMessageTextBlock.Text = string.Empty;
-            // Add more error message clearing logic if needed
+            ReceiptErrorMessageTextBlock.Text = string.Empty;
         }
 
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
@@ -250,7 +249,7 @@ namespace BarrocIntens
 
         private void ShowErrorMessage(string errorMessage)
         {
-            ErrorMessageTextBlock.Text = errorMessage;
+            ReceiptErrorMessageTextBlock.Text = errorMessage;
         }
 
         private void SaveReceiptToDatabase(string employeeName, string selectedProductId, DateTime installationDate, decimal connectionCosts, decimal totalPrice)
