@@ -29,9 +29,7 @@
             <TextBox x:Name="usernameTextbox" />
             <TextBlock Text="Wachtwoord" />
             <PasswordBox x:Name="passwordBox" />
-            <Button x:Name="LoginEl"
-                    HorizontalAlignment="Stretch"
-                    Click="LoginEl_Click">Login</Button>
+
         </StackPanel>
         <ContentDialog x:Name="inlogDialog"
                        Title="Inloggegevens"
