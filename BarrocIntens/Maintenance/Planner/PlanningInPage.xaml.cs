@@ -47,8 +47,8 @@ namespace BarrocIntens.Maintenance.Planner
             {
                 var dialog = new ContentDialog()
                 {
-                    Title = clickedMaintenance.Company.Name,
-                    Content = $"\nLocation: {clickedMaintenance.Location}",
+                    Title = "MaintenanceAppointment",
+                    Content = $"\nLocation: {clickedMaintenance.Location}, \nCompany: {clickedMaintenance.Company.Name}",
                     CloseButtonText = "Close",
                     XamlRoot = this.XamlRoot,
                 };
@@ -59,8 +59,8 @@ namespace BarrocIntens.Maintenance.Planner
             {
                 var dialog = new ContentDialog()
                 {
-                    Title = clickedRoutine.Company.Name,
-                    Content = $"\nLocation: {clickedRoutine.Location}",
+                    Title = "RoutineBezoek",
+                    Content = $"\nLocation: {clickedRoutine.Location}, \nCompany: {clickedRoutine.Company.Name}",
                     CloseButtonText = "Close",
                     XamlRoot = this.XamlRoot,
                 };
