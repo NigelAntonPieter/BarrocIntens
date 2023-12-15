@@ -13,9 +13,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AdminMaintenanceWindow.xaml" />
+    <None Remove="ClientNotesListWindow.xaml" />
     <None Remove="ClientNotesWindow.xaml" />
     <None Remove="ClientRegisterWindow.xaml" />
     <None Remove="ClientWindow.xaml" />
+    <None Remove="CreateClientNoteWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
     <None Remove="Inkoop\ProductListPage.xaml" />
     <None Remove="LeaseContractManagementWindow.xaml" />
@@ -130,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Maintenance\Planner\RoutineAppointmentPage.xaml">
+    <Page Update="CreateClientNoteWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -150,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Maintenance\Planner\PlanningInPage.xaml">
+    <Page Update="ClientNotesListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

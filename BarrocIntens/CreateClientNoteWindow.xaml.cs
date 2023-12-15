@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation and Contributors.
+// Licensed under the MIT License.
+
 using BarrocIntens.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
@@ -9,11 +12,13 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,47 +28,28 @@ namespace BarrocIntens
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ClientNotesWindow : Window
+    public sealed partial class CreateClientNoteWindow : Window
     {
-        private int userId;
         private Note userNotes;
+        private int userId;
         public DateTimeOffset AppointmentDate { get; set; }
 
-        public ClientNotesWindow(int userId, int noteId)
+        public CreateClientNoteWindow(int userId)
         {
-            this.userId = userId;
             this.InitializeComponent();
+            this.userId = userId;
 
             using (var db = new AppDbContext())
             {
-                companiesCB.ItemsSource = db.Companies.ToList();
-                companiesCB.DisplayMemberPath = "Name";
-                companiesCB.SelectedValuePath = "Id";
-            }
-            LoadUserNotes(noteId);
-        }
-
-        private void LoadUserNotes(int noteId)
-        {
-            using (var db = new AppDbContext())
-            {
-                userNotes = db.Notes.FirstOrDefault(n => n.Id == noteId);
-
-                if (userNotes != null)
-                {
-                    commentsTB.Text = userNotes.Comments;
-                    appointmentTitleTB.Text = userNotes.AppointmentTitle;
-                    //companiesCB.Text = userNotes.Company.Name;
-                    companiesCB.SelectedValue = userNotes.CompanyId;
-                    appointmentDateTB.Text = userNotes.AppointmentDate.ToString();
-                    appointmentDatePicker.Date = userNotes.AppointmentDate;
-                }
+                CompaniesCB.ItemsSource = db.Companies.ToList();
+                CompaniesCB.DisplayMemberPath = "Name";
+                CompaniesCB.SelectedValuePath = "Id";
             }
         }
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var selectedCompany = (Company)companiesCB.SelectedItem;
+            var selectedCompany = (Company)CompaniesCB.SelectedItem;
             var companyId = selectedCompany.Id;
             using (var db = new AppDbContext())
             {
@@ -72,10 +58,17 @@ namespace BarrocIntens
                     userNotes.Comments = commentsTB.Text;
                     userNotes.AppointmentTitle = appointmentTitleTB.Text;
 
-
                     var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
 
-                    userNotes.CompanyId = companyId;
+                    if (existingCompany != null)
+                    {
+                        userNotes.CompanyId = companyId;
+                    }
+                    else
+                    {
+                        await wrongCompanyCD.ShowAsync();
+                        return;
+                    }
 
                     userNotes.AppointmentDate = AppointmentDate;
 
@@ -83,17 +76,26 @@ namespace BarrocIntens
                 }
                 else
                 {
-                        var existingCompany = await db.Companies.FirstOrDefaultAsync(c => c.Id == companyId);
-                            userNotes = new Note
-                            {
-                                Comments = commentsTB.Text,
-                                AppointmentTitle = appointmentTitleTB.Text,
-                                UserId = userId,
-                                CompanyId = companyId,
-                                AppointmentDate = AppointmentDate
-                            };
+                    var existingCompany = db.Companies.FirstOrDefault(c => c.Id == companyId);
 
-                            db.Notes.Add(userNotes);
+                    if (existingCompany != null)
+                    {
+                        userNotes = new Note
+                        {
+                            Comments = commentsTB.Text,
+                            AppointmentTitle = appointmentTitleTB.Text,
+                            UserId = userId,
+                            CompanyId = companyId,
+                            AppointmentDate = AppointmentDate
+                        };
+
+                        db.Notes.Add(userNotes);
+                    }
+                    else
+                    {
+                        await wrongCompanyCD.ShowAsync();
+                        return;
+                    }
                 }
 
                 await db.SaveChangesAsync();

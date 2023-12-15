@@ -24,7 +24,7 @@
                     Grid.RowSpan="2"
                     Background="#fdd716" />
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
-            <TextBlock Text="Voeg een note toe of wijzig deze." FontSize="50" FontWeight="Bold" FontFamily="arial"/>
+            <TextBlock Text="Pas een note aan." FontSize="50" FontWeight="Bold" FontFamily="arial"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1">
             <TextBlock Text="Opmerkingen:"
@@ -50,12 +50,15 @@
                        HorizontalAlignment="Center"
                        Date="{x:Bind AppointmentDate, Mode=TwoWay}"
                        Margin="0,0,0,10" />
-            <TextBlock Text="Bedrijf (Id):"
+            <TextBlock Text="Bedrijf: "
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10"  />
-            <TextBox x:Name="companiesTB"
-                       Margin="0,0,0,10"  />
-
+            <ComboBox x:Name="companiesCB"
+                      PlaceholderText="Select Company"
+                      HorizontalAlignment="Center"
+                      Margin="0,0,0,10"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id" />
             <Button Content="Opslaan"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
