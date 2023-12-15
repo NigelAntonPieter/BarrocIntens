@@ -17,22 +17,21 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.System;
+using System.Threading.Tasks;
+using BarrocUser = BarrocIntens.Data.User;
 
 
 namespace BarrocIntens
 {
-    public sealed partial class LoginWindow : Window
+    public sealed partial class LoginPage : Page
     {
         // De sleutel voor het opslaan van de gebruikersnaam in de lokale instellingen
         private const string LastUsernameKey = "LastUsername";
         public bool IsLoggedIn { get; private set; }
         public string UserRole { get; private set; }
 
-        private readonly IWindowFactory _windowFactory;
-
-        public LoginWindow(IWindowFactory windowFactory, AppDbContext @object)
+        public LoginPage()
         {
-            _windowFactory = windowFactory;
             this.InitializeComponent();
 
             // Probeer de laatst ingevoerde gebruikersnaam op te halen en in te stellen
@@ -50,33 +49,39 @@ namespace BarrocIntens
 
             using (var db = new AppDbContext())
             {
-                var user = db.Users.SingleOrDefault(u => u.UserName == enteredUsername && u.Password == enteredPassword);
-
-                // Use the AuthenticationManager to authenticate the user
                 var authManager = new AuthenticationManager(new AppAuthenticationService());
-                if (user != null && authManager.Authenticate(enteredUsername, enteredPassword))
+                if ( authManager.Authenticate(enteredUsername, enteredPassword))
                 {
                     UserSettingsManager.SaveLastUsername(enteredUsername);
+                    string sessionToken = GenerateSessionToken.SessionTokenGenerator(32); // Generate session token
+                    db.Attach(BarrocUser.LoggedInUser);
+                    SaveSessionTokenToFile(BarrocUser.LoggedInUser.Id, sessionToken);
 
-                    var windowFactory = new WindowFactory();
-                    var newWindow = windowFactory.CreateWindow(user);
-                    ActivateWindow(user);
-
-                    this.Close();
+                    BarrocUser.LoggedInUser.SessionToken = sessionToken; // Set session token for the user in the database
+                    db.SaveChanges(); // Save changes to persist the session token
+                    ActivateWindow(BarrocUser.LoggedInUser);
                 }
                 else
                 {
-                    // Authentication failed
-                    ErrorTextBlock.Text = "Ongeldige inloggegevens";
                     await inlogDialog.ShowAsync();
                 }
             }
         }
         private void ActivateWindow(Data.User user)
         {
-            var window = _windowFactory.CreateWindow(user);
-            window.Activate();
+            var windowFactory = new WindowFactory();
+            var newWindow = windowFactory.CreateWindow(user);
+            newWindow.Activate();
+            App.DashboardWindow = newWindow;
+        }
+
+        private async void SaveSessionTokenToFile(int userId, string sessionToken)
+        {
+            string fileName = $"_sessionToken.txt";
+            string sessionTokenPath = Path.Combine(ApplicationData.Current.LocalFolder.Path, fileName);
+            File.WriteAllText(sessionTokenPath, sessionToken);
         }
 
     }
 }
+

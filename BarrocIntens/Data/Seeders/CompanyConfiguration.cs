@@ -15,7 +15,8 @@ namespace BarrocIntens.Data.Seeders
             builder.HasData(
                 new Company { Id = 1, Name = "Company1", Phone = "123-456-7890", Street = "123 Main Street" },
                 new Company { Id = 2, Name = "Company2", Phone = "987-654-3210", Street = "456 Oak Avenue" },
-                new Company { Id = 3, Name = "Company3", Phone = "555-123-4567", Street = "789 Pine Road" }
+                new Company { Id = 3, Name = "Company3", Phone = "555-123-4567", Street = "789 Pine Road" },
+                new Company { Id = 4, Name = "Company4", Phone = "555-123-4567", Street = "799 Pine Road" }
             );
         }
     }

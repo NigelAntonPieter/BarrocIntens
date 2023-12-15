@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window
-    x:Class="BarrocIntens.LoginWindow"
+<Page
+    x:Class="BarrocIntens.LoginPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BarrocIntens"
@@ -41,4 +41,4 @@
             </StackPanel>
         </ContentDialog>
     </Grid>
-</Window>
+</Page>

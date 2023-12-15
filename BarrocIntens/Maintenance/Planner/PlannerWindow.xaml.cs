@@ -1,4 +1,6 @@
 using BarrocIntens.Data;
+using BarrocIntens.Inkoop;
+using BarrocIntens.Maintenance;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -13,40 +15,25 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using BarrocIntensTestlLibrary;
-using BarrocIntensTestlLibrary.LoginWindow;
+
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace BarrocIntens
+namespace BarrocIntens.Maintenance.Planner
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Maintenance : Window
+    public sealed partial class PlannerWindow : Window
     {
-        private readonly User _currentUser;
-
-        public Maintenance(User user)
+        
+        public PlannerWindow(User user )
         {
-            _currentUser = user;
             this.InitializeComponent();
-
-            LoadMaintenanceAppointments();
-        }
-
-        private void LoadMaintenanceAppointments()
-        {
-            using (var dbContext = new AppDbContext())
-            {
-  
-                var maintenanceAppointments = dbContext.UserMaintenanceAppointments
-                    .Where(uma => uma.UserId == _currentUser.Id)
-                    .Select(uma => uma.MaintenanceAppointment)
-                    .ToList();
-
-                MaintenanceListView.ItemsSource = maintenanceAppointments;
-            }
+            planningFrame.Navigate(typeof(PlanningInPage));
         }
     }
 }
+
+
+
