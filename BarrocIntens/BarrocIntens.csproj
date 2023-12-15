@@ -132,6 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Maintenance\Planner\RoutineAppointmentPage.xaml">
+     <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="CreateClientNoteWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,6 +155,8 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Maintenance\Planner\PlanningInPage.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Update="ClientNotesListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
