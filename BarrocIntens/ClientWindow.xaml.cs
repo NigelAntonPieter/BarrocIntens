@@ -44,11 +44,7 @@ namespace BarrocIntens
 
         private void uitlogEl_Click(object sender, RoutedEventArgs e)
         {
-            AppDbContext db = new AppDbContext();
-            IWindowFactory windowFactory = new WindowFactory();
-            var loginwindow = new LoginWindow(windowFactory, db);
-            loginwindow.Activate();
-            this.Close();
+            
         }
 
         private async void productListView_ItemClick(object sender, ItemClickEventArgs e)

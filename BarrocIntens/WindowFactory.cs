@@ -1,4 +1,6 @@
 ﻿using BarrocIntens.Data;
+using BarrocIntens.Maintenance;
+using BarrocIntens.Maintenance.Planner;
 using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
@@ -21,13 +23,15 @@ namespace BarrocIntens
                 case "Sales":
                     return new SalesWindow(user);
                 case "Maintenance":
-                    return new Maintenance(user);
+                    return new MaintenanceWindow(user);
                 case "MaintenanceAdmin":
                     return new AdminMaintenanceWindow(user);
                 case "Finance":
                     return new FinanceWindow(user);
                 case "Purchase":
                     return new PurchaseWindow(user);
+                case "Planner":
+                    return new PlannerWindow(user);
                 default:
                     return new ClientWindow(user);
             }

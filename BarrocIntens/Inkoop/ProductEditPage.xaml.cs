@@ -23,26 +23,35 @@ namespace BarrocIntens
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ProductEditWindow : Window
+    public sealed partial class ProductEditPage : Page
     {
+
         private Product _clickedProduct;
         public ObservableCollection<Product_category> ProductCategories { get; set; }
 
-        public ProductEditWindow(Product clickedProduct)
+        public ProductEditPage()
         {   
             this.InitializeComponent();
-            using (var dbContext = new AppDbContext())
+           
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is Product clickedProduct)
             {
-                ProductCategories = new ObservableCollection<Product_category>(dbContext.ProductCategories.ToList());
+                using (var dbContext = new AppDbContext())
+                {
+                    ProductCategories = new ObservableCollection<Product_category>(dbContext.ProductCategories.ToList());
+                }
+
+                _clickedProduct = clickedProduct;
+
+                using var db = new AppDbContext();
+                db.Products.Attach(clickedProduct);
+                NameTextBox.Text = clickedProduct.Name;
+                DescriptionTextBox.Text = clickedProduct.Description;
+                PriceTextBox.Text = clickedProduct.PriceFormatted;
             }
-
-            _clickedProduct = clickedProduct;
-
-            using var db = new AppDbContext();
-            db.Products.Attach(clickedProduct);
-            NameTextBox.Text = clickedProduct.Name;
-            DescriptionTextBox.Text = clickedProduct.Description;
-            PriceTextBox.Text = clickedProduct.PriceFormatted;
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -82,7 +91,9 @@ namespace BarrocIntens
             // Sla de wijzigingen op in de database
             db.SaveChanges();
 
-            this.Close();
+            this.Frame.Navigate(typeof(PurchaseWindow));
+
+            
         }
 
     }

@@ -12,22 +12,24 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-    <Page Remove="NewFolder\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="AdminMaintenanceWindow.xaml" />
+    <None Remove="ClientNotesListWindow.xaml" />
     <None Remove="ClientNotesWindow.xaml" />
     <None Remove="ClientRegisterWindow.xaml" />
     <None Remove="ClientWindow.xaml" />
     <None Remove="EmployeeMaintenancePage.xaml" />
-    <None Remove="FinanceWindow.xaml" />
-    <None Remove="LeaseContractOverviewWindow.xaml" />
-    <None Remove="LoginWindow.xaml" />
     <None Remove="MaintenanceDetailPage.xaml" />
+    <None Remove="CreateClientNoteWindow.xaml" />
+    <None Remove="FinanceWindow.xaml" />
+    <None Remove="Inkoop\ProductListPage.xaml" />
+    <None Remove="LeaseContractManagementWindow.xaml" />
+    <None Remove="LoginPage.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
+    <None Remove="Maintenance\PlannerWindow.xaml" />
+    <None Remove="Maintenance\Planner\AppointMaintenance.xaml" />
+    <None Remove="Maintenance\Planner\PlanningInPage.xaml" />
+    <None Remove="Maintenance\Planner\RoutineAppointmentPage.xaml" />
+    <None Remove="MainWindow.xaml" />
     <None Remove="ProductAddWindow.xaml" />
     <None Remove="ProductEditWindow.xaml" />
     <None Remove="PurchaseWindow.xaml" />
@@ -63,7 +65,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="LoginWindow.xaml">
+    <Page Update="LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -76,9 +78,6 @@
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
-  <ItemGroup>
-    <PRIResource Remove="NewFolder\**" />
-  </ItemGroup>
   <ItemGroup>
     <Page Update="AdminMaintenanceWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
@@ -126,18 +125,43 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Inkoop\" />
+    <Page Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="EmployeeMaintenancePage.xaml">
+    <Page Update="Maintenance\Planner\RoutineAppointmentPage.xaml">
+     <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="CreateClientNoteWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MaintenanceDetailPage.xaml">
+    <Page Update="Maintenance\Planner\AppointMaintenance.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Inkoop\ProductListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Maintenance\PlannerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Maintenance\Planner\PlanningInPage.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="ClientNotesListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

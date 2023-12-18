@@ -27,6 +27,8 @@ namespace BarrocIntens.Data
 
         [Required]
         public decimal ConnectionCosts { get; set; }
+
+        public decimal TotalPrice { get; set; }
     }
 }
 

@@ -64,7 +64,7 @@ namespace BarrocIntens
         {
             var clickedItem = (User)e.ClickedItem;
 
-            var window = new ClientNotesWindow(clickedItem.Id);
+            var window = new ClientNotesListWindow(clickedItem.Id);
             window.Activate();
         }
     }

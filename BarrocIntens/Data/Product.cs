@@ -8,7 +8,8 @@ namespace BarrocIntens.Data
 {
     public class Product
     {
-        public string Id { get; set; } 
+        public int Id { get; set; }
+        public string Code { get; set; } 
         public string Name { get; set; }
         public string Description { get; set; }
        
@@ -20,9 +21,6 @@ namespace BarrocIntens.Data
         public bool IsOrdered { get; set; }
 
         public string ImagePath { get; set; }
-
-       
-
 
        
         public int Product_categoryId { get; set; }

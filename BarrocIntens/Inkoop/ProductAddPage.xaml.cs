@@ -20,6 +20,7 @@ using Windows.Storage.Pickers;
 using WinRT.Interop;
 using Windows.Storage;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers.Provider;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,11 +30,13 @@ namespace BarrocIntens
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ProductAddWindow : Window
+    public sealed partial class ProductAddPage : Page
     {
+        private ObservableCollection<Product> allProducts {  get; set; }
+
         private StorageFile copiedFile;
         public ObservableCollection<Product_category> ProductCategories { get; set; }
-        public ProductAddWindow()
+        public ProductAddPage()
         {
             this.InitializeComponent();
             
@@ -67,19 +70,20 @@ namespace BarrocIntens
                 {
                     var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
                     using var db = new AppDbContext();
-                    db.Products.Add(new Product
+                    var newProduct = new Product
                     {
-                        Id = CodeTextBox.Text,
+                        Code = CodeTextBox.Text,
                         Name = NameTextBox.Text,
                         Description = DescriptionTextBox.Text,
                         Price = price, // Gebruik de eerder gecontroleerde geconverteerde waarde
                         StockQuantity = quantity, // Gebruik de eerder gecontroleerde geconverteerde waarde
                         Product_categoryId = productCategoryId.Id,
                         ImagePath = copiedFile.Path
-                    });
+                    };
+                    db.Products.Add(newProduct);
                     db.SaveChanges();
-
-                    this.Close();
+                    
+                    this.Frame.Navigate(typeof(PurchaseWindow));
                 }
                 else
                 {
@@ -88,9 +92,26 @@ namespace BarrocIntens
             }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            if (e.Parameter != null && e.Parameter is Product newProduct)
+            {
+                if (allProducts == null)
+                {
+                    allProducts = new ObservableCollection<Product>();
+                }
+                allProducts.Add(newProduct);
+                // Use allProducts in your page accordingly
+            }
+        }
+
+
         private async void fileButton_Click(object sender, RoutedEventArgs e)
         {
             await SelectAndCopyFileAsync();
+            
         }
 
         private async Task SelectAndCopyFileAsync()
@@ -100,7 +121,9 @@ namespace BarrocIntens
                 FileTypeFilter = { ".jpg", ".jpeg", ".png", ".gif" }
             };
 
-            var windowHandle = WindowNative.GetWindowHandle(this);
+           
+
+            nint windowHandle = WindowNative.GetWindowHandle(App.ParentWindow);
             InitializeWithWindow.Initialize(fileopenPicker, windowHandle);
 
             var file = await fileopenPicker.PickSingleFileAsync();

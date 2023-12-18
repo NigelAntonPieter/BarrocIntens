@@ -15,6 +15,7 @@ namespace BarrocIntens.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Maintenance_appointment> MaintenanceAppointments { get; set; }
+        public DbSet<Maintenance_Receipt> MaintenanceReceipts { get; set; }
         public DbSet<Product_category> ProductCategories { get; set; }
         public DbSet<LeaseContract> LeaseContracts { get; set; }
         public DbSet<InvoiceFinance> InvoicesFinance { get; set; }
@@ -23,6 +24,15 @@ namespace BarrocIntens.Data
         public DbSet<InstallationReceipt> InstallationReceipts { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Routine> Routines { get; set; }
+        public DbSet<UserRoutineAppointment> UserRoutineAppoinments { get; set; }
+
+        public User GetUserBySessionToken(string sessionToken)
+        {
+            return Users.FirstOrDefault(u => u.SessionToken == sessionToken);
+            // Hier wordt ervan uitgegaan dat 'SessionToken' een eigenschap van de 'User'-klasse is waarin het sessietoken wordt opgeslagen.
+            // Pas deze code aan op basis van hoe je het sessietoken in je gebruikerstableau hebt opgeslagen.
+        }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,18 +47,15 @@ namespace BarrocIntens.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Note>()
-           .HasOne(n => n.Company)
-           .WithMany(c => c.Notes)
-           .HasForeignKey(n => n.CompanyId);
-
             modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new Maintenance_ReceiptConfiguration());
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new Maintenance_appointmentConfiguration());
             modelBuilder.ApplyConfiguration(new UserMaintenanceAppointmentConfiguration());
-
+            modelBuilder.ApplyConfiguration(new RoutineConfiguration());
+            modelBuilder.ApplyConfiguration(new RoutineAppointmentConfiguration());
         }
 
     }
