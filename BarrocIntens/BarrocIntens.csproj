@@ -133,7 +133,7 @@
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="EmployeeMaintenancePage.xaml">
+    <Page Update="EmployeeMaintenancePage.xaml"></Page>
     <Page Update="Maintenance\Planner\RoutineAppointmentPage.xaml">
      <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,7 +142,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MaintenanceDetailPage.xaml">
+    <Page Update="MaintenanceDetailPage.xaml"></Page>
     <Page Update="Maintenance\Planner\AppointMaintenance.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

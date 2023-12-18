@@ -1,3 +1,4 @@
+using BarrocIntens.Data;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -23,7 +24,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class MaintenanceDetailPage : Page
     {
-        private Maintenance selectedMaintenance;
+        private Maintenance_appointment selectedMaintenance;
         public MaintenanceDetailPage()
         {
             this.InitializeComponent();
@@ -31,7 +32,7 @@ namespace BarrocIntens
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            selectedMaintenance = (Maintenance)e.Parameter;
+            selectedMaintenance = (Maintenance_appointment)e.Parameter;
         }
     }
 }
