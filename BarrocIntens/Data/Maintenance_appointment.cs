@@ -16,7 +16,7 @@
             public DateOnly DateOfMaintenanceAppointment { get; set; }
             public bool IsFinished { get; set; }
             public ICollection<UserMaintenanceAppointment> UserMaintenanceAppointments { get; set; }
-            public int Maintenance_ReceiptId { get; set; }
+            public int? Maintenance_ReceiptId { get; set; } 
             public Maintenance_Receipt Maintenance_Receipt { get; set; }
 
         }

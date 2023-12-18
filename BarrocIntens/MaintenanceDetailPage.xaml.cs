@@ -1,4 +1,5 @@
 using BarrocIntens.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -25,6 +26,7 @@ namespace BarrocIntens
     public sealed partial class MaintenanceDetailPage : Page
     {
         private Maintenance_appointment selectedMaintenance;
+
         public MaintenanceDetailPage()
         {
             this.InitializeComponent();
@@ -33,6 +35,28 @@ namespace BarrocIntens
         {
             base.OnNavigatedTo(e);
             selectedMaintenance = (Maintenance_appointment)e.Parameter;
+            using (var db = new AppDbContext())
+            {
+                Maintenance_Receipt receipt = null;
+
+                if (db.MaintenanceReceipts.Any(r => r.Maintenance_appointmentId == selectedMaintenance.Id))
+                {
+                    receipt = db.MaintenanceReceipts
+                        .Include(r => r.Company)
+                        .FirstOrDefault(r => r.Maintenance_appointmentId == selectedMaintenance.Id);
+
+                    CompanyTextBlock.Text = receipt.Company.Name;
+                    ServiceTypeTextBlock.Text = receipt.ServiceType;
+                    WorkDescriptionTextBlock.Text = receipt.WorkDescription;
+                    MaintenanceReceiptDetailsPanel.Visibility = Visibility.Visible;
+                    MarkAsFinishedButton.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    MaintenanceReceiptDetailsPanel.Visibility = Visibility.Collapsed;
+                    MarkAsFinishedButton.Visibility = Visibility.Visible;
+                }
+            }
 
         }
 
@@ -43,7 +67,8 @@ namespace BarrocIntens
 
         private void MarkAsFinishedButton_Click(object sender, RoutedEventArgs e)
         {
-
+                this.Frame.Navigate(typeof(MakeReceiptForMaintenanceAppointment), selectedMaintenance);
+            
         }
     }
 }
