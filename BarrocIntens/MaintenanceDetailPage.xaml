@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="BarrocIntens.MaintenanceDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BarrocIntens"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Orientation="Vertical" Padding="5">
+            <TextBlock Text="{Binding Id}" FontWeight="Bold" />
+            <TextBlock Text="{Binding CompanyId}" />
+            <TextBlock Text="{Binding Remark}" TextWrapping="Wrap" Foreground="DarkGray" />
+            <TextBlock Text="{Binding DateAdded}" Foreground="DarkGray" />
+            <TextBlock Text="{Binding UserMaintenanceAppointments.Count}" Foreground="DarkGray" />
+        </StackPanel>
+    </Grid>
+</Page>
