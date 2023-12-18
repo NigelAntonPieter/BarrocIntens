@@ -19,7 +19,7 @@ using Windows.Storage;
 using Windows.System;
 using System.Threading.Tasks;
 using BarrocUser = BarrocIntens.Data.User;
-
+using BarrocIntens.Utility;
 
 namespace BarrocIntens
 {

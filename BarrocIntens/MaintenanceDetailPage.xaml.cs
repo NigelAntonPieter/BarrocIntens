@@ -33,6 +33,17 @@ namespace BarrocIntens
         {
             base.OnNavigatedTo(e);
             selectedMaintenance = (Maintenance_appointment)e.Parameter;
+
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
+
+        private void MarkAsFinishedButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

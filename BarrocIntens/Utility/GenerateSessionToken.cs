@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarrocIntens
+namespace BarrocIntens.Utility
 {
     public static class GenerateSessionToken
     {
@@ -19,7 +19,7 @@ namespace BarrocIntens
                 StringBuilder sb = new StringBuilder(length);
                 foreach (byte b in bytes)
                 {
-                    sb.Append(validChars[b % (validChars.Length)]);
+                    sb.Append(validChars[b % validChars.Length]);
                 }
                 return sb.ToString();
             }

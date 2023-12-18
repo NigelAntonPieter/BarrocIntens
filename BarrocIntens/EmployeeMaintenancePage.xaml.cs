@@ -117,7 +117,7 @@ namespace BarrocIntens
 
                 var button = new Button
                 {
-                    Content = "Your Button Text",
+                    Content = "Meer",
                     HorizontalAlignment = HorizontalAlignment.Left,
                     VerticalAlignment = VerticalAlignment.Center,
                 };
