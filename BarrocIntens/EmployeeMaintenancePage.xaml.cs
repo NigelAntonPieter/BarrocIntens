@@ -34,7 +34,7 @@ namespace BarrocIntens
         public EmployeeMaintenancePage()
         {
             this.InitializeComponent();
-
+            
             LoadMaintenanceAppointments();
 
         }

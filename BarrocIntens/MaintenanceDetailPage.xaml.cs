@@ -50,11 +50,19 @@ namespace BarrocIntens
                     WorkDescriptionTextBlock.Text = receipt.WorkDescription;
                     MaintenanceReceiptDetailsPanel.Visibility = Visibility.Visible;
                     MarkAsFinishedButton.Visibility = Visibility.Collapsed;
+ 
                 }
                 else
                 {
                     MaintenanceReceiptDetailsPanel.Visibility = Visibility.Collapsed;
-                    MarkAsFinishedButton.Visibility = Visibility.Visible;
+                    if (selectedMaintenance.UserMaintenanceAppointments.Any(uma => uma.UserId == Data.User.LoggedInUser.Id))
+                    {
+                        MarkAsFinishedButton.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        MarkAsFinishedButton.Visibility = Visibility.Collapsed;
+                    }
                 }
             }
 

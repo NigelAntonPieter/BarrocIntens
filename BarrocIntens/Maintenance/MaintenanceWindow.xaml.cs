@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using BarrocIntensTestlLibrary;
 using BarrocIntensTestlLibrary.LoginWindow;
+using Windows.Networking.Proximity;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -32,7 +33,14 @@ namespace BarrocIntens.Maintenance
             _currentUser = user;
             this.InitializeComponent();
 
-            this.maintenanceFrame.Navigate(typeof(EmployeeMaintenancePage), user);
+            if (_currentUser.Role == "MaintenanceAdmin")
+            {
+                this.maintenanceFrame.Navigate(typeof(AdminMaintenancePage), user);
+            }
+            else
+            {
+                this.maintenanceFrame.Navigate(typeof(EmployeeMaintenancePage), user);
+            }
         }
 
 

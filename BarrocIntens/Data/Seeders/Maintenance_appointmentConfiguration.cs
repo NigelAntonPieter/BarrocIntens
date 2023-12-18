@@ -17,7 +17,7 @@ namespace BarrocIntens.Data.Seeders
                 .HasForeignKey<Maintenance_Receipt>(mr => mr.Maintenance_appointmentId)
                 .IsRequired(false);
             builder.HasData(
-                new Maintenance_appointment { Id = 1, CompanyId = 1, Remark = "Updated remark 1", DateAdded = DateTime.Now, DateOfMaintenanceAppointment = new DateOnly(2023, 12, 5), IsFinished = false, Maintenance_ReceiptId = null, Location = "Breda" },
+                new Maintenance_appointment { Id = 1, CompanyId = 1, Remark = "Updated remark 1", DateAdded = DateTime.Now, DateOfMaintenanceAppointment = new DateOnly(2023, 12, 5), IsFinished = true, Maintenance_ReceiptId = null, Location = "Breda" },
                 new Maintenance_appointment { Id = 2, CompanyId = 2, Remark = "Updated remark 2", DateAdded = DateTime.Now, DateOfMaintenanceAppointment = new DateOnly(2023, 12, 25), IsFinished = false, Maintenance_ReceiptId = null, Location = "Eindhoven" },
                 new Maintenance_appointment { Id = 3, CompanyId = 3, Remark = "Updated remark 3", DateAdded = DateTime.Now, DateOfMaintenanceAppointment = new DateOnly(2023, 12, 19), IsFinished = false, Maintenance_ReceiptId = null, Location = "Rotterdam" },
                  new Maintenance_appointment { Id = 4, CompanyId = 4, Remark = "Updated remark 4", DateAdded = DateTime.Now, DateOfMaintenanceAppointment = new DateOnly(2023, 12, 21), IsFinished = false, Maintenance_ReceiptId = null, Location = "Tilburg" }

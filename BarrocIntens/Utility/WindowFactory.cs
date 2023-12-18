@@ -25,7 +25,7 @@ namespace BarrocIntens.Utility
                 case "Maintenance":
                     return new MaintenanceWindow(user);
                 case "MaintenanceAdmin":
-                    return new AdminMaintenanceWindow(user);
+                    return new MaintenanceWindow(user);
                 case "Finance":
                     return new FinanceWindow(user);
                 case "Purchase":

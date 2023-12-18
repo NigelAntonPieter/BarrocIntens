@@ -87,5 +87,9 @@ namespace BarrocIntens
             ErrorMessageText.Text = errorMessage;
             await errorDialog.ShowAsync();
         }
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
     }
 }

@@ -12,6 +12,9 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Maintenance\AdminMaintenanceWindow.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="AdminMaintenanceWindow.xaml" />
     <None Remove="ClientNotesListWindow.xaml" />
     <None Remove="ClientNotesWindow.xaml" />
@@ -25,6 +28,8 @@
     <None Remove="LeaseContractManagementWindow.xaml" />
     <None Remove="LoginPage.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
+    <None Remove="Maintenance\AdminMaintenancePage.xaml" />
+    <None Remove="Maintenance\AdminMaintenanceWindow.xaml" />
     <None Remove="Maintenance\PlannerWindow.xaml" />
     <None Remove="Maintenance\Planner\AppointMaintenance.xaml" />
     <None Remove="Maintenance\Planner\PlanningInPage.xaml" />
@@ -35,6 +40,9 @@
     <None Remove="ProductEditWindow.xaml" />
     <None Remove="PurchaseWindow.xaml" />
     <None Remove="SalesWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Maintenance\AdminMaintenanceWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -132,6 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Maintenance\AdminMaintenancePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MakeReceiptForMaintenanceAppointment.xaml">

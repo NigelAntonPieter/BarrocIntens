@@ -49,8 +49,6 @@
             <TextBlock FontWeight="Bold" Text="Company:" />
             <TextBlock x:Name="CompanyTextBlock" />
 
-            <TextBlock FontWeight="Bold" Text="Customer Location:" />
-            <TextBlock x:Name="CustomerLocationTextBlock" />
 
             <TextBlock FontWeight="Bold" Text="Service Type:" />
             <TextBlock x:Name="ServiceTypeTextBlock" />

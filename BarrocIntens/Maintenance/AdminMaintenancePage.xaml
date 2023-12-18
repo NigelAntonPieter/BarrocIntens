@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Window
-    x:Class="BarrocIntens.Maintenance.AdminMaintenanceWindow"
-   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:local="using:BarrocIntens"
-   xmlns:localData="using:BarrocIntens.Data"
-   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-   mc:Ignorable="d">
+<Page
+    x:Class="BarrocIntens.Maintenance.AdminMaintenancePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BarrocIntens.Maintenance"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:localData="using:BarrocIntens.Data"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -24,7 +24,7 @@
             <TextBlock Text="Finished"
                        FontSize="50"
                        FontWeight="Bold" HorizontalAlignment="Center" />
-            <ListView ItemClick="MaintenanceListView_ItemClick" x:Name="FinishedMaintenanceListView" Width="350">
+            <ListView ItemClick="FinishedMaintenanceListView_ItemClick" IsItemClickEnabled="True" x:Name="FinishedMaintenanceListView" Width="350">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="localData:Maintenance_appointment">
                         <Grid Margin="5">
@@ -55,7 +55,7 @@
             <TextBlock Text="In progress"
                        FontSize="50"
                        FontWeight="Bold" HorizontalAlignment="Center" />
-            <ListView ItemClick="MaintenanceListView_ItemClick" x:Name="UnfinishedMaintenanceListView" Width="350">
+            <ListView ItemClick="UnfinishedMaintenanceListView_ItemClick" IsItemClickEnabled="True" x:Name="UnfinishedMaintenanceListView" Width="350">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="localData:Maintenance_appointment">
                         <Grid Margin="5">
@@ -81,5 +81,4 @@
         </StackPanel>
 
     </Grid>
-    
-</Window>
+</Page>

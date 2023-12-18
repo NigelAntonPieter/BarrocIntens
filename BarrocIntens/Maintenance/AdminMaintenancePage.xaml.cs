@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
@@ -21,9 +20,12 @@ using Windows.Foundation.Collections;
 
 namespace BarrocIntens.Maintenance
 {
-    public sealed partial class AdminMaintenanceWindow : Window
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class AdminMaintenancePage : Page
     {
-        public AdminMaintenanceWindow(User user)
+        public AdminMaintenancePage()
         {
             this.InitializeComponent();
 
@@ -40,11 +42,18 @@ namespace BarrocIntens.Maintenance
             }
         }
 
-        private void MaintenanceListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void UnfinishedMaintenanceListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var selectedMaintenance = (Maintenance_appointment)e.ClickedItem;
 
-            Maintenance.Frame.Navigate(typeof(MaintenanceDetailPage), selectedMaintenance);
+            this.Frame.Navigate(typeof(MaintenanceDetailPage), selectedMaintenance);
+        }
+
+        private void FinishedMaintenanceListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var selectedMaintenance = (Maintenance_appointment)e.ClickedItem;
+
+            this.Frame.Navigate(typeof(MaintenanceDetailPage), selectedMaintenance);
         }
     }
 }
