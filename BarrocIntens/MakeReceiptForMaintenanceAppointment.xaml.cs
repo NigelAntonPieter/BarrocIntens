@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -65,7 +67,7 @@ namespace BarrocIntens
             {
                 EmployeeId = Data.User.LoggedInUser.Id,
                 VisitDate = selectedMaintenance.DateOfMaintenanceAppointment,
-                CompanyId = selectedMaintenance.Company.Id,
+                CompanyId = selectedMaintenance.CompanyId,
                 CustomerLocation = selectedMaintenance.Location,
                 Maintenance_appointmentId = selectedMaintenance.Id,
                 ServiceType = ServiceTypeTextBox.Text,
@@ -80,7 +82,30 @@ namespace BarrocIntens
             selectedMaintenance.IsFinished = true;
             selectedMaintenance.Maintenance_ReceiptId = newReceipt.Id;
 
+            SendEmailToAdmin(newReceipt);
+
             this.Frame.GoBack();
+        }
+        void SendEmailToAdmin(Maintenance_Receipt receipt)
+        {
+            var smtpClient = new SmtpClient("sandbox.smtp.mailtrap.io")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("fbeed68a24ce3c", "e3aa23f72b0da1"),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                //dit moet eigenlijk email worden van de admin maar users heeft nog geen email weet ook niet of we dat willen toevoegen
+                From = new MailAddress("brent.albers1999@gmail.com"),
+                Subject = "Maintenance Receipt",
+                Body = $"New Maintenance Receipt:\n\nEmployee ID: {receipt.EmployeeId}\nReceipt ID: {receipt.Id}\n\nDetails:\nService Type: {receipt.ServiceType}\nWork Description: {receipt.WorkDescription}\nMaterial Cost: {receipt.MaterialCost}\nLabor Hours: {receipt.LaborHours}",
+            };
+
+            mailMessage.To.Add("brent.albers1999@gmail.com");
+
+            smtpClient.Send(mailMessage);
         }
         private async Task ShowErrorDialog(string errorMessage)
         {
