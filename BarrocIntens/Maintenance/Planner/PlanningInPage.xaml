@@ -25,7 +25,7 @@
                     Click="AddRoutine_Click">Routinematige bezoek
             </Button>
             <Button Name="addAppointment"
-                    clic>
+                    Click="addAppointment_Click">onderhoudsbeurt
             </Button>
         </StackPanel>
         <CalendarView x:Name="MaintanceCalendar"
@@ -81,7 +81,10 @@
                                 <TextBlock Text="{x:Bind Company.Name}"
                                            Foreground="Black"
                                            Margin="5" />
-                                <TextBlock Text="{Binding DateOfMaintenanceAppointment}"
+                                <TextBlock Text="{Binding Remark}"
+                                           Foreground="Black"
+                                           Margin="5" />
+                                <TextBlock Text="{Binding DateAdded}"
                                            Foreground="Black"
                                            Margin="5" />
                             </StackPanel>

@@ -165,5 +165,10 @@ namespace BarrocIntens.Maintenance.Planner
                 this.Frame.Navigate(typeof(AppointmentEditPage), selectedMaintenance);
             }
         }
+
+        private void addAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddAppointmentPage));
+        }
     } 
 }
