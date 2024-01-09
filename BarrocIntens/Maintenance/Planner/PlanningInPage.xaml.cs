@@ -103,13 +103,6 @@ namespace BarrocIntens.Maintenance.Planner
             this.Frame.Navigate(typeof(RoutineAppointmentPage));
         }
 
-        private void ListView_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            if (e.OriginalSource is FrameworkElement element && element.DataContext is Maintenance_appointment clickedMaintenance)
-            {
-                this.Frame.Navigate(typeof(AppointmentEditPage), clickedMaintenance);
-            }
-        }
         private List<int> deletedAppointmentIds = new List<int>();
         private async void ListView_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {

@@ -23,7 +23,9 @@
             </Button>
             <Button Name="AddRoutine"
                     Click="AddRoutine_Click">Routinematige bezoek
-                
+            </Button>
+            <Button Name="addAppointment"
+                    clic>
             </Button>
         </StackPanel>
         <CalendarView x:Name="MaintanceCalendar"
@@ -44,8 +46,6 @@
                                 <ListView ItemsSource="{Binding}"
                                           IsItemClickEnabled="True"
                                           ItemClick="DayListView_ItemClick"
-                                          IsDoubleTapEnabled="True"
-                                          DoubleTapped="ListView_DoubleTapped"
                                           IsRightTapEnabled="True"
                                           RightTapped="ListView_RightTapped">
                                     <ListView.ItemTemplate>
@@ -119,8 +119,7 @@
         </ContentDialog>
         <ContentDialog x:Name="routineDialog"
                        PrimaryButtonText="edit"
-                       CloseButtonText="Close"
-                       PrimaryButtonClick="routineDialog_PrimaryButtonClick">
+                       CloseButtonText="Close">
             <ContentDialog.TitleTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
