@@ -19,6 +19,9 @@ namespace BarrocIntens.Data.Seeders
                  new Maintenance_appointment { Id = 4, CompanyId = 4, Remark = "Updated remark 4", DateAdded = DateTime.Now, DateOfMaintenanceAppointment = new DateOnly(2023, 12, 21), IsFinished = false, Maintenance_ReceiptId = 1, Location = "Tilburg" }
             );
 
+            builder.HasOne(m => m.Company)
+           .WithMany()
+           .HasForeignKey(m => m.CompanyId);
         }
     }
-}
+}   
