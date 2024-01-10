@@ -55,7 +55,7 @@ namespace BarrocIntens.Maintenance.Planner
             {
                 Maintenance_appointment newMaintenanceAppointment = CreateMaintenanceAppointment();
 
-                if (newMaintenanceAppointment != null)
+                if (newMaintenanceAppointment != null && CompanyComboBox.SelectedItem != null )
                 {
                     using (var context = new AppDbContext())
                     {
@@ -65,21 +65,16 @@ namespace BarrocIntens.Maintenance.Planner
                         context.MaintenanceAppointments.Add(newMaintenanceAppointment);
                         await context.SaveChangesAsync();
                         this.Frame.GoBack();
-                    }
-
-                    // Geef een succesmelding of voer andere acties uit
-                    // MessageBox.Show("Maintenance Appointment opgeslagen");
+                    };
                 }
                 else
                 {
-                    // Melding weergeven dat er ongeldige gegevens zijn ingevoerd
-                    // MessageBox.Show("Ongeldige gegevens ingevoerd");
+                    await employeeDialog.ShowAsync();
                 }
             }
             else
             {
-                // Melding weergeven dat niet alle velden zijn ingevuld
-                // MessageBox.Show("Vul alle verplichte velden in");
+                await maintenanceDialog.ShowAsync();
             }
         }
 

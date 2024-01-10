@@ -21,12 +21,12 @@
                     Spacing="10">
             <Image Source="/Assets/Logo6_klein.png"
                    Width="210" />
-            <TextBlock Text="Welkom bij BarrocIntens"
+            <TextBlock Text="Welkom at BarrocIntens"
                        FontSize="50"
                        FontWeight="Bold" />
             <Button x:Name="LoginPage"
                     HorizontalAlignment="Center"
-                    Click="LoginPage_Click">Loginpagina</Button>
+                    Click="LoginPage_Click">Loginpage</Button>
         </StackPanel>
     </Grid>
 

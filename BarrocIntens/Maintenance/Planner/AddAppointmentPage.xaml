@@ -22,34 +22,48 @@
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2"
                     Background="#fdd716">
-            <Button Name="logoutClick" Click="logoutClick_Click"> Uitloggen
+            <Button Name="goBackButton" Click="logoutClick_Click"> Go Back
             </Button>
         </StackPanel>
         <StackPanel VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Grid.Column="1"
                     Grid.Row="1">
-            <TextBlock Text="Maak een nieuwe Maintenance Appointment"
+            <TextBlock Text="Make an new appointment"
                        FontSize="20"
                        FontWeight="Bold"
                        Margin="0,0,0,20" />
             <TextBlock Text="Company:" />
             <ComboBox x:Name="CompanyComboBox"
-                      PlaceholderText="Selecteer een bedrijf"
+                      PlaceholderText="Selected a company"
                       Width="200"
                       Margin="0,5,0,10" />
 
             <TextBlock Text="Remark:" />
             <TextBox x:Name="RemarkTextBox"
-                     PlaceholderText="Voer opmerking in" />
+                     PlaceholderText="Enter the remark" />
 
             <TextBlock Text="Location:" />
             <TextBox x:Name="LocationTextBox"
-                     PlaceholderText="Voer locatie in" />
+                     PlaceholderText="Enter the location" />
 
-            <Button Content="Opslaan"
+            <Button Content="Save"
                     Click="SaveMaintenanceAppointment_Click"
                     Margin="0,20,0,0" />
         </StackPanel>
+        <ContentDialog x:Name="employeeDialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Enter the employee ." />
+            </StackPanel>
+        </ContentDialog>
+        <ContentDialog x:Name="maintenanceDialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Enter all the information ." />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Page>

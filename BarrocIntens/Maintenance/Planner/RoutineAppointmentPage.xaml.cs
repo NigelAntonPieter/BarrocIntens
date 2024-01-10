@@ -39,7 +39,7 @@ namespace BarrocIntens.Maintenance.Planner
 
         public async void SaveAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-            if ( UserComboBox.SelectedItem != null)
+            if ( UserComboBox.SelectedItem != null && CompanyComboBox.SelectedItem != null && !string.IsNullOrEmpty(LocationEl.Text) && RoutineDate.SelectedDate.HasValue)
             {
                 using var db = new AppDbContext();
 
@@ -87,6 +87,11 @@ namespace BarrocIntens.Maintenance.Planner
             {
                 await RoutineDialog.ShowAsync();
             }
+        }
+
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(PlanningInPage));
         }
     }
 }

@@ -13,14 +13,16 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0"
-                    Background="#fdd716" />
+                    Background="#fdd716">
+            <Button Name="goBackButton" Click="goBackButton_Click">Go back</Button>
+        </StackPanel>
         <StackPanel Grid.Column="1"
                     Grid.Row="1">
-            <TextBlock Text="Medewerker">
+            <TextBlock Text="Employee">
             </TextBlock>
             <ComboBox x:Name="UserComboBox">
                 <ComboBox.ItemTemplate>
@@ -44,7 +46,7 @@
                        Title="Ontbrekende gegevens"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Vergeet niet een medewerker of datum toe te voegen ." />
+                <TextBlock Text="Enter employee and date." />
             </StackPanel>
         </ContentDialog>
     </Grid>

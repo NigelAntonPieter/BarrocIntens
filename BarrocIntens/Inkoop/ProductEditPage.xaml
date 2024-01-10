@@ -1,75 +1,84 @@
 <!-- ProductEditWindow.xaml -->
 
 <Page x:Class="BarrocIntens.ProductEditPage"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        xmlns:local="using:BarrocIntens"
-        xmlns:localData="using:BarrocIntens.Data"
-        >
-
-
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      xmlns:local="using:BarrocIntens"
+      xmlns:localData="using:BarrocIntens.Data">
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" /> 
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0"
+                    Grid.RowSpan="9"
+                    Background="#fdd716">
+            <Button x:Name="goBackButton"
+                    Click="goBackButton_Click">Go Back</Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="10">
+            <TextBlock Text="Edit Purchase"
+                       FontSize="50"
+                       FontWeight="Bold" />
+            <TextBlock Text="Name:"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="5" />
+            <TextBox x:Name="NameTextBox"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Margin="5" />
 
-        <TextBlock Text="Name:"
-                   Grid.Row="0"
-                   Grid.Column="0"
-                   Margin="5" />
-        <TextBox x:Name="NameTextBox"
-                 Grid.Row="0"
-                 Grid.Column="1"
-                 Margin="5" />
+            <TextBlock Text="Description:"
+                       Grid.Row="1"
+                       Grid.Column="0"
+                       Margin="5" />
+            <TextBox x:Name="DescriptionTextBox"
+                     Grid.Row="1"
+                     Grid.Column="1"
+                     Margin="5" />
 
-        <TextBlock Text="Description:"
-                   Grid.Row="1"
-                   Grid.Column="0"
-                   Margin="5" />
-        <TextBox x:Name="DescriptionTextBox"
-                 Grid.Row="1"
-                 Grid.Column="1"
-                 Margin="5" />
+            <TextBlock Text="Price:"
+                       Grid.Row="2"
+                       Grid.Column="0"
+                       Margin="5" />
+            <TextBox x:Name="PriceTextBox"
+                     Grid.Row="2"
+                     Grid.Column="1"
+                     Margin="5" />
+            <ComboBox x:Name="ProductCategoryComboBox"
+                      ItemsSource="{x:Bind ProductCategories}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      PlaceholderText="Select a Catagory"
+                      Grid.Row="3"
+                      Grid.Column="1" />
 
-        <TextBlock Text="Price:"
-                   Grid.Row="2"
-                   Grid.Column="0"
-                   Margin="5" />
-        <TextBox x:Name="PriceTextBox"
-                 Grid.Row="2"
-                 Grid.Column="1"
-                 Margin="5" />
-        <ComboBox x:Name="ProductCategoryComboBox"
-              ItemsSource="{x:Bind ProductCategories}"
-              DisplayMemberPath="Name"
-              SelectedValuePath="Id"
-              PlaceholderText="Selecteer een categorie"
-                  Grid.Row="3"
-                  Grid.Column="1"/>
-
-        <Button Content="Update Product"
-                Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Click="Button_Click"
-                Margin="5" />
-        <ContentDialog x:Name="EditDialog"
-                       Title="Onjuiste gegevens"
-                       CloseButtonText="OK">
-            <StackPanel>
-                <TextBlock Text="Vul de juiste gegevens in ." />
-            </StackPanel>
-        </ContentDialog>
+            <Button Content="Update Product"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Click="Button_Click"
+                    Margin="5" />
+            <ContentDialog x:Name="EditDialog"
+                           Title="Onjuiste gegevens"
+                           CloseButtonText="OK">
+                <StackPanel>
+                    <TextBlock Text="Vul de juiste gegevens in ." />
+                </StackPanel>
+            </ContentDialog>
+        </StackPanel>
     </Grid>
 </Page>

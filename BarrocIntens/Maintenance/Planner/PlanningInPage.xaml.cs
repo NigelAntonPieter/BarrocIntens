@@ -34,6 +34,7 @@ namespace BarrocIntens.Maintenance.Planner
             this.InitializeComponent();
             using var db = new AppDbContext();
             MaintenanceListView.ItemsSource = db.MaintenanceAppointments.Include(c => c.Company);
+
         }
 
         private void uitLogEL_Click(object sender, RoutedEventArgs e)
@@ -51,6 +52,7 @@ namespace BarrocIntens.Maintenance.Planner
             }
             else if (e.ClickedItem is Routine clickedRoutine)
             {
+                routineDialog.DataContext = clickedRoutine;
                 await routineDialog.ShowAsync();
             }
         }

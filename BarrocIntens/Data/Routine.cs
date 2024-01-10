@@ -17,6 +17,7 @@ namespace BarrocIntens.Data
         public bool IsFinished { get; set; }
 
         public ICollection<UserRoutineAppointment> UserRoutineAppointments { get; set; }
+        public string GetUserName => UserRoutineAppointments.FirstOrDefault()?.User?.UserName ?? "Geen medewerker";
     }
 
     public class UserRoutineAppointment
@@ -27,5 +28,4 @@ namespace BarrocIntens.Data
         public int RoutineId { get; set; }
         public Routine Routine { get; set; }
     }
-        
 }

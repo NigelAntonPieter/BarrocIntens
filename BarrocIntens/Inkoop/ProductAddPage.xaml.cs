@@ -21,6 +21,7 @@ using WinRT.Interop;
 using Windows.Storage;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers.Provider;
+using BarrocIntens.Inkoop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -66,7 +67,7 @@ namespace BarrocIntens
                 bool isPriceValid = decimal.TryParse(PriceTextBox.Text, out decimal price);
                 bool isQuantityValid = int.TryParse(QuantityTextBox.Text, out int quantity);
 
-                if (isCodeValid && isNameValid && isDescriptionValid && isPriceValid && isQuantityValid)
+                if (isCodeValid && isNameValid && isDescriptionValid && isPriceValid && isQuantityValid && quantity > 0)
                 {
                     var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
                     using var db = new AppDbContext();
@@ -83,11 +84,19 @@ namespace BarrocIntens
                     db.Products.Add(newProduct);
                     db.SaveChanges();
                     
-                    this.Frame.Navigate(typeof(PurchaseWindow));
+                    this.Frame.Navigate(typeof(ProductListPage));
                 }
                 else
                 {
-                    await priceDialog.ShowAsync(); // Toon foutmelding als invoer ongeldig is
+                    if (isQuantityValid && quantity <= 0)
+                    { 
+                            await quantityErrorDialog.ShowAsync();
+                    }
+                    else
+                    {
+                        await priceDialog.ShowAsync(); // Toon foutmelding als invoer ongeldig is
+                    }
+                   
                 }
             }
         }
@@ -141,6 +150,11 @@ namespace BarrocIntens
             var renamedFileName = $"{currentTime.ToFileTime()}{fileExtension}";
 
             copiedFile = await file.CopyAsync(localFolder, renamedFileName);
+        }
+
+        private void logoutClick_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ProductListPage));
         }
     }
 }

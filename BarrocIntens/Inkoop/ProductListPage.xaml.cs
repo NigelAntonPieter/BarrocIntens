@@ -138,6 +138,7 @@ namespace BarrocIntens.Inkoop
             try
             {
                 db.SaveChanges();
+                this.Frame.Navigate(typeof(ProductListPage));
             }
             // Concurrency = gelijktijdigheid
             catch (DbUpdateConcurrencyException ex)

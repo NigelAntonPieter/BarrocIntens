@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -36,7 +37,7 @@ namespace BarrocIntens
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
             }
-
+            
             mainFrame.Navigate(typeof(MainBarrocpage));
         }
     }

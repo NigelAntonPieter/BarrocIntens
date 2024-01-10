@@ -20,7 +20,11 @@
 
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2"
-                    Background="#fdd716" />
+                    Background="#fdd716">
+            <Button Name="logoutClick"
+                    Click="logoutClick_Click">Go Back
+            </Button>
+        </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
                 <TextBlock Text="Add Product" FontSize="50" FontWeight="Bold" FontFamily="arial"/>
             </StackPanel>
@@ -29,39 +33,39 @@
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="CodeTextBox"
-                     PlaceholderText="Voer de naam in" />
-            <TextBlock Text="Naam:"
+                     PlaceholderText="Fill in the code " />
+            <TextBlock Text="Name:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="NameTextBox"
-                     PlaceholderText="Voer de naam in" />
-            <TextBlock Text="Beschrijving:"
+                     PlaceholderText="Fill in the name" />
+            <TextBlock Text="Description:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="DescriptionTextBox"
-                     PlaceholderText="Voer de beschrijving in" />
-            <TextBlock Text="Prijs:"
+                     PlaceholderText="Fill in the description" />
+            <TextBlock Text="Price:"
                        HorizontalAlignment="center"
                        Margin="0,0,0,10"  />
             <TextBox x:Name="PriceTextBox"
-                     PlaceholderText="Voer de prijs in" />
-            <TextBlock Text="Hoeveelheid:"
+                     PlaceholderText="Enter the price" />
+            <TextBlock Text="Quantity:"
                        HorizontalAlignment="center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="QuantityTextBox"
-                     PlaceholderText="Voer de hoeveelheid  in" />
-            <TextBlock Text="Categorie:"
+                     PlaceholderText="Enter in the quantity" />
+            <TextBlock Text="Category:"
                HorizontalAlignment="Center"
                Margin="0,0,0,10" />
             <ComboBox x:Name="ProductCategoryComboBox"
               ItemsSource="{x:Bind ProductCategories}"
               DisplayMemberPath="Name"
               SelectedValuePath="Id"
-              PlaceholderText="Selecteer een categorie" />
+              PlaceholderText="Selected a Category" />
 
             <Button x:Name="fileButton"
-                    Click="fileButton_Click">Voeg een Foto toe...</Button>
-            <Button Content="Toevoegen"
+                    Click="fileButton_Click">Add a picture...</Button>
+            <Button Content="Add"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Width="75"
@@ -71,14 +75,21 @@
                        Title="Ontbrekende gegevens"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Vul alle velden in en selecteer een afbeelding." />
+                <TextBlock Text="Complete all fields and select an image." />
             </StackPanel>
         </ContentDialog>
         <ContentDialog x:Name="priceDialog"
                        Title="Ontbrekende gegevens"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Vul de cijfers in." />
+                <TextBlock Text="Enter numbers or words." />
+            </StackPanel>
+        </ContentDialog>
+        <ContentDialog x:Name="quantityErrorDialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Quantity must be above zero ." />
             </StackPanel>
         </ContentDialog>
     </Grid>

@@ -49,9 +49,9 @@ namespace BarrocIntens.Maintenance.Planner
             this.Frame.GoBack();
         }
 
-        private void editAppointment_Click(object sender, RoutedEventArgs e)
+        private async void editAppointment_Click(object sender, RoutedEventArgs e)
         {
-            if (_selectedMaintenanceAppointment != null)
+            if (_selectedMaintenanceAppointment != null && UserComboBox.SelectedItem != null && AppointmentDate.SelectedDate.HasValue)
             {
                 var selectedUser = (User)UserComboBox.SelectedItem;
 
@@ -82,9 +82,12 @@ namespace BarrocIntens.Maintenance.Planner
                         dbContext.SaveChanges();
                     }
                 }
-
                 // Navigeer terug naar de vorige pagina of een andere gewenste pagina
                 this.Frame.GoBack();
+            }
+            else
+            {
+                await editAppointmentDialog.ShowAsync();
             }
         }
     }

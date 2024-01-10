@@ -19,13 +19,13 @@
         <StackPanel Grid.Column="0"
                     Background="#fdd716">
             <Button Name="uitLogEL"
-                    Click="uitLogEL_Click">Uitloggen
+                    Click="uitLogEL_Click">Go back
             </Button>
             <Button Name="AddRoutine"
-                    Click="AddRoutine_Click">Routinematige bezoek
+                    Click="AddRoutine_Click">Routine visit
             </Button>
             <Button Name="addAppointment"
-                    Click="addAppointment_Click">onderhoudsbeurt
+                    Click="addAppointment_Click">maintenance
             </Button>
         </StackPanel>
         <CalendarView x:Name="MaintanceCalendar"
@@ -131,7 +131,7 @@
                 </DataTemplate>
             </ContentDialog.TitleTemplate>
             <ContentDialog.ContentTemplate>
-                <DataTemplate x:DataType="localData:Maintenance_appointment">
+                <DataTemplate x:DataType="localData:Routine">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{x:Bind GetUserName}"
                                    FontSize="15" />
