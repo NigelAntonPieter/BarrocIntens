@@ -165,35 +165,6 @@ namespace BarrocIntens
             InvoiceErrorMessageTextBlock.Text = string.Empty;
         }
 
-
-        private void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Add code to send an invoice to the customer
-        }
-
-        private void MarkAsPaidButton_Click(object sender, RoutedEventArgs e)
-        {
-            InvoiceFinance selectedInvoice = GetSelectedInvoice();
-
-            if (selectedInvoice != null)
-            {
-                selectedInvoice.IsPaid = true;
-                dbContext.SaveChanges();
-            }
-        }
-
-        private LeaseContract GetSelectedLeaseContract()
-        {
-            // Implement the logic to get the selected lease contract
-            return null;
-        }
-
-        private InvoiceFinance GetSelectedInvoice()
-        {
-            // Implement the logic to get the selected invoice
-            return null;
-        }
-
         private void GenerateReceiptButton_Click(object sender, RoutedEventArgs e)
         {
             ClearErrorMessages();
@@ -227,7 +198,6 @@ namespace BarrocIntens
                 return;
             }
 
-            // Get the selected product from the database
             Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Code == selectedProductId);
 
             if (selectedProduct == null)
@@ -236,13 +206,11 @@ namespace BarrocIntens
                 return;
             }
 
-            // Calculate total price including machine price, installation cost, and VAT
             decimal machinePrice = selectedProduct.Price;
             decimal vatRate = 0.21m; // Example VAT rate (21%)
 
             decimal totalPrice = machinePrice + connectionCosts + (machinePrice + connectionCosts) * vatRate;
 
-            // Display receipt information on the UI
             string receiptText = $"Receipt for Coffee Machine Installation\n\n" +
                                  $"Employee: {employeeName}\n" +
                                  $"Product: {selectedProduct.Name}\n" +
@@ -254,7 +222,6 @@ namespace BarrocIntens
 
             ShowReceipt(receiptText);
 
-            // Save receipt to the database
             SaveReceiptToDatabase(employeeName, selectedProductId, installationDate, connectionCosts, totalPrice);
         }
 
@@ -291,6 +258,15 @@ namespace BarrocIntens
 
                 dbContext.InstallationReceipts.Add(newReceipt);
                 dbContext.SaveChanges();
+            }
+        }
+        private void PeriodicalPaymentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selectedOption = PeriodicalPaymentComboBox.SelectedItem as ComboBoxItem;
+            if (selectedOption != null)
+            {
+                int months = Convert.ToInt32(selectedOption.Tag);
+                PeriodicalPaymentComboBox.Text = months.ToString();
             }
         }
     }

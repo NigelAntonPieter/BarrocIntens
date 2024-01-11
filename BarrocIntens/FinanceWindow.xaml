@@ -44,6 +44,12 @@
             <ComboBox x:Name="LeaseContractComboBox" PlaceholderText="Select Lease Contract" DisplayMemberPath="CustomerName" SelectedValuePath="Id" Margin="0,0,0,10"/>
             <CheckBox x:Name="MonthlyInvoiceCheckBox" Content="Monthly Invoice" Margin="0,10,0,0"/>
             <CheckBox x:Name="PeriodicInvoiceCheckBox" Content="Periodic Invoice" Margin="0,10,0,0"/>
+            <ComboBox x:Name="PeriodicalPaymentComboBox" Header="Periodical Payment" SelectionChanged="PeriodicalPaymentComboBox_SelectionChanged">
+                <ComboBoxItem Content="None" Tag="0"/>
+                <ComboBoxItem Content="Every 3 months" Tag="3"/>
+                <ComboBoxItem Content="Every 6 months" Tag="6"/>
+                <ComboBoxItem Content="Every year" Tag="12"/>
+            </ComboBox>
             <TextBlock Text="Due Date:" Margin="0,10,0,0"/>
             <DatePicker x:Name="DueDatePicker" Margin="0,0,0,10"/>
             <TextBlock Text="Amount:" Margin="0,10,0,0"/>
