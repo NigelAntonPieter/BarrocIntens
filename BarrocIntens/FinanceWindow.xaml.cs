@@ -30,9 +30,6 @@ namespace BarrocIntens
             ProductComboBox.ItemsSource = dbContext.Products.ToList();
             ProductComboBox.DisplayMemberPath = "Name";
             ProductComboBox.SelectedValuePath = "Id";
-            LeaseContractComboBox.ItemsSource = dbContext.LeaseContracts.ToList();
-            LeaseContractComboBox.DisplayMemberPath = "CustomerName";
-            LeaseContractComboBox.SelectedValuePath = "Id";
             MachineComboBox.ItemsSource = dbContext.Products.ToList();
             MachineComboBox.DisplayMemberPath = "Name";
             MachineComboBox.SelectedValuePath = "Id";
@@ -41,11 +38,7 @@ namespace BarrocIntens
         private void RefreshComboBoxes()
         {
             EmployeeComboBox.ItemsSource = dbContext.Users.ToList();
-
             ProductComboBox.ItemsSource = dbContext.Products.ToList();
-
-            LeaseContractComboBox.ItemsSource = dbContext.LeaseContracts.ToList();
-
             MachineComboBox.ItemsSource = dbContext.Products.ToList();
         }
         private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
@@ -69,12 +62,39 @@ namespace BarrocIntens
                 ShowLeaseContractErrorMessage("BKR check must be passed.");
                 return;
             }
+            if (DateCreatedPicker.Date == default(DateTimeOffset))
+            {
+                ShowLeaseContractErrorMessage("Please select a valid Due Date.");
+                return;
+            }
+
+            if (!decimal.TryParse(AmountTextBox.Text, out decimal amount))
+            {
+                ShowLeaseContractErrorMessage("Please enter a valid Amount.");
+                return;
+            }
+
+            if ((MonthlyInvoiceCheckBox.IsChecked ?? false) && (PeriodicInvoiceCheckBox.IsChecked ?? false))
+            {
+                ShowLeaseContractErrorMessage("Please select either Monthly Invoice or Periodic Payment, not both.");
+                return;
+            }
+            if (PeriodicalPaymentComboBox.SelectedItem == null)
+            {
+                ShowLeaseContractErrorMessage("Please select a periodical payment option.");
+                return;
+            }
 
             LeaseContract newLeaseContract = new LeaseContract
             {
                 CustomerName = CustomerNameTextBox.Text,
                 BkrCheckPassed = BkrCheckCheckBox.IsChecked ?? false,
-                MachineId = int.Parse(MachineComboBox.SelectedValue.ToString())
+                MachineId = int.Parse(MachineComboBox.SelectedValue.ToString()),
+                DateCreated = DateCreatedPicker.Date.DateTime,
+                Amount = amount,
+                IsPaid = IsPaidCheckBox.IsChecked ?? false,
+                MonthlyInvoice = MonthlyInvoiceCheckBox.IsChecked ?? false,
+                PeriodicInvoice = PeriodicInvoiceCheckBox.IsChecked ?? false,
             };
 
             dbContext.LeaseContracts.Add(newLeaseContract);
@@ -91,7 +111,6 @@ namespace BarrocIntens
         private void ClearErrorMessages()
         {
             LeaseContractErrorMessageTextBlock.Text = string.Empty;
-            InvoiceErrorMessageTextBlock.Text = string.Empty;
             ReceiptErrorMessageTextBlock.Text = string.Empty;
         }
 
@@ -101,64 +120,6 @@ namespace BarrocIntens
             leaseContractOverview.Activate();
             this.Close();
         }
-
-        private void CreateInvoiceButton_Click(object sender, RoutedEventArgs e)
-        {
-            ClearErrorMessages();
-
-            if (LeaseContractComboBox.SelectedValue == null)
-            {
-                ShowInvoiceErrorMessage("Please select a Lease Contract.");
-                return;
-            }
-
-            if (DueDatePicker.Date == default(DateTimeOffset))
-            {
-                ShowInvoiceErrorMessage("Please select a valid Due Date.");
-                return;
-            }
-
-            if (!decimal.TryParse(AmountTextBox.Text, out decimal amount))
-            {
-                ShowInvoiceErrorMessage("Please enter a valid Amount.");
-                return;
-            }
-
-            if ((MonthlyInvoiceCheckBox.IsChecked ?? false) && (PeriodicInvoiceCheckBox.IsChecked ?? false))
-            {
-                ShowInvoiceErrorMessage("Please select either Monthly Invoice or Periodic Payment, not both.");
-                return;
-            }
-
-            InvoiceFinance newInvoice = new InvoiceFinance
-            {
-                LeaseContractId = int.Parse(LeaseContractComboBox.SelectedValue.ToString()),
-                DueDate = DueDatePicker.Date.DateTime,
-                Amount = amount,
-                IsPaid = IsPaidCheckBox.IsChecked ?? false,
-                MonthlyInvoice = MonthlyInvoiceCheckBox.IsChecked ?? false,
-                PeriodicInvoice = PeriodicInvoiceCheckBox.IsChecked ?? false,
-            };
-            CreateAndSaveInvoice(newInvoice);
-        }
-
-
-        private void CreateAndSaveInvoice(InvoiceFinance newInvoice)
-        {
-            dbContext.InvoicesFinance.Add(newInvoice);
-            dbContext.SaveChanges();
-        }
-
-        private void ShowInvoiceErrorMessage(string errorMessage)
-        {
-            InvoiceErrorMessageTextBlock.Text = errorMessage;
-        }
-
-        private void ClearInvoiceErrorMessages()
-        {
-            InvoiceErrorMessageTextBlock.Text = string.Empty;
-        }
-
         private void GenerateReceiptButton_Click(object sender, RoutedEventArgs e)
         {
             ClearErrorMessages();
@@ -263,11 +224,6 @@ namespace BarrocIntens
                 PeriodicalPaymentComboBox.Text = months.ToString();
             }
         }
-        private void OpenLeaseContractOverviewButton_Click(object sender, RoutedEventArgs e)
-        {
-        //    this.Frame.Navigate(typeof(LeaseContractOverviewWindow));
-        }
-
     }
 }
 

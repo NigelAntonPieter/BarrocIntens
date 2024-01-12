@@ -15,11 +15,14 @@ public class LeaseContract
     public bool BkrCheckPassed { get; set; }
 
     public bool MonthlyInvoice { get; set; }
-
+    public bool PeriodicInvoice { get; set; }
+    public DateTime DateCreated { get; set; }
+    public decimal Amount { get; set; }
+    public bool IsPaid { get; set; }
     public int MachineId { get; set; }
-
     [ForeignKey("MachineId")]
-    public virtual Machine Machine { get; set; }
 
+    public bool SignedContract { get; set; }
+    public virtual Machine Machine { get; set; }
     public virtual ICollection<InvoiceFinance> Invoices { get; set; }
 }

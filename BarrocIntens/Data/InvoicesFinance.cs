@@ -9,7 +9,7 @@ public class InvoiceFinance
     public int LeaseContractId { get; set; }
     public bool MonthlyInvoice { get; set; }
     public bool PeriodicInvoice { get; set; }
-    public DateTime DueDate { get; set; }
+    public DateTime DateCreated { get; set; }
     public decimal Amount { get; set; }
     public bool IsPaid { get; set; }
 
