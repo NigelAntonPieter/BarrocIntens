@@ -35,20 +35,13 @@ namespace BarrocIntens.Maintenance.Planner
                 CompanyComboBox.DisplayMemberPath = "Name"; // Toon de bedrijfsnamen
                 CompanyComboBox.SelectedValuePath = "Id"; // Gebruik de Id als geselecteerde waarde
 
-            }
-           
+            }  
         }
 
         private void logoutClick_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
         }
-
-        private void FillCompanyComboBox()
-        {
-            
-        }
-
         private async void SaveMaintenanceAppointment_Click(object sender, RoutedEventArgs e)
         {
             if (AreAllFieldsFilled())
