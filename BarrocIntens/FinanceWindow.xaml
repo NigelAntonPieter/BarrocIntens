@@ -54,7 +54,7 @@
             <TextBlock x:Name="LeaseContractErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,5,0,0" />
         </StackPanel>
         <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
-            <Button Content="Open Lease Contract Overview" Click="OpenLeaseContractOverviewButton_Click" Margin="0,10,0,0"/>
+            <Button Content="Open Lease Contract Overview" Click="ViewLeaseContractsButton_Click" Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

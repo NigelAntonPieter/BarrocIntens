@@ -79,10 +79,13 @@ namespace BarrocIntens
                 ShowLeaseContractErrorMessage("Please select either Monthly Invoice or Periodic Payment, not both.");
                 return;
             }
-            if (PeriodicalPaymentComboBox.SelectedItem == null)
+            if (PeriodicInvoiceCheckBox.IsChecked ?? false)
             {
-                ShowLeaseContractErrorMessage("Please select a periodical payment option.");
-                return;
+                if (PeriodicalPaymentComboBox.SelectedItem == null)
+                {
+                    ShowLeaseContractErrorMessage("Please select a periodical payment option.");
+                    return;
+                }
             }
 
             LeaseContract newLeaseContract = new LeaseContract
