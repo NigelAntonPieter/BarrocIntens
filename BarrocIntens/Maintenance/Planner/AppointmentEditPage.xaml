@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="BarrocIntens.Maintenance.Planner.AppointMaintenance"
+    x:Class="BarrocIntens.Maintenance.Planner.AppointmentEditPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BarrocIntens.Maintenance.Planner"
-      xmlns:localData="using:BarrocIntens.Data"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+      xmlns:localData="using:BarrocIntens.Data"
+      mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0"
-                    Background="#fdd716" />
-        <StackPanel Grid.Column="1"
-                    Grid.Row="1">
+                    Background="#fdd716">
+            <Button Name="uitLogEL"
+                    Click="uitLogEL_Click">Uitloggen
+            </Button> 
+        </StackPanel>
+        <StackPanel Grid.Column="1">
             <TextBlock Text="Medewerker">
             </TextBlock>
             <ComboBox x:Name="UserComboBox">
@@ -28,7 +31,7 @@
                         <StackPanel>
 
                             <TextBlock Text="{x:Bind Name }">
-                                <Run Text="{x:Bind Role}"></Run>
+                     <Run Text="{x:Bind Role}"></Run>
                             </TextBlock>
                         </StackPanel>
                     </DataTemplate>
@@ -38,14 +41,7 @@
                         HorizontalAlignment="Center"
                         Margin="0,10,0,10" />
             <Button x:Name="AddAppointment"
-                    Click="SaveAppointmentButton_Click">Upload</Button>
+                    Click="editAppointment_Click">Upload</Button>
         </StackPanel>
-        <ContentDialog x:Name="maintenanceDialog"
-                       Title="Ontbrekende gegevens"
-                       CloseButtonText="OK">
-            <StackPanel>
-                <TextBlock Text="Vergeet niet een medewerker of datum toe te voegen ." />
-            </StackPanel>
-        </ContentDialog>
     </Grid>
 </Page>

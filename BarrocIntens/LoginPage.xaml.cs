@@ -40,9 +40,29 @@ namespace BarrocIntens
             {
                 usernameTextbox.Text = lastUsername;
             }
+
+            // Voeg key event handlers toe voor de tekstvakken
+            usernameTextbox.KeyUp += UsernameTextbox_KeyUp;
+            passwordBox.KeyUp += PasswordBox_KeyUp;
         }
 
-        private async void LoginEl_Click(object sender, RoutedEventArgs e)
+        private void UsernameTextbox_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                AttemptLogin();
+            }
+        }
+
+        private void PasswordBox_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                AttemptLogin();
+            }
+        }
+
+        private async void AttemptLogin()
         {
             string enteredUsername = usernameTextbox.Text;
             string enteredPassword = passwordBox.Password;
@@ -50,7 +70,7 @@ namespace BarrocIntens
             using (var db = new AppDbContext())
             {
                 var authManager = new AuthenticationManager(new AppAuthenticationService());
-                if ( authManager.Authenticate(enteredUsername, enteredPassword))
+                if (authManager.Authenticate(enteredUsername, enteredPassword))
                 {
                     UserSettingsManager.SaveLastUsername(enteredUsername);
                     string sessionToken = GenerateSessionToken.SessionTokenGenerator(32); // Generate session token
@@ -67,6 +87,8 @@ namespace BarrocIntens
                 }
             }
         }
+
+
         private void ActivateWindow(Data.User user)
         {
             var windowFactory = new WindowFactory();

@@ -24,7 +24,9 @@
     <None Remove="LoginPage.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
     <None Remove="Maintenance\PlannerWindow.xaml" />
+    <None Remove="Maintenance\Planner\AddAppointmentPage.xaml" />
     <None Remove="Maintenance\Planner\AppointMaintenance.xaml" />
+    <None Remove="Maintenance\Planner\AppointmentEditPage.xaml" />
     <None Remove="Maintenance\Planner\PlanningInPage.xaml" />
     <None Remove="Maintenance\Planner\RoutineAppointmentPage.xaml" />
     <None Remove="MainWindow.xaml" />
@@ -129,6 +131,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Maintenance\Planner\AddAppointmentPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Maintenance\Planner\AppointmentEditPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Maintenance\Planner\RoutineAppointmentPage.xaml">
