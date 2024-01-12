@@ -12,37 +12,28 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Maintenance\AdminMaintenanceWindow.xaml.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="AdminMaintenanceWindow.xaml" />
     <None Remove="ClientNotesListWindow.xaml" />
     <None Remove="ClientNotesWindow.xaml" />
     <None Remove="ClientRegisterWindow.xaml" />
     <None Remove="ClientWindow.xaml" />
-    <None Remove="EmployeeMaintenancePage.xaml" />
-    <None Remove="MaintenanceDetailPage.xaml" />
     <None Remove="CreateClientNoteWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
     <None Remove="Inkoop\ProductListPage.xaml" />
     <None Remove="LeaseContractManagementWindow.xaml" />
     <None Remove="LoginPage.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
-    <None Remove="Maintenance\AdminMaintenancePage.xaml" />
-    <None Remove="Maintenance\AdminMaintenanceWindow.xaml" />
     <None Remove="Maintenance\PlannerWindow.xaml" />
+    <None Remove="Maintenance\Planner\AddAppointmentPage.xaml" />
     <None Remove="Maintenance\Planner\AppointMaintenance.xaml" />
+    <None Remove="Maintenance\Planner\AppointmentEditPage.xaml" />
     <None Remove="Maintenance\Planner\PlanningInPage.xaml" />
     <None Remove="Maintenance\Planner\RoutineAppointmentPage.xaml" />
     <None Remove="MainWindow.xaml" />
-    <None Remove="MakeReceiptForMaintenanceAppointment.xaml" />
     <None Remove="ProductAddWindow.xaml" />
     <None Remove="ProductEditWindow.xaml" />
     <None Remove="PurchaseWindow.xaml" />
     <None Remove="SalesWindow.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Remove="Maintenance\AdminMaintenanceWindow.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -142,17 +133,16 @@
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Maintenance\AdminMaintenancePage.xaml">
+    <Page Update="Maintenance\Planner\AddAppointmentPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MakeReceiptForMaintenanceAppointment.xaml">
+    <Page Update="Maintenance\Planner\AppointmentEditPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="EmployeeMaintenancePage.xaml"></Page>
     <Page Update="Maintenance\Planner\RoutineAppointmentPage.xaml">
      <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,7 +151,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MaintenanceDetailPage.xaml"></Page>
     <Page Update="Maintenance\Planner\AppointMaintenance.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

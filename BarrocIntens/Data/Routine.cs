@@ -20,11 +20,11 @@ namespace BarrocIntens.Data
 
     public class UserRoutineAppointment
     {
-        
         public int UserId { get; set; }
         public User User { get; set; }
 
         public int RoutineId { get; set; }
         public Routine Routine { get; set; }
     }
+        
 }

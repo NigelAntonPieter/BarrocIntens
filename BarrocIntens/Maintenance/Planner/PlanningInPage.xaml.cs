@@ -33,7 +33,7 @@ namespace BarrocIntens.Maintenance.Planner
         {
             this.InitializeComponent();
             using var db = new AppDbContext();
-            MaintenanceListView.ItemsSource = db.MaintenanceAppointments;
+            MaintenanceListView.ItemsSource = db.MaintenanceAppointments.Include(c => c.Company);
         }
 
         private void uitLogEL_Click(object sender, RoutedEventArgs e)
@@ -43,29 +43,15 @@ namespace BarrocIntens.Maintenance.Planner
 
         private async void DayListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+
             if (e.ClickedItem is Maintenance_appointment clickedMaintenance)
             {
-                var dialog = new ContentDialog()
-                {
-                    Title = "MaintenanceAppointment",
-                    Content = $"\nLocation: {clickedMaintenance.Location}, \nCompany: {clickedMaintenance.Company.Name}",
-                    CloseButtonText = "Close",
-                    XamlRoot = this.XamlRoot,
-                };
-
-                await dialog.ShowAsync();
+                appointmentDialog.DataContext = clickedMaintenance;
+                await appointmentDialog.ShowAsync();
             }
             else if (e.ClickedItem is Routine clickedRoutine)
             {
-                var dialog = new ContentDialog()
-                {
-                    Title = "RoutineBezoek",
-                    Content = $"\nLocation: {clickedRoutine.Location}, \nCompany: {clickedRoutine.Company.Name}",
-                    CloseButtonText = "Close",
-                    XamlRoot = this.XamlRoot,
-                };
-
-                await dialog.ShowAsync();
+                await routineDialog.ShowAsync();
             }
         }
 
@@ -80,14 +66,18 @@ namespace BarrocIntens.Maintenance.Planner
                 var calendarItemDate = args.Item.Date.Date;
 
                 var maintenanceAppointments = db.MaintenanceAppointments
+                .Include(m => m.UserMaintenanceAppointments)
+                .ThenInclude(uma => uma.User)
                 .Include(m => m.Company)
                 .Where(m => m.DateOfMaintenanceAppointment == DateOnly.FromDateTime(calendarItemDate))
                 .ToList();
 
                 var routineAppointments = db.Routines
-                    .Include(r => r.Company)
-                    .Where(r => r.DateOfRoutineAppointment == DateOnly.FromDateTime(calendarItemDate))
-                    .ToList();
+                 .Include(m => m.UserRoutineAppointments)
+                .ThenInclude(umr => umr.User)
+                .Include(r => r.Company)
+                .Where(r => r.DateOfRoutineAppointment == DateOnly.FromDateTime(calendarItemDate))
+                .ToList();
 
                 var allAppointments = new List<BaseAppointment>();
                 allAppointments.AddRange(maintenanceAppointments);
@@ -113,5 +103,72 @@ namespace BarrocIntens.Maintenance.Planner
             this.Frame.Navigate(typeof(RoutineAppointmentPage));
         }
 
-    }
+        private List<int> deletedAppointmentIds = new List<int>();
+        private async void ListView_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            // Het ophalen van het aangeklikte item is een beetje omslachtig. Dit is omdat (in tegenstelling
+            // tot ItemClick) RightTapped geen ListView specifiek event is. Het werkt voor alle elementen.
+            // Daarom moeten we eerst de ListViewItem vinden en dan daaruit de aangeklikte aap.
+            var listViewItem = (FrameworkElement)e.OriginalSource;
+            var selectedAppointment = (Maintenance_appointment)listViewItem.DataContext;
+
+            // Als we rechtsklikken in de ListView, maar niet op een item, dan is er geen aap aangeklikt
+            if (selectedAppointment == null)
+            {
+                return;
+            }
+
+            using var db = new AppDbContext();
+
+            db.MaintenanceAppointments.Remove(selectedAppointment);
+
+
+            try
+            {
+                await db.SaveChangesAsync();
+                this.Frame.Navigate(typeof(PlanningInPage));
+            }
+            // Concurrency = gelijktijdigheid
+            catch (DbUpdateConcurrencyException ex)
+            {
+                foreach (var entry in ex.Entries)
+                {
+                    // Wijzigingen die gemaakt moesten worden, maar waarbij een Exception gebeurde
+                    var proposedValues = entry.CurrentValues;
+                    // Gegevens zoals ze in de database staan
+                    var databaseValues = entry.GetDatabaseValues();
+
+                    // Geen databas egegevens? Dan was de aap al verwijdert en geven we simpelweg een melding
+                    if (databaseValues == null)
+                    {
+                        // We tonen een melding
+                        await databaseErrorDialog.ShowAsync();
+                        // BUG:     https://github.com/microsoft/microsoft-ui-xaml/issues/1679
+                        //          Wanneer al een ContentDialog geopent is, terwijl er nog een opent, dan
+                        //          crasht de bovenstaande regel. Microsoft is bekend met het probleem en
+                        //          werkt (erg langzaam) aan een oplossing.
+                    }
+                    else
+                    {
+                        // Anders hebben we een probleem waar we nog niks voor bedacht hebben.
+                        throw ex;
+                    }
+                }
+            }
+        }
+
+        private void appointmentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            if (appointmentDialog.DataContext is Maintenance_appointment selectedMaintenance)
+            {
+                // Navigeer naar de bewerkingspagina en geef de geselecteerde afspraak door
+                this.Frame.Navigate(typeof(AppointmentEditPage), selectedMaintenance);
+            }
+        }
+
+        private void addAppointment_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddAppointmentPage));
+        }
+    } 
 }

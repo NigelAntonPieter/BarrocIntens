@@ -23,7 +23,9 @@
             </Button>
             <Button Name="AddRoutine"
                     Click="AddRoutine_Click">Routinematige bezoek
-                
+            </Button>
+            <Button Name="addAppointment"
+                    Click="addAppointment_Click">onderhoudsbeurt
             </Button>
         </StackPanel>
         <CalendarView x:Name="MaintanceCalendar"
@@ -43,7 +45,9 @@
                             <ControlTemplate>
                                 <ListView ItemsSource="{Binding}"
                                           IsItemClickEnabled="True"
-                                          ItemClick="DayListView_ItemClick">
+                                          ItemClick="DayListView_ItemClick"
+                                          IsRightTapEnabled="True"
+                                          RightTapped="ListView_RightTapped">
                                     <ListView.ItemTemplate>
                                         <DataTemplate x:DataType="localData:BaseAppointment">
                                             <StackPanel Orientation="Horizontal">
@@ -59,26 +63,26 @@
                 </Style>
             </CalendarView.CalendarViewDayItemStyle>
         </CalendarView>
-        <ListView x:Name="MaintenanceListView"
+        <ListView 
+                  x:Name="MaintenanceListView"
                   VerticalAlignment="Stretch"
                   HorizontalAlignment="Stretch"
                   Grid.Column="2"
                   IsItemClickEnabled="True"
                   ItemClick="MaintenanceListView_ItemClick">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="localData:Maintenance_appointment">
-                    <Grid Margin="5">
-                        <Border BorderBrush="Black"
-                                BorderThickness="1"
-                                Background="#fdd716"
-                                CornerRadius="5">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localData:Maintenance_appointment">
+                        <Grid Margin="5">
+                            <Border BorderBrush="Black"
+                                    BorderThickness="1"
+                                    Background="#fdd716"
+                                    CornerRadius="5">
                             <StackPanel>
-                                <TextBlock Text="{Binding Name}"
+                                <TextBlock Text="{x:Bind Company.Name}"
                                            Foreground="Black"
                                            Margin="5" />
                                 <TextBlock Text="{Binding Remark}"
                                            Foreground="Black"
-                                           TextWrapping="Wrap"
                                            Margin="5" />
                                 <TextBlock Text="{Binding DateAdded}"
                                            Foreground="Black"
@@ -89,5 +93,55 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <ContentDialog x:Name="databaseErrorDialog"
+                       PrimaryButtonText="Ok">
+            <TextBlock>
+         This appointment was already removed!
+            </TextBlock>
+        </ContentDialog>
+        <ContentDialog x:Name="appointmentDialog"
+                       PrimaryButtonText="edit"
+                       CloseButtonText="Close"
+                       PrimaryButtonClick="appointmentDialog_PrimaryButtonClick">
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="MaintenaceAppointent" />
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+            <ContentDialog.ContentTemplate>
+                <DataTemplate x:DataType="localData:Maintenance_appointment">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{x:Bind GetUserName}" FontSize="15" />
+                        <TextBlock Text="{x:Bind Company.Name}" FontSize="15"/>
+                        <TextBlock Text="{x:Bind Location}" FontSize="15"/>
+                    </StackPanel>
+                    </DataTemplate>
+            </ContentDialog.ContentTemplate>
+        </ContentDialog>
+        <ContentDialog x:Name="routineDialog"
+                       PrimaryButtonText="edit"
+                       CloseButtonText="Close">
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="RoutineAppointment" />
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+            <ContentDialog.ContentTemplate>
+                <DataTemplate x:DataType="localData:Maintenance_appointment">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{x:Bind GetUserName}"
+                                   FontSize="15" />
+                        <TextBlock Text="{x:Bind Company.Name}"
+                                   FontSize="15" />
+                        <TextBlock Text="{x:Bind Location}"
+                                   FontSize="15" />
+                    </StackPanel>                               
+                </DataTemplate>
+            </ContentDialog.ContentTemplate>
+        </ContentDialog>
     </Grid>
 </Page>
