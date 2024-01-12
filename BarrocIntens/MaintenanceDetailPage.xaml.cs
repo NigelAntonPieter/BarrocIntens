@@ -80,5 +80,6 @@ namespace BarrocIntens
                 this.Frame.Navigate(typeof(MakeReceiptForMaintenanceAppointment), selectedMaintenance);
             
         }
+
     }
 }

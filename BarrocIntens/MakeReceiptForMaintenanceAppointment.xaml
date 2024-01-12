@@ -50,11 +50,11 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-
                             <TextBlock Text="{x:Bind Name}"
                                    VerticalAlignment="Center" />
-                            <Button Grid.Column="1"
+                            <Button Grid.Column="2"
                                 Click="ProductRemoveButton_Click">
                                 remove
                             </Button>
@@ -67,6 +67,7 @@
                     Orientation="Horizontal">
                 <ComboBox x:Name="productsComboBox"
                       Margin="15" />
+                <TextBox x:Name="QuantityInputTextBox" PlaceholderText="Quantity" VerticalAlignment="Center" Margin="5" InputScope="Number" />
                 <Button Click="AddProductButton_Click"
                     Margin="15">
                     Add used product

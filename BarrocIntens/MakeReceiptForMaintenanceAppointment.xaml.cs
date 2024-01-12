@@ -77,6 +77,12 @@ namespace BarrocIntens
                 return;
             }
 
+            if (int.TryParse(QuantityInputTextBox.Text, out int quantity))
+            {
+                selectedProduct.StockQuantity -= quantity;
+            }
+
+
             currentProducts.Add(selectedProduct);
         }
 
@@ -109,6 +115,7 @@ namespace BarrocIntens
             foreach (var currentMaintenanceReceiptProduct in currentProducts)
             {
                 var maintenanceReceiptProduct = db.Products.First(p => p.Id == currentMaintenanceReceiptProduct.Id);
+                maintenanceReceiptProduct.StockQuantity = currentMaintenanceReceiptProduct.StockQuantity;
                 maintenanceReceiptProducts.Add(maintenanceReceiptProduct);
             }
             newReceipt.Products = maintenanceReceiptProducts;
