@@ -52,33 +52,28 @@ namespace BarrocIntens
         {
             ClearErrorMessages();
 
-            // Check if CustomerNameTextBox is empty
             if (string.IsNullOrEmpty(CustomerNameTextBox.Text))
             {
                 ShowLeaseContractErrorMessage("Please enter customer name.");
                 return;
             }
 
-            // Check if MachineComboBox is empty
             if (MachineComboBox.SelectedValue == null)
             {
                 ShowLeaseContractErrorMessage("Please select a Machine.");
                 return;
             }
 
-            // Check if BkrCheckCheckBox is not checked
             if (BkrCheckCheckBox.IsChecked == null || !BkrCheckCheckBox.IsChecked.Value)
             {
                 ShowLeaseContractErrorMessage("BKR check must be passed.");
                 return;
             }
 
-            // All fields are valid, proceed to create and save LeaseContract
             LeaseContract newLeaseContract = new LeaseContract
             {
                 CustomerName = CustomerNameTextBox.Text,
                 BkrCheckPassed = BkrCheckCheckBox.IsChecked ?? false,
-                // Retrieve the selected machine from the database
                 MachineId = int.Parse(MachineComboBox.SelectedValue.ToString())
             };
 
@@ -111,7 +106,6 @@ namespace BarrocIntens
         {
             ClearErrorMessages();
 
-            // Check if LeaseContractComboBox is empty
             if (LeaseContractComboBox.SelectedValue == null)
             {
                 ShowInvoiceErrorMessage("Please select a Lease Contract.");
