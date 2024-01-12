@@ -14,7 +14,6 @@ namespace BarrocIntens.Data
         public DateTime DateAdded { get; set; }
 
         public DateOnly DateOfRoutineAppointment { get; set; }
-        public bool IsFinished { get; set; }
 
         public ICollection<UserRoutineAppointment> UserRoutineAppointments { get; set; }
     }

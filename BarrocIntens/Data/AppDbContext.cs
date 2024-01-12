@@ -45,6 +45,10 @@ namespace BarrocIntens.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Maintenance_Receipt>()
+                .HasMany(maintenance_receipt => maintenance_receipt.Products)
+                .WithMany(product => product.Maintenance_Receipts)
+                .UsingEntity<MaintenanceReceiptProduct>();
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());

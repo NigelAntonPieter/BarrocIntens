@@ -46,11 +46,9 @@ namespace BarrocIntens
                         .FirstOrDefault(r => r.Maintenance_appointmentId == selectedMaintenance.Id);
 
                     CompanyTextBlock.Text = receipt.Company.Name;
-                    ServiceTypeTextBlock.Text = receipt.ServiceType;
                     WorkDescriptionTextBlock.Text = receipt.WorkDescription;
                     MaintenanceReceiptDetailsPanel.Visibility = Visibility.Visible;
                     MarkAsFinishedButton.Visibility = Visibility.Collapsed;
-
                 }
                 else
                 {
@@ -68,10 +66,8 @@ namespace BarrocIntens
                     {
                         MarkAsFinishedButton.Visibility = Visibility.Collapsed;
                     }
-                
+                }
             }
-            }
-
         }
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)

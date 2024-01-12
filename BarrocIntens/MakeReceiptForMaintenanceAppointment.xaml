@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BarrocIntens"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:localData="using:BarrocIntens.Data"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -31,23 +31,47 @@
 
         <!-- Form for Maintenance Receipt on the right side -->
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="20">
-            <TextBlock Text="Customer Location:" />
-            <TextBox x:Name="CustomerLocationTextBox" PlaceholderText="Enter customer location" />
 
-            <TextBlock Text="Service Type:" />
-            <TextBox x:Name="ServiceTypeTextBox" PlaceholderText="Enter service type" />
 
             <TextBlock Text="Work Description:" />
             <TextBox x:Name="WorkDescriptionTextBox" PlaceholderText="Enter work description" />
 
-            <TextBlock Text="Materials Used:" />
-            <TextBox x:Name="MaterialsUsedTextBox" PlaceholderText="Enter materials used" />
-
             <TextBlock Text="Labor Hours:" />
             <TextBox x:Name="LaborHoursTextBox" PlaceholderText="Enter labor hours" />
 
-            <TextBlock Text="Material Cost:" />
-            <TextBox x:Name="MaterialCostTextBox" PlaceholderText="Enter material cost" />
+
+            <ListView Grid.Row="3"
+                  x:Name="productListView"
+                  Margin="15"
+                  Header="Products">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localData:Product">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{x:Bind Name}"
+                                   VerticalAlignment="Center" />
+                            <Button Grid.Column="1"
+                                Click="ProductRemoveButton_Click">
+                                remove
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackPanel Grid.Row="4"
+                    Orientation="Horizontal">
+                <ComboBox x:Name="productsComboBox"
+                      Margin="15" />
+                <Button Click="AddProductButton_Click"
+                    Margin="15">
+                    Add used product
+                </Button>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <Button Content="Voeg toe"
                 HorizontalAlignment="Left"

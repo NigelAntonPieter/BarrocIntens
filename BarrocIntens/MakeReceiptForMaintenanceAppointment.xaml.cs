@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -29,58 +30,96 @@ namespace BarrocIntens
     public sealed partial class MakeReceiptForMaintenanceAppointment : Page
     {
         private Maintenance_appointment selectedMaintenance;
+        private ObservableCollection<Product> currentProducts;
 
         public MakeReceiptForMaintenanceAppointment()
         {
             this.InitializeComponent();
+
+           
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             selectedMaintenance = (Maintenance_appointment)e.Parameter;
-            
+            currentProducts = new ObservableCollection<Product>();
+            RefreshProductComboBox();
+            productListView.ItemsSource = currentProducts;
+
+        }
+        private void RefreshProductComboBox()
+        {
+            using (var db = new AppDbContext())
+            {
+                productsComboBox.ItemsSource = db.Products.ToList();
+            }
+        }
+        private void ProductRemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var product = (Product)button.DataContext;
+
+            currentProducts.Remove(product);
+        }
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedProduct = (Product)productsComboBox.SelectedItem;
+
+            if (selectedProduct == null)
+            {
+                return;
+            }
+
+            var existingProduct = currentProducts.FirstOrDefault(g => g.Id == selectedProduct.Id);
+
+            if (existingProduct != null)
+            {
+                return;
+            }
+
+            currentProducts.Add(selectedProduct);
         }
 
         private async void finishButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(ServiceTypeTextBox.Text) ||
-                string.IsNullOrWhiteSpace(WorkDescriptionTextBox.Text) ||
-                string.IsNullOrWhiteSpace(MaterialsUsedTextBox.Text) ||
-                string.IsNullOrWhiteSpace(LaborHoursTextBox.Text) ||
-                string.IsNullOrWhiteSpace(MaterialCostTextBox.Text))
+            if (string.IsNullOrWhiteSpace(WorkDescriptionTextBox.Text) || string.IsNullOrWhiteSpace(LaborHoursTextBox.Text))
             {
-
                 await ShowErrorDialog("Fill in all fields.");
                 return;
             }
 
-
-            if (!decimal.TryParse(LaborHoursTextBox.Text, out var laborHours) ||
-                !decimal.TryParse(MaterialCostTextBox.Text, out var materialCost))
+            if (!decimal.TryParse(LaborHoursTextBox.Text, out var laborHours))
             {
-
                 await ShowErrorDialog("Invalid decimal values for Labor Hours or Material Cost.");
                 return;
             }
+
             using var db = new AppDbContext();
+
             var newReceipt = new Maintenance_Receipt
             {
                 EmployeeId = Data.User.LoggedInUser.Id,
-                VisitDate = selectedMaintenance.DateOfMaintenanceAppointment,
                 CompanyId = selectedMaintenance.CompanyId,
-                CustomerLocation = selectedMaintenance.Location,
                 Maintenance_appointmentId = selectedMaintenance.Id,
-                ServiceType = ServiceTypeTextBox.Text,
                 WorkDescription = WorkDescriptionTextBox.Text,
-                MaterialsUsed = MaterialsUsedTextBox.Text,
                 LaborHours = decimal.TryParse(LaborHoursTextBox.Text, out laborHours) ? laborHours : 0.0m,
-                MaterialCost = decimal.TryParse(MaterialCostTextBox.Text, out  materialCost) ? materialCost : 0.0m
             };
+
+            var maintenanceReceiptProducts = new List<Product>();
+            foreach (var currentMaintenanceReceiptProduct in currentProducts)
+            {
+                var maintenanceReceiptProduct = db.Products.First(p => p.Id == currentMaintenanceReceiptProduct.Id);
+                maintenanceReceiptProducts.Add(maintenanceReceiptProduct);
+            }
+            newReceipt.Products = maintenanceReceiptProducts;
+
             db.MaintenanceReceipts.Add(newReceipt);
-            
             db.SaveChanges();
-            selectedMaintenance.IsFinished = true;
-            selectedMaintenance.Maintenance_ReceiptId = newReceipt.Id;
+
+            var getCurrentMaintenance = db.MaintenanceAppointments.FirstOrDefault(m => m.Id == selectedMaintenance.Id);
+            getCurrentMaintenance.IsFinished = true;
+            getCurrentMaintenance.Maintenance_ReceiptId = newReceipt.Id;
+            db.SaveChanges();
 
             SendEmailToAdmin(newReceipt);
 
@@ -100,7 +139,7 @@ namespace BarrocIntens
                 //dit moet eigenlijk email worden van de admin maar users heeft nog geen email weet ook niet of we dat willen toevoegen
                 From = new MailAddress("brent.albers1999@gmail.com"),
                 Subject = "Maintenance Receipt",
-                Body = $"New Maintenance Receipt:\n\nEmployee ID: {receipt.EmployeeId}\nReceipt ID: {receipt.Id}\n\nDetails:\nService Type: {receipt.ServiceType}\nWork Description: {receipt.WorkDescription}\nMaterial Cost: {receipt.MaterialCost}\nLabor Hours: {receipt.LaborHours}",
+                Body = $"New Maintenance Receipt:\n\nEmployee ID: {receipt.EmployeeId}\nReceipt ID: {receipt.Id}\n\nDetails:\nWork Description: {receipt.WorkDescription}\nLabor Hours: {receipt.LaborHours}",
             };
 
             mailMessage.To.Add("brent.albers1999@gmail.com");
