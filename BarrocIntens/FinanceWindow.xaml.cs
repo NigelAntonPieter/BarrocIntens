@@ -263,6 +263,11 @@ namespace BarrocIntens
                 PeriodicalPaymentComboBox.Text = months.ToString();
             }
         }
+        private void OpenLeaseContractOverviewButton_Click(object sender, RoutedEventArgs e)
+        {
+        //    this.Frame.Navigate(typeof(LeaseContractOverviewWindow));
+        }
+
     }
 }
 
