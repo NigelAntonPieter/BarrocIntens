@@ -53,6 +53,7 @@ namespace BarrocIntens.Data
             modelBuilder.ApplyConfiguration(new UserMaintenanceAppointmentConfiguration());
             modelBuilder.ApplyConfiguration(new RoutineConfiguration());
             modelBuilder.ApplyConfiguration(new RoutineAppointmentConfiguration());
+            modelBuilder.ApplyConfiguration(new LeaseContractConfiguration());
         }
 
     }
