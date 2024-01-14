@@ -13,6 +13,7 @@ using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -28,6 +29,8 @@ namespace BarrocIntens.Inkoop
     {
         public static ProductListPage Instance { get; private set; }
         public ObservableCollection<Product> allProducts { get; private set; }
+        private static TaskCompletionSource<bool> adminDecisionSource;
+
 
         public ProductListPage()
         {
@@ -36,7 +39,8 @@ namespace BarrocIntens.Inkoop
             var products = db.Products.ToList();
             allProducts = new ObservableCollection<Product>(products);
             productListView.ItemsSource = allProducts;
-            
+            adminDecisionSource = new TaskCompletionSource<bool>();
+
         }
 
         private void addProduct_Click(object sender, RoutedEventArgs e)
@@ -67,32 +71,57 @@ namespace BarrocIntens.Inkoop
             App.DashboardWindow.Close();
         }
 
+        public static async Task SetAdminDecision(bool decision)
+        {
+            if (adminDecisionSource != null && !adminDecisionSource.Task.IsCompleted)
+            {
+                adminDecisionSource.SetResult(decision);
+            }
+        }
+
+        public static async Task<bool> GetAdminDecision()
+        {
+            adminDecisionSource = new TaskCompletionSource<bool>();
+            return await adminDecisionSource.Task;
+        }
+
         private async void AddQuantity_Click(object sender, RoutedEventArgs e)
         {
-            // Controleren of er een product is geselecteerd
             if (productListView.SelectedItem is Product selectedProduct)
             {
-                // Openen van de ContentDialog
                 ContentDialogResult result = await QuantityInputDialog.ShowAsync();
 
-                // Controleren of de gebruiker op 'Ok' heeft geklikt in de ContentDialog
                 if (result == ContentDialogResult.Primary)
                 {
-                    // Controleren of het ingevoerde cijfer geldig is
                     if (int.TryParse(QuantityTextBox.Text, out int quantity))
                     {
-                        // De hoeveelheid van het geselecteerde product bijwerken
-                        using var db = new AppDbContext();
-                        selectedProduct.StockQuantity += quantity;
-                        db.Update(selectedProduct);
-                        db.SaveChanges();
+                        if (quantity > 100)
+                        {
+                            bool adminApproval = await NotifyAdmin(selectedProduct, quantity);
 
-                        // Productlijst vernieuwen
-                        productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
+                            if (adminApproval)
+                            {
+                                using var db = new AppDbContext();
+                                selectedProduct.StockQuantity += quantity;
+                                db.Update(selectedProduct);
+                                db.SaveChanges();
+
+                                productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
+                            }
+                        }
+                        else
+                        {
+                            using var db = new AppDbContext();
+                            selectedProduct.StockQuantity += quantity;
+                            db.Update(selectedProduct);
+                            db.SaveChanges();
+
+                            productListView.ItemsSource = db.Products.OrderByDescending(p => p.Id);
+                        }
                     }
                     else
                     {
-                        await QuantityInputDialog.ShowAsync();
+                        await onlyNumbersDialog.ShowAsync();
                     }
                 }
             }
@@ -101,6 +130,29 @@ namespace BarrocIntens.Inkoop
                 await noProductClicked.ShowAsync();
             }
         }
+
+
+        private async Task<bool> NotifyAdmin(Product product, int quantity)
+        {
+            var parameters = new Dictionary<string, object>
+    {
+        { "Product", product },
+        { "Quantity", quantity }
+    };
+
+            var adminPage = new AdminPurchasePage();
+            await getPermission.ShowAsync();
+
+            // Pass parameters to AdminPurchasePage
+            adminPage.Initialize(parameters);
+
+            this.Frame.Navigate(typeof(AdminPurchasePage));
+
+            return await adminPage.GetAdminDecision();
+        }
+
+
+
 
         private void stockStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

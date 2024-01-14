@@ -115,5 +115,14 @@
                 <TextBlock Text="Selecteer een product om de hoeveelheid te wijzigen." />
             </StackPanel>
         </ContentDialog>
+        <ContentDialog x:Name="getPermission"
+                       Title="Request must be approved"
+                       CloseButtonText="OK">
+        </ContentDialog>
+        <ContentDialog x:Name="onlyNumbersDialog"
+                       Title="Error"
+                       CloseButtonText="OK">
+            <TextBlock Text="Only numbers are allowed. Please enter a valid quantity." />
+        </ContentDialog>
     </Grid>
 </Page>

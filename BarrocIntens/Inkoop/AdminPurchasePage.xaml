@@ -18,12 +18,24 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2"
                     Background="#fdd716">
             <Button x:Name="uitlogEL"
-                    Click="uitlogEL_Click">Uitloggen</Button>
+                    Click="uitlogEL_Click">Logout</Button>
+        </StackPanel>
+
+        
+
+        <!-- Admin Approval UI -->
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="10">
+            <!-- ... (existing code) -->
+            <Button Name="ApproveButton"
+                    Click="ApproveButtonClick">Permission Accepting</Button>
         </StackPanel>
     </Grid>
 </Page>
