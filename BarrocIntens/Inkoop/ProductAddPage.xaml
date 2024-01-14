@@ -29,27 +29,27 @@
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="CodeTextBox"
-                     PlaceholderText="Voer de naam in" />
-            <TextBlock Text="Naam:"
+                     PlaceholderText="Enter the Product code" />
+            <TextBlock Text="Name:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="NameTextBox"
-                     PlaceholderText="Voer de naam in" />
-            <TextBlock Text="Beschrijving:"
+                     PlaceholderText="Enter the name " />
+            <TextBlock Text="Description:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="DescriptionTextBox"
-                     PlaceholderText="Voer de beschrijving in" />
-            <TextBlock Text="Prijs:"
+                     PlaceholderText="Enter the description" />
+            <TextBlock Text="Price:"
                        HorizontalAlignment="center"
                        Margin="0,0,0,10"  />
             <TextBox x:Name="PriceTextBox"
-                     PlaceholderText="Voer de prijs in" />
-            <TextBlock Text="Hoeveelheid:"
+                     PlaceholderText="Enter the price" />
+            <TextBlock Text="Quantity:"
                        HorizontalAlignment="center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="QuantityTextBox"
-                     PlaceholderText="Voer de hoeveelheid  in" />
+                     PlaceholderText="Enter the quantity" />
             <TextBlock Text="Categorie:"
                HorizontalAlignment="Center"
                Margin="0,0,0,10" />
@@ -57,10 +57,10 @@
               ItemsSource="{x:Bind ProductCategories}"
               DisplayMemberPath="Name"
               SelectedValuePath="Id"
-              PlaceholderText="Selecteer een categorie" />
+              PlaceholderText="Selected a category" />
 
             <Button x:Name="fileButton"
-                    Click="fileButton_Click">Voeg een Foto toe...</Button>
+                    Click="fileButton_Click">Add a photo...</Button>
             <Button Content="Toevoegen"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -71,14 +71,21 @@
                        Title="Ontbrekende gegevens"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Vul alle velden in en selecteer een afbeelding." />
+                <TextBlock Text="fill al fields." />
             </StackPanel>
         </ContentDialog>
         <ContentDialog x:Name="priceDialog"
                        Title="Ontbrekende gegevens"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Vul de cijfers in." />
+                <TextBlock Text="Enter the right details." />
+            </StackPanel>
+        </ContentDialog>
+        <ContentDialog x:Name="smallQuantityDialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Enter more then 0." />
             </StackPanel>
         </ContentDialog>
     </Grid>

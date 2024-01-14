@@ -12,14 +12,30 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0"
-                    Background="#fdd716" />
-        <StackPanel Grid.Column="1"
-                    Grid.Row="1">
+                    Grid.RowSpan="2"
+                    Background="#fdd716">
+            <Button Name="goBackButton" Click="goBackButton_Click">
+                Go back
+            </Button>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Padding="20">
+            <TextBlock Text="add employee to maintenance"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20" />
             <TextBlock Text="Medewerker">
             </TextBlock>
             <ComboBox x:Name="UserComboBox">

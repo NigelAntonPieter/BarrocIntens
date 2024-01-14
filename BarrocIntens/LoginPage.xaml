@@ -21,13 +21,13 @@
                     VerticalAlignment="Center"
                     Spacing="10">
             <TextBlock x:Name="ErrorTextBlock" />
-            <TextBlock Text="Inloggen"
+            <TextBlock Text="Login  "
                        FontSize="16"
                        FontWeight="Bold"
                        HorizontalAlignment="Center" />
-            <TextBlock Text="Gebruikersnaam" />
+            <TextBlock Text="Username" />
             <TextBox x:Name="usernameTextbox" />
-            <TextBlock Text="Wachtwoord" />
+            <TextBlock Text="Password" />
             <PasswordBox x:Name="passwordBox" />
 
         </StackPanel>
@@ -35,7 +35,7 @@
                        Title="Inloggegevens"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Inlog gegevens kloppen niet." />
+                <TextBlock Text="Your username and password doesn't match." />
             </StackPanel>
         </ContentDialog>
     </Grid>
