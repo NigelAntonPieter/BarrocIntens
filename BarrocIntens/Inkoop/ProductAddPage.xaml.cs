@@ -21,6 +21,8 @@ using WinRT.Interop;
 using Windows.Storage;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers.Provider;
+using BarrocIntens.Maintenance.Planner;
+using BarrocIntens.Inkoop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -68,22 +70,31 @@ namespace BarrocIntens
 
                 if (isCodeValid && isNameValid && isDescriptionValid && isPriceValid && isQuantityValid)
                 {
-                    var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
-                    using var db = new AppDbContext();
-                    var newProduct = new Product
+                    if (quantity <= 0 && price <=0)
                     {
-                        Code = CodeTextBox.Text,
-                        Name = NameTextBox.Text,
-                        Description = DescriptionTextBox.Text,
-                        Price = price, // Gebruik de eerder gecontroleerde geconverteerde waarde
-                        StockQuantity = quantity, // Gebruik de eerder gecontroleerde geconverteerde waarde
-                        Product_categoryId = productCategoryId.Id,
-                        ImagePath = copiedFile.Path
-                    };
-                    db.Products.Add(newProduct);
-                    db.SaveChanges();
+                        // Show content dialog for small quantity
+                        await smallQuantityDialog.ShowAsync();
+                    }
+                    else
+                    {
+                        var productCategoryId = ProductCategoryComboBox.SelectedItem as Product_category;
+                        using var db = new AppDbContext();
+                        var newProduct = new Product
+                        {
+                            Code = CodeTextBox.Text,
+                            Name = NameTextBox.Text,
+                            Description = DescriptionTextBox.Text,
+                            Price = price, // Gebruik de eerder gecontroleerde geconverteerde waarde
+                            StockQuantity = quantity, // Gebruik de eerder gecontroleerde geconverteerde waarde
+                            Product_categoryId = productCategoryId.Id,
+                            ImagePath = copiedFile.Path
+                        };
+                        db.Products.Add(newProduct);
+                        db.SaveChanges();
+
+                        this.Frame.Navigate(typeof(ProductListPage)); ;
+                    }
                     
-                    this.Frame.Navigate(typeof(PurchaseWindow));
                 }
                 else
                 {

@@ -51,6 +51,7 @@ namespace BarrocIntens.Maintenance.Planner
             }
             else if (e.ClickedItem is Routine clickedRoutine)
             {
+                routineDialog.DataContext = clickedRoutine;
                 await routineDialog.ShowAsync();
             }
         }

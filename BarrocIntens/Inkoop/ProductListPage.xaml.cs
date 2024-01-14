@@ -92,6 +92,8 @@ namespace BarrocIntens.Inkoop
                     }
                     else
                     {
+                        // Toon een foutmelding in de bestaande ContentDialog
+                        QuantityInputDialog.Content = "Ongeldig aantal. Voer een geldig getal in.";
                         await QuantityInputDialog.ShowAsync();
                     }
                 }
@@ -138,6 +140,7 @@ namespace BarrocIntens.Inkoop
             try
             {
                 db.SaveChanges();
+                this.Frame.Navigate(typeof(ProductListPage));
             }
             // Concurrency = gelijktijdigheid
             catch (DbUpdateConcurrencyException ex)

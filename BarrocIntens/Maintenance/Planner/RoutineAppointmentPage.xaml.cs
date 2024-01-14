@@ -35,11 +35,35 @@ namespace BarrocIntens.Maintenance.Planner
             var Company = db.Companies.Include(c => c.Name);
             UserComboBox.ItemsSource = maintenanceUsers;
             CompanyComboBox.ItemsSource = Company;
+
+            CompanyComboBox.SelectionChanged += CompanyComboBox_SelectionChanged;
+        }
+
+        private void CompanyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Wanneer de geselecteerde maintenance appointment verandert, vul automatisch de locatie in
+            if (CompanyComboBox.SelectedItem is Company selectedcompany)
+            {
+                using var db = new AppDbContext();
+
+                // Zoek de bijbehorende Company op basis van de CompanyId
+                var selectedCompany = db.Companies.FirstOrDefault(c => c.Id == selectedcompany.Id);
+
+                if (selectedCompany != null)
+                {
+                    LocationEl.Text = selectedCompany.Street;
+                }
+                else
+                {
+                    // Handle het geval waarin de bijbehorende Company niet kan worden gevonden
+                    LocationEl.Text = "Locatie niet gevonden";
+                }
+            }
         }
 
         public async void SaveAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-            if ( UserComboBox.SelectedItem != null)
+            if ( UserComboBox.SelectedItem != null && CompanyComboBox.SelectedItem != null && RoutineDate.SelectedDate.HasValue && LocationEl.Text != null)
             {
                 using var db = new AppDbContext();
 
@@ -87,6 +111,11 @@ namespace BarrocIntens.Maintenance.Planner
             {
                 await RoutineDialog.ShowAsync();
             }
+        }
+
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
         }
     }
 }

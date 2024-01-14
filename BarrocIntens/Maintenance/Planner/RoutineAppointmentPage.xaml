@@ -15,13 +15,26 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0"
-                    Background="#fdd716" />
-        <StackPanel Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Background="#fdd716">
+            <Button Name="goBackButton"
+                    Click="goBackButton_Click">
+                Go back
+            </Button>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Padding="20 "
+                    Grid.Column="1"
                     Grid.Row="1">
-
-            <ComboBox x:Name="UserComboBox">
+            <TextBlock Text="User" />
+            <ComboBox x:Name="UserComboBox" Margin="0 0 0 20">
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="localData:User">
                         <StackPanel>
@@ -33,7 +46,9 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             
-            <ComboBox x:Name="CompanyComboBox">
+            <TextBlock Text="Company" />
+            <ComboBox x:Name="CompanyComboBox"
+                      Margin="0 0 0 20">
                 <ComboBox.ItemTemplate>
                     <DataTemplate x:DataType="localData:Company">
                         <StackPanel>
@@ -43,11 +58,15 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+
+            <TextBlock Text="Location" />
             <TextBox x:Name="LocationEl"
-                     PlaceholderText="Voer hier de locatie in"></TextBox>
+                     PlaceholderText="Voer hier de locatie in"
+                     Margin="0 0 0 20"></TextBox>
+            <TextBlock Text="Date" />
             <DatePicker x:Name="RoutineDate"
                         HorizontalAlignment="Center"
-                        Margin="0,10,0,10" />
+                        Margin="0,0,0,20" />
             <Button x:Name="AddAppointment"
                     Click="SaveAppointmentButton_Click">Upload</Button>
         </StackPanel>
