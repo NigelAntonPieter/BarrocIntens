@@ -107,13 +107,11 @@ namespace BarrocIntens.Maintenance.Planner
         private List<int> deletedAppointmentIds = new List<int>();
         private async void ListView_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            // Het ophalen van het aangeklikte item is een beetje omslachtig. Dit is omdat (in tegenstelling
-            // tot ItemClick) RightTapped geen ListView specifiek event is. Het werkt voor alle elementen.
-            // Daarom moeten we eerst de ListViewItem vinden en dan daaruit de aangeklikte aap.
+            
             var listViewItem = (FrameworkElement)e.OriginalSource;
             var selectedAppointment = (Maintenance_appointment)listViewItem.DataContext;
 
-            // Als we rechtsklikken in de ListView, maar niet op een item, dan is er geen aap aangeklikt
+          
             if (selectedAppointment == null)
             {
                 return;
@@ -171,5 +169,5 @@ namespace BarrocIntens.Maintenance.Planner
         {
             this.Frame.Navigate(typeof(AddAppointmentPage));
         }
-    } 
+    }
 }

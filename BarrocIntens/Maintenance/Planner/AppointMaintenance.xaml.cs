@@ -25,6 +25,7 @@ namespace BarrocIntens.Maintenance.Planner
     public sealed partial class AppointMaintenance : Page
     {
         private Maintenance_appointment selectedMaintenance;
+
         public AppointMaintenance()
         {
             this.InitializeComponent();
@@ -45,8 +46,6 @@ namespace BarrocIntens.Maintenance.Planner
                 // ...
             }
         }
-
-        // In de AppointMaintenance.cs
 
         public async void SaveAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
@@ -69,6 +68,8 @@ namespace BarrocIntens.Maintenance.Planner
 
                 db.MaintenanceAppointments.Update(selectedMaintenance);
                 db.SaveChanges();
+
+
 
                 // Navigeer terug naar PlanningInPage
                 this.Frame.Navigate(typeof(PlanningInPage));
