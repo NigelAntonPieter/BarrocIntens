@@ -14,7 +14,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0"
-                    Background="#fdd716" />
+                    Background="#fdd716">
+        </StackPanel>
         <StackPanel Grid.Column="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
