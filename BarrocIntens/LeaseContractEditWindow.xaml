@@ -1,4 +1,3 @@
-<!-- LeaseContractEditWindow.xaml -->
 <Window x:Class="BarrocIntens.LeaseContractEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,37 +7,40 @@
         Title="Edit Lease Contract">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Customer Name:" />
-        <TextBox Grid.Row="0" x:Name="CustomerNameTextBox" Text="{Binding CustomerName, Mode=TwoWay}" />
+        <StackPanel Grid.Column="0" Background="#fdd716" />
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+            <TextBlock Text="Edit Lease Contract" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+            <StackPanel>
+                <TextBlock Text="Edit Lease Contract" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
 
-        <TextBlock Grid.Row="1" Text="Bkr Check Passed:" />
-        <CheckBox Grid.Row="1" x:Name="BkrCheckCheckBox" IsChecked="{Binding BkrCheckPassed, Mode=TwoWay}" />
+                <TextBlock Text="Customer Name:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="CustomerNameTextBox" Text="{Binding CustomerName, Mode=TwoWay}" Margin="5,0,5,10"/>
 
-        <TextBlock Grid.Row="2" Text="Monthly Invoice:" />
-        <CheckBox Grid.Row="2" x:Name="MonthlyInvoiceCheckBox" IsChecked="{Binding MonthlyInvoice, Mode=TwoWay}" />
+                <TextBlock Text="Bkr Check Passed:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                <CheckBox x:Name="BkrCheckCheckBox" IsChecked="{Binding BkrCheckPassed, Mode=TwoWay}" Margin="5,0,5,10"/>
 
-        <TextBlock Grid.Row="3" Text="Periodic Invoice:" />
-        <CheckBox Grid.Row="3" x:Name="PeriodicInvoiceCheckBox" IsChecked="{Binding PeriodicInvoice, Mode=TwoWay}" />
+                <TextBlock Text="Monthly Invoice:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                <CheckBox x:Name="MonthlyInvoiceCheckBox" IsChecked="{Binding MonthlyInvoice, Mode=TwoWay}" Margin="5,0,5,10"/>
 
-        <TextBlock Grid.Row="4" Text="Date Created:" />
-        <DatePicker Grid.Row="4" x:Name="DateCreatedDatePicker" Date="{Binding DateCreated, Mode=TwoWay}" />
+                <TextBlock Text="Periodic Invoice:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                <CheckBox x:Name="PeriodicInvoiceCheckBox" IsChecked="{Binding PeriodicInvoice, Mode=TwoWay}" Margin="5,0,5,10"/>
 
-        <TextBlock Grid.Row="5" Text="Amount:" />
-        <TextBox Grid.Row="5" x:Name="AmountTextBox" Text="{Binding Amount, Mode=TwoWay}" />
+                <TextBlock Text="Amount:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                <TextBox x:Name="AmountTextBox" Text="{Binding Amount, Mode=TwoWay}" Margin="5,0,5,10"/>
 
-        <TextBlock Grid.Row="6" Text="Is Paid:" />
-        <CheckBox Grid.Row="6" x:Name="IsPaidCheckBox" IsChecked="{Binding IsPaid, Mode=TwoWay}" />
+                <TextBlock Text="Is Paid:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                <CheckBox x:Name="IsPaidCheckBox" Content="Is Paid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
 
-        <TextBlock Grid.Row="7" Text="Machine ID:" />
-        <TextBox Grid.Row="7" x:Name="MachineIdTextBox" Text="{Binding MachineId, Mode=TwoWay}" />
+                <TextBlock Text="Signed Contract:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                <CheckBox x:Name="SignedContractCheckBox" IsChecked="{Binding SignedContract, Mode=TwoWay}" Margin="5,0,5,10"/>
 
-        <TextBlock Grid.Row="8" Text="Signed Contract:" />
-        <CheckBox Grid.Row="8" x:Name="SignedContractCheckBox" IsChecked="{Binding SignedContract, Mode=TwoWay}" />
-
-        <Button Grid.Row="11" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Click="SaveButton_Click"/>
+                <Button Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" Click="SaveChanges_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

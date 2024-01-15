@@ -20,6 +20,7 @@
     <None Remove="CreateClientNoteWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
     <None Remove="Inkoop\ProductListPage.xaml" />
+    <None Remove="LeaseContractEditWindow.xaml" />
     <None Remove="LeaseContractManagementWindow.xaml" />
     <None Remove="LoginPage.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
@@ -131,6 +132,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LeaseContractEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Maintenance\Planner\AddAppointmentPage.xaml">

@@ -31,11 +31,6 @@ namespace BarrocIntens
             LeaseContractIdTextBox.Text = selectedLeaseContract.Id.ToString();
         }
 
-        internal void ShowDialog()
-        {
-            throw new NotImplementedException();
-        }
-
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
             selectedLeaseContract.CustomerName = CustomerNameTextBox.Text;

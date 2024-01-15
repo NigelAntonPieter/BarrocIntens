@@ -14,12 +14,14 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Authentication.OnlineId;
 
 namespace BarrocIntens
 {
     public sealed partial class FinanceWindow : Window
     {
         private AppDbContext dbContext;
+        private readonly User _currentUser;
 
         public FinanceWindow(User user)
         {
@@ -119,7 +121,7 @@ namespace BarrocIntens
 
         private void ViewLeaseContractsButton_Click(object sender, RoutedEventArgs e)
         {
-            var leaseContractOverview = new LeaseContractOverviewWindow();
+            var leaseContractOverview = new LeaseContractOverviewWindow(_currentUser);
             leaseContractOverview.Activate();
             this.Close();
         }
