@@ -97,5 +97,9 @@ namespace BarrocIntens
             
         }
 
+        private void goBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
     }
 }

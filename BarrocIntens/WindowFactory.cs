@@ -1,4 +1,5 @@
 ﻿using BarrocIntens.Data;
+using BarrocIntens.Inkoop;
 using BarrocIntens.Maintenance;
 using BarrocIntens.Maintenance.Planner;
 using Microsoft.UI.Xaml;
@@ -32,6 +33,8 @@ namespace BarrocIntens
                     return new PurchaseWindow(user);
                 case "Planner":
                     return new PlannerWindow(user);
+                case "PurchaseAdmin":
+                    return new AdminPurchaseWindow(user);
                 default:
                     return new ClientWindow(user);
             }

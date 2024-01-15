@@ -1,5 +1,7 @@
 using BarrocIntens.Data;
 using BarrocIntensTestlLibrary.LoginWindow;
+using Microsoft.UI.Windowing;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -16,6 +18,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -28,6 +31,7 @@ namespace BarrocIntens
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+  
         public MainWindow()
         {
             this.InitializeComponent();

@@ -19,6 +19,8 @@
     <None Remove="ClientWindow.xaml" />
     <None Remove="CreateClientNoteWindow.xaml" />
     <None Remove="FinanceWindow.xaml" />
+    <None Remove="Inkoop\AdminPurchasePage.xaml" />
+    <None Remove="Inkoop\AdminPurchaseWindow.xaml" />
     <None Remove="Inkoop\ProductListPage.xaml" />
     <None Remove="LeaseContractEditWindow.xaml" />
     <None Remove="LeaseContractManagementWindow.xaml" />
@@ -135,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="LeaseContractEditWindow.xaml">
+    <Page Update="Inkoop\AdminPurchaseWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Inkoop\AdminPurchasePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

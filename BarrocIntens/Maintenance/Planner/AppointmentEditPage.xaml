@@ -19,7 +19,7 @@
         <StackPanel Grid.Column="0"
                     Background="#fdd716">
             <Button Name="uitLogEL"
-                    Click="uitLogEL_Click">Uitloggen
+                    Click="uitLogEL_Click">Go back
             </Button> 
         </StackPanel>
         <StackPanel Grid.Column="1">
@@ -43,5 +43,12 @@
             <Button x:Name="AddAppointment"
                     Click="editAppointment_Click">Upload</Button>
         </StackPanel>
+        <ContentDialog x:Name="editAppointmentDialog"
+                       Title="Ontbrekende gegevens"
+                       CloseButtonText="OK">
+            <StackPanel>
+                <TextBlock Text="Enter employee and date ." />
+            </StackPanel>
+        </ContentDialog>
     </Grid>
 </Page>
