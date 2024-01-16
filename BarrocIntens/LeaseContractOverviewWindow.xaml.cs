@@ -11,6 +11,7 @@ namespace BarrocIntens
 {
     public sealed partial class LeaseContractOverviewWindow : Window
     {
+        private readonly User _currentUser;
         public static LeaseContract LeaseContract { get; private set; }
 
         public LeaseContractOverviewWindow(User user)
@@ -20,9 +21,9 @@ namespace BarrocIntens
             using (var dbContext = new AppDbContext())
             {
                 LeaseContractListView.ItemsSource = dbContext.LeaseContracts.Include(lc => lc.Invoices).ToList(); ;
-    }
+            }
 
-    LeaseContractListView.SelectionChanged += LeaseContractListView_SelectionChanged;
+            LeaseContractListView.SelectionChanged += LeaseContractListView_SelectionChanged;
         }
 
         private void LeaseContractListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -114,8 +115,8 @@ namespace BarrocIntens
             using (var dbContext = new AppDbContext())
             {
                 var LeaseContracts = dbContext.LeaseContracts
-                    .Include(lc => lc.Machine)
-                    .Include(lc => lc.Invoices)
+                    //.Include(lc => lc.Machine)
+                    //.Include(lc => lc.Invoices)
                     .ToList();
 
                 LeaseContractListView.ItemsSource = LeaseContracts;
@@ -125,6 +126,21 @@ namespace BarrocIntens
                 EditButton.IsEnabled = false;
                 DeleteButton.IsEnabled = false;
             }
+        }
+
+        private void InvoiceOverviewButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (LeaseContractListView.SelectedItem != null)
+            {
+                LeaseContract selectedContract = (LeaseContract)LeaseContractListView.SelectedItem;
+
+                var leaseContractInvoiceOverview = new LeaseContractInvoiceOverviewWindow();
+                leaseContractInvoiceOverview.Activate();
+                this.Close();
+            }
+
+
         }
     }
 }

@@ -56,6 +56,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button Name="MarkAsPaidButton" Content="Mark as Paid" Click="MarkAsPaidButton_Click" IsEnabled="False"/>
                 <Button Name="InvoiceButton" Content="Send Invoice" Click="SendInvoiceButton_Click"/>
+                <Button Name="InvoiceOverviewButton" Content="Invoice Overview" Click="InvoiceOverviewButton_Click"/>
                 <Button Name="EditButton" Content="Edit" Click="EditButton_Click" IsEnabled="False"/>
                 <Button Name="DeleteButton" Content="Delete" Click="DeleteButton_Click" IsEnabled="False"/>
                 <Button Content="Refresh" Click="RefreshButton_Click"/>

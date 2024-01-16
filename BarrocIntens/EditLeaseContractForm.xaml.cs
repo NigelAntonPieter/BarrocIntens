@@ -33,12 +33,16 @@ namespace BarrocIntens
 
         private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            selectedLeaseContract.CustomerName = CustomerNameTextBox.Text;
+            if (!string.IsNullOrWhiteSpace(CustomerNameTextBox.Text))
+            {
+                selectedLeaseContract.CustomerName = CustomerNameTextBox.Text;
+            }
+
             selectedLeaseContract.BkrCheckPassed = BkrCheckCheckBox.IsChecked ?? false;
+
             selectedLeaseContract.MonthlyInvoice = MonthlyInvoiceCheckBox.IsChecked ?? false;
 
-            int leaseContractId;
-            if (int.TryParse(LeaseContractIdTextBox.Text, out leaseContractId))
+            if (!string.IsNullOrWhiteSpace(LeaseContractIdTextBox.Text) && int.TryParse(LeaseContractIdTextBox.Text, out int leaseContractId))
             {
                 selectedLeaseContract.Id = leaseContractId;
             }
@@ -50,5 +54,6 @@ namespace BarrocIntens
 
             this.Close();
         }
+
     }
 }
