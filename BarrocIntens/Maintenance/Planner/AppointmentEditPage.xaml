@@ -45,7 +45,8 @@
         </StackPanel>
         <ContentDialog x:Name="editAppointmentDialog"
                        Title="Ontbrekende gegevens"
-                       CloseButtonText="OK">
+                       CloseButtonText="OK"
+                       Background="#fdd716">
             <StackPanel>
                 <TextBlock Text="Enter employee and date ." />
             </StackPanel>

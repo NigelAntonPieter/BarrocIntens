@@ -53,14 +53,16 @@
         </StackPanel>
         <ContentDialog x:Name="addApointmentDialog"
                        Title="Missing information"
-                       CloseButtonText="OK">
+                       CloseButtonText="OK"
+                       Background="#fdd716">
             <StackPanel>
                 <TextBlock Text="Enter all information ." />
             </StackPanel>
         </ContentDialog>
         <ContentDialog x:Name="locationDialog"
                        Title="Missing information"
-                       CloseButtonText="OK">
+                       CloseButtonText="OK"
+                       Background="#fdd716">
             <StackPanel>
                 <TextBlock Text="Enter the right information ." />
             </StackPanel>

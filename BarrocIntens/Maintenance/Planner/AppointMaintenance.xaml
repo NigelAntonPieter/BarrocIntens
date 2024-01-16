@@ -58,9 +58,10 @@
         </StackPanel>
         <ContentDialog x:Name="maintenanceDialog"
                        Title="Ontbrekende gegevens"
-                       CloseButtonText="OK">
+                       CloseButtonText="OK"
+                       Background="#fdd716">
             <StackPanel>
-                <TextBlock Text="Vergeet niet een medewerker of datum toe te voegen ." />
+                <TextBlock Text="Dont forget to add a employee and date ." />
             </StackPanel>
         </ContentDialog>
     </Grid>
