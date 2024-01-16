@@ -35,8 +35,6 @@ namespace BarrocIntens
         public MakeReceiptForMaintenanceAppointment()
         {
             this.InitializeComponent();
-
-           
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -81,8 +79,6 @@ namespace BarrocIntens
             {
                 selectedProduct.StockQuantity -= quantity;
             }
-
-
             currentProducts.Add(selectedProduct);
         }
 
