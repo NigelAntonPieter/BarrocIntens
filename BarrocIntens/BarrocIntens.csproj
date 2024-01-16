@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
@@ -22,6 +22,8 @@
     <None Remove="Inkoop\AdminPurchasePage.xaml" />
     <None Remove="Inkoop\AdminPurchaseWindow.xaml" />
     <None Remove="Inkoop\ProductListPage.xaml" />
+    <None Remove="LeaseContractEditWindow.xaml" />
+    <None Remove="LeaseContractInvoiceOverviewWindow.xaml" />
     <None Remove="LeaseContractManagementWindow.xaml" />
     <None Remove="LoginPage.xaml" />
     <None Remove="MaintenanceWindow.xaml" />
@@ -135,6 +137,14 @@
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="LeaseContractInvoiceOverviewWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="LeaseContractEditWindow.xaml">
+		<Generator>MSBuild:Compile</Generator>
+	</Page>		
     <Page Update="Inkoop\AdminPurchaseWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

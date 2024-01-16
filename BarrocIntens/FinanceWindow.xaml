@@ -35,11 +35,8 @@
             <TextBlock Text="Machine:" Margin="0,5,0,0"/>
             <ComboBox x:Name="MachineComboBox" PlaceholderText="Select Machine" DisplayMemberPath="Name" SelectedValuePath="Id" Margin="0,0,0,5"/>
             <CheckBox x:Name="BkrCheckCheckBox" Content="BKR Check Passed" Margin="0,5,0,0"/>
-            <TextBlock x:Name="LeaseContractErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,5,0,0" />
-            <Button Content="Save Lease Contract" Click="SaveLeaseContractButton_Click" Margin="0,0,0,10"/>
             <TextBlock Text="Create Invoice" FontWeight="Bold" FontSize="16"/>
             <TextBlock Text="Lease Contract:" Margin="0,5,0,0"/>
-            <ComboBox x:Name="LeaseContractComboBox" PlaceholderText="Select Lease Contract" DisplayMemberPath="CustomerName" SelectedValuePath="Id" Margin="0,0,0,5"/>
             <CheckBox x:Name="MonthlyInvoiceCheckBox" Content="Monthly Invoice" Margin="0,5,0,0"/>
             <CheckBox x:Name="PeriodicInvoiceCheckBox" Content="Periodic Invoice" Margin="0,5,0,0"/>
             <ComboBox x:Name="PeriodicalPaymentComboBox" Header="Periodical Payment" SelectionChanged="PeriodicalPaymentComboBox_SelectionChanged">
@@ -48,16 +45,16 @@
                 <ComboBoxItem Content="Every 6 months" Tag="6"/>
                 <ComboBoxItem Content="Every year" Tag="12"/>
             </ComboBox>
-            <TextBlock Text="Due Date:" Margin="0,5,0,0"/>
-            <DatePicker x:Name="DueDatePicker" Margin="0,0,0,5"/>
+            <TextBlock Text=" Payment Date:" Margin="0,5,0,0"/>
+            <DatePicker x:Name="DateCreatedPicker" Margin="0,0,0,5"/>
             <TextBlock Text="Amount:" Margin="0,5,0,0"/>
             <TextBox x:Name="AmountTextBox" PlaceholderText="Enter Amount" Margin="0,0,0,5"/>
             <CheckBox x:Name="IsPaidCheckBox" Content="Is Paid" Margin="0,5,0,0"/>
-            <TextBlock x:Name="InvoiceErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,5,0,0" />
-            <Button Content="Create Invoice" Click="CreateInvoiceButton_Click" Margin="0,10,0,0"/>
+            <Button Content="Save Lease Contract" Click="SaveLeaseContractButton_Click" Margin="0,0,0,10"/>
+            <TextBlock x:Name="LeaseContractErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,5,0,0" />
         </StackPanel>
         <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
-            <Button Content="Open Lease Contract Overview" Click="OpenLeaseContractOverviewButton_Click" Margin="0,10,0,0"/>
+            <Button Content="Open Lease Contract Overview" Click="ViewLeaseContractsButton_Click" Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </Window>
