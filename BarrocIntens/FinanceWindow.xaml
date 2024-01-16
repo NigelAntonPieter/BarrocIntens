@@ -13,44 +13,51 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Background="#fdd716" />
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-            <TextBlock Text="Finance" FontSize="50" FontWeight="Bold" />
-            <Button Content="View Lease Contracts" Click="ViewLeaseContractsButton_Click" Margin="0,20,0,0"/>
-            <TextBlock Text="Make new Lease Contract " FontWeight="Bold" FontSize="16"/>
-            <TextBlock Text="Customer Name:" Margin="0,10,0,0"/>
-            <TextBox x:Name="CustomerNameTextBox" PlaceholderText="Enter customer name" Margin="0,0,0,10"/>
-            <CheckBox x:Name="BkrCheckCheckBox" Content="BKR Check Passed" Margin="0,10,0,0"/>
-            <CheckBox x:Name="MonthlyInvoiceCheckBox" Content="Monthly Invoice" Margin="0,10,0,0"/>
-            <TextBlock x:Name="LeaseContractErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,10,0,0" />
-            <Button Content="Save Lease Contract" Click="SaveLeaseContractButton_Click" Margin="0,20,0,0"/>
-        </StackPanel>
-        <StackPanel Margin="20">
+        <StackPanel Margin="10">
             <TextBlock Text="Make Receipt Installation" FontWeight="Bold" FontSize="20"/>
             <TextBlock Text="Employee Information" FontWeight="Bold" FontSize="16"/>
-            <ComboBox x:Name="EmployeeComboBox" PlaceholderText="Select Employee" DisplayMemberPath="Name" SelectedValuePath="Id" Margin="0,10,0,0"/>
-            <TextBlock Text="Installation Details" FontWeight="Bold" FontSize="20" Margin="0,20,0,0"/>
+            <ComboBox x:Name="EmployeeComboBox" PlaceholderText="Select Employee" DisplayMemberPath="Name" SelectedValuePath="Id" Margin="0,5,0,0"/>
+            <TextBlock Text="Installation Details" FontWeight="Bold" FontSize="20" Margin="0,10,0,0"/>
             <TextBlock Text="Installed Product" FontWeight="Bold" FontSize="16" />
             <ComboBox x:Name="ProductComboBox"  PlaceholderText="Select Product" DisplayMemberPath="Name" SelectedValuePath="Id"/>
             <TextBlock Text="Instalation Date" FontWeight="Bold" FontSize="16" />
             <DatePicker x:Name="InstallationDatePicker"/>
             <TextBlock Text="Instalation Cost" FontWeight="Bold" FontSize="16" />
             <TextBox x:Name="ConnectionCostsTextBox" PlaceholderText="Enter connection costs"/>
-            <TextBlock x:Name="ReceiptErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,10,0,0" />
-            <TextBlock x:Name="ReceiptTextBlock" Text="" Margin="0,20,0,0"/>
-            <Button Content="Generate Receipt" Click="GenerateReceiptButton_Click" Margin="0,20,0,0"/>
+            <TextBlock x:Name="ReceiptErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,5,0,0" />
+            <TextBlock x:Name="ReceiptTextBlock" Text="" Margin="0,10,0,0"/>
+            <Button Content="Generate Receipt" Click="GenerateReceiptButton_Click" Margin="0,10,0,0"/>
         </StackPanel>
-        <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-            <TextBlock Text="Create Invoice" FontWeight="Bold" FontSize="50"/>
-            <TextBlock Text="Lease Contract:" Margin="0,10,0,0"/>
-            <ComboBox x:Name="LeaseContractComboBox" PlaceholderText="Select Lease Contract" DisplayMemberPath="CustomerName" SelectedValuePath="Id" Margin="0,0,0,10"/>
-
-            <TextBlock Text="Due Date:" Margin="0,10,0,0"/>
-            <DatePicker x:Name="DueDatePicker" Margin="0,0,0,10"/>
-            <TextBlock Text="Amount:" Margin="0,10,0,0"/>
-            <TextBox x:Name="AmountTextBox" PlaceholderText="Enter Amount" Margin="0,0,0,10"/>
-            <CheckBox x:Name="IsPaidCheckBox" Content="Is Paid" Margin="0,10,0,0"/>
-            <TextBlock x:Name="InvoiceErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,10,0,0" />
-            <Button Content="Create Invoice" Click="CreateInvoiceButton_Click" Margin="0,20,0,0"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
+            <TextBlock Text="Make new Lease Contract " FontWeight="Bold" FontSize="16"/>
+            <TextBlock Text="Customer Name:" Margin="0,5,0,0"/>
+            <TextBox x:Name="CustomerNameTextBox" PlaceholderText="Enter customer name" Margin="0,0,0,5"/>
+            <TextBlock Text="Machine:" Margin="0,5,0,0"/>
+            <ComboBox x:Name="MachineComboBox" PlaceholderText="Select Machine" DisplayMemberPath="Name" SelectedValuePath="Id" Margin="0,0,0,5"/>
+            <CheckBox x:Name="BkrCheckCheckBox" Content="BKR Check Passed" Margin="0,5,0,0"/>
+            <TextBlock x:Name="LeaseContractErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,5,0,0" />
+            <Button Content="Save Lease Contract" Click="SaveLeaseContractButton_Click" Margin="0,0,0,10"/>
+            <TextBlock Text="Create Invoice" FontWeight="Bold" FontSize="16"/>
+            <TextBlock Text="Lease Contract:" Margin="0,5,0,0"/>
+            <ComboBox x:Name="LeaseContractComboBox" PlaceholderText="Select Lease Contract" DisplayMemberPath="CustomerName" SelectedValuePath="Id" Margin="0,0,0,5"/>
+            <CheckBox x:Name="MonthlyInvoiceCheckBox" Content="Monthly Invoice" Margin="0,5,0,0"/>
+            <CheckBox x:Name="PeriodicInvoiceCheckBox" Content="Periodic Invoice" Margin="0,5,0,0"/>
+            <ComboBox x:Name="PeriodicalPaymentComboBox" Header="Periodical Payment" SelectionChanged="PeriodicalPaymentComboBox_SelectionChanged">
+                <ComboBoxItem Content="None" Tag="0"/>
+                <ComboBoxItem Content="Every 3 months" Tag="3"/>
+                <ComboBoxItem Content="Every 6 months" Tag="6"/>
+                <ComboBoxItem Content="Every year" Tag="12"/>
+            </ComboBox>
+            <TextBlock Text="Due Date:" Margin="0,5,0,0"/>
+            <DatePicker x:Name="DueDatePicker" Margin="0,0,0,5"/>
+            <TextBlock Text="Amount:" Margin="0,5,0,0"/>
+            <TextBox x:Name="AmountTextBox" PlaceholderText="Enter Amount" Margin="0,0,0,5"/>
+            <CheckBox x:Name="IsPaidCheckBox" Content="Is Paid" Margin="0,5,0,0"/>
+            <TextBlock x:Name="InvoiceErrorMessageTextBlock" Text="" Foreground="Red" Margin="0,5,0,0" />
+            <Button Content="Create Invoice" Click="CreateInvoiceButton_Click" Margin="0,10,0,0"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
+            <Button Content="Open Lease Contract Overview" Click="OpenLeaseContractOverviewButton_Click" Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

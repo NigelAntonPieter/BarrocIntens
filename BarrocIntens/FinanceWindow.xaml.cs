@@ -33,43 +33,54 @@ namespace BarrocIntens
             LeaseContractComboBox.ItemsSource = dbContext.LeaseContracts.ToList();
             LeaseContractComboBox.DisplayMemberPath = "CustomerName";
             LeaseContractComboBox.SelectedValuePath = "Id";
+            MachineComboBox.ItemsSource = dbContext.Products.ToList();
+            MachineComboBox.DisplayMemberPath = "Name";
+            MachineComboBox.SelectedValuePath = "Id";
         }
 
+        private void RefreshComboBoxes()
+        {
+            EmployeeComboBox.ItemsSource = dbContext.Users.ToList();
+
+            ProductComboBox.ItemsSource = dbContext.Products.ToList();
+
+            LeaseContractComboBox.ItemsSource = dbContext.LeaseContracts.ToList();
+
+            MachineComboBox.ItemsSource = dbContext.Products.ToList();
+        }
         private void SaveLeaseContractButton_Click(object sender, RoutedEventArgs e)
         {
             ClearErrorMessages();
 
-            // Check if CustomerNameTextBox is empty
             if (string.IsNullOrEmpty(CustomerNameTextBox.Text))
             {
                 ShowLeaseContractErrorMessage("Please enter customer name.");
                 return;
             }
 
-            // Check if BkrCheckCheckBox is not checked
+            if (MachineComboBox.SelectedValue == null)
+            {
+                ShowLeaseContractErrorMessage("Please select a Machine.");
+                return;
+            }
+
             if (BkrCheckCheckBox.IsChecked == null || !BkrCheckCheckBox.IsChecked.Value)
             {
                 ShowLeaseContractErrorMessage("BKR check must be passed.");
                 return;
             }
 
-            // Check if MonthlyInvoiceCheckBox is not checked
-            if (MonthlyInvoiceCheckBox.IsChecked == null || !MonthlyInvoiceCheckBox.IsChecked.Value)
-            {
-                ShowLeaseContractErrorMessage("Monthly invoice must be selected.");
-                return;
-            }
-
-            // All fields are valid, proceed to create and save LeaseContract
             LeaseContract newLeaseContract = new LeaseContract
             {
                 CustomerName = CustomerNameTextBox.Text,
                 BkrCheckPassed = BkrCheckCheckBox.IsChecked ?? false,
-                MonthlyInvoice = MonthlyInvoiceCheckBox.IsChecked ?? false,
+                MachineId = int.Parse(MachineComboBox.SelectedValue.ToString())
             };
 
             dbContext.LeaseContracts.Add(newLeaseContract);
             dbContext.SaveChanges();
+
+            RefreshComboBoxes();
         }
 
         private void ShowLeaseContractErrorMessage(string errorMessage)
@@ -95,34 +106,38 @@ namespace BarrocIntens
         {
             ClearErrorMessages();
 
-            // Check if LeaseContractComboBox is empty
             if (LeaseContractComboBox.SelectedValue == null)
             {
                 ShowInvoiceErrorMessage("Please select a Lease Contract.");
                 return;
             }
 
-            // Check if DueDatePicker has a valid date
             if (DueDatePicker.Date == default(DateTimeOffset))
             {
                 ShowInvoiceErrorMessage("Please select a valid Due Date.");
                 return;
             }
 
-            // Check if AmountTextBox is a valid decimal
             if (!decimal.TryParse(AmountTextBox.Text, out decimal amount))
             {
                 ShowInvoiceErrorMessage("Please enter a valid Amount.");
                 return;
             }
 
-            // All fields are valid create and save InvoiceFinance
+            if ((MonthlyInvoiceCheckBox.IsChecked ?? false) && (PeriodicInvoiceCheckBox.IsChecked ?? false))
+            {
+                ShowInvoiceErrorMessage("Please select either Monthly Invoice or Periodic Payment, not both.");
+                return;
+            }
+
             InvoiceFinance newInvoice = new InvoiceFinance
             {
                 LeaseContractId = int.Parse(LeaseContractComboBox.SelectedValue.ToString()),
                 DueDate = DueDatePicker.Date.DateTime,
                 Amount = amount,
                 IsPaid = IsPaidCheckBox.IsChecked ?? false,
+                MonthlyInvoice = MonthlyInvoiceCheckBox.IsChecked ?? false,
+                PeriodicInvoice = PeriodicInvoiceCheckBox.IsChecked ?? false,
             };
             CreateAndSaveInvoice(newInvoice);
         }
@@ -142,35 +157,6 @@ namespace BarrocIntens
         private void ClearInvoiceErrorMessages()
         {
             InvoiceErrorMessageTextBlock.Text = string.Empty;
-        }
-
-
-        private void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Add code to send an invoice to the customer
-        }
-
-        private void MarkAsPaidButton_Click(object sender, RoutedEventArgs e)
-        {
-            InvoiceFinance selectedInvoice = GetSelectedInvoice();
-
-            if (selectedInvoice != null)
-            {
-                selectedInvoice.IsPaid = true;
-                dbContext.SaveChanges();
-            }
-        }
-
-        private LeaseContract GetSelectedLeaseContract()
-        {
-            // Implement the logic to get the selected lease contract
-            return null;
-        }
-
-        private InvoiceFinance GetSelectedInvoice()
-        {
-            // Implement the logic to get the selected invoice
-            return null;
         }
 
         private void GenerateReceiptButton_Click(object sender, RoutedEventArgs e)
@@ -206,7 +192,6 @@ namespace BarrocIntens
                 return;
             }
 
-            // Get the selected product from the database
             Product selectedProduct = dbContext.Products.FirstOrDefault(p => p.Code == selectedProductId);
 
             if (selectedProduct == null)
@@ -215,13 +200,11 @@ namespace BarrocIntens
                 return;
             }
 
-            // Calculate total price including machine price, installation cost, and VAT
             decimal machinePrice = selectedProduct.Price;
             decimal vatRate = 0.21m; // Example VAT rate (21%)
 
             decimal totalPrice = machinePrice + connectionCosts + (machinePrice + connectionCosts) * vatRate;
 
-            // Display receipt information on the UI
             string receiptText = $"Receipt for Coffee Machine Installation\n\n" +
                                  $"Employee: {employeeName}\n" +
                                  $"Product: {selectedProduct.Name}\n" +
@@ -233,7 +216,6 @@ namespace BarrocIntens
 
             ShowReceipt(receiptText);
 
-            // Save receipt to the database
             SaveReceiptToDatabase(employeeName, selectedProductId, installationDate, connectionCosts, totalPrice);
         }
 
@@ -272,6 +254,20 @@ namespace BarrocIntens
                 dbContext.SaveChanges();
             }
         }
+        private void PeriodicalPaymentComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selectedOption = PeriodicalPaymentComboBox.SelectedItem as ComboBoxItem;
+            if (selectedOption != null)
+            {
+                int months = Convert.ToInt32(selectedOption.Tag);
+                PeriodicalPaymentComboBox.Text = months.ToString();
+            }
+        }
+        private void OpenLeaseContractOverviewButton_Click(object sender, RoutedEventArgs e)
+        {
+        //    this.Frame.Navigate(typeof(LeaseContractOverviewWindow));
+        }
+
     }
 }
 
