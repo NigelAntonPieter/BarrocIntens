@@ -14,6 +14,7 @@ namespace BarrocIntens.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<InvoiceFinance> InvoiceFinances { get; set; }
         public DbSet<Maintenance_appointment> MaintenanceAppointments { get; set; }
         public DbSet<Maintenance_Receipt> MaintenanceReceipts { get; set; }
         public DbSet<Product_category> ProductCategories { get; set; }

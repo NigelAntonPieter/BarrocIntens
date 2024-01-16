@@ -16,6 +16,8 @@ public class InvoiceFinance
         public decimal Amount { get; set; }
         public bool IsPaid { get; set; }
 
+        public string CustomerName { get; set; }
+
         [ForeignKey("LeaseContractId")]
         public virtual LeaseContract LeaseContract { get; set; }
     }

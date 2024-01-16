@@ -5,7 +5,9 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using Windows.Security.ExchangeActiveSyncProvisioning;
 
 namespace BarrocIntens
 {
@@ -52,21 +54,48 @@ namespace BarrocIntens
                 RefreshList();
             }
         }
-
+        
         private void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
-            // Implement logic to send an invoice (e.g., create a .txt file)
-            // You can use selected LeaseContract properties to generate the invoice
+            if (LeaseContractListView.SelectedItem != null)
+            {
+                LeaseContract selectedContract = (LeaseContract)LeaseContractListView.SelectedItem;
+
+                using var db = new AppDbContext();
+                var newInvoice = new InvoiceFinance
+                {
+                    LeaseContractId = selectedContract.Id,
+                    CustomerName = selectedContract.CustomerName,
+                    Amount = selectedContract.Amount,
+                    DateCreated = DateTime.Now,
+                };
+                db.InvoiceFinances.Add(newInvoice); 
+                db.SaveChanges();
+
+                string fileName = $"Invoice_{selectedContract.Id}_{DateTime.Now:yyyyMMddHHmmss}.txt";
+                string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
+
+                System.IO.File.WriteAllText(filePath, $"Invoice Details:\n\nCustomer Name: {newInvoice.CustomerName}\nAmount: {newInvoice.Amount:C}\nDate: {newInvoice.DateCreated}\n");
+
+                System.Diagnostics.Process.Start("notepad.exe", filePath);
+            }
         }
+        
 
         private void GenerateInvoice(LeaseContract leaseContract)
         {
-            var invoice = new InvoicesFinance
+            var invoice = new InvoiceFinance
             {
                 CustomerName = leaseContract.CustomerName,
                 Amount = leaseContract.Amount,
                 DateCreated = DateTime.Now,
             };
+
+            using (var dbContext = new AppDbContext())
+            {
+                dbContext.Add(invoice);
+                dbContext.SaveChanges();
+            }
 
             string fileName = $"Invoice_{leaseContract.Id}_{DateTime.Now:yyyyMMddHHmmss}.txt";
             string filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileName);
