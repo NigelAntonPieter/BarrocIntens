@@ -69,8 +69,6 @@ namespace BarrocIntens.Maintenance.Planner
                 db.MaintenanceAppointments.Update(selectedMaintenance);
                 db.SaveChanges();
 
-
-
                 // Navigeer terug naar PlanningInPage
                 this.Frame.Navigate(typeof(PlanningInPage));
             }

@@ -31,7 +31,7 @@ namespace BarrocIntens.Maintenance.Planner
             using (var context = new AppDbContext())
             {
                 var companies = context.Companies.ToList(); // Veronderst
-                CompanyComboBox.ItemsSource = companies.Select(c => new { c.Id, c.Name }).ToList();
+                CompanyComboBox.ItemsSource = companies.ToList();
                 CompanyComboBox.DisplayMemberPath = "Name"; // Toon de bedrijfsnamen
                 CompanyComboBox.SelectedValuePath = "Id"; // Gebruik de Id als geselecteerde waarde
 
