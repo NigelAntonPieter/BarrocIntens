@@ -8,59 +8,61 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="3*" />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Background="#fdd716" />
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-            <TextBlock Text="All Lease Contracts" FontSize="50" FontWeight="Bold" />
-            <ListView x:Name="LeaseContractListView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="localData:LeaseContract">
-                        <Grid Margin="5">
-                            <Border BorderBrush="Black" BorderThickness="1" Background="#fdd716" CornerRadius="5">
-                                <StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                                    <TextBlock Text="Company Name:" Foreground="Black" FontWeight="Bold" Margin="5"/>
-                                    <TextBlock Text="{x:Bind CustomerName}" Foreground="Black" FontWeight="Bold" Margin="5"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Background="#fdd716" />
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+                <TextBlock Text="All Lease Contracts" FontSize="50" FontWeight="Bold" />
+                <ListView x:Name="LeaseContractListView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="localData:LeaseContract">
+                            <Grid Margin="5">
+                                <Border BorderBrush="Black" BorderThickness="1" Background="#fdd716" CornerRadius="5">
+                                    <StackPanel>
 
-                                    <TextBlock Text="Customer Name:" Foreground="Black" Margin="1"/>
-                                    <TextBlock Text="{x:Bind CustomerName}" Foreground="Black" Margin="5"/>
+                                        <TextBlock Text="Company Name:" Foreground="Black" FontWeight="Bold" Margin="5"/>
+                                        <TextBlock Text="{x:Bind CustomerName}" Foreground="Black" FontWeight="Bold" Margin="5"/>
 
-                                    <TextBlock Text="Date Created:" Foreground="Black" Margin="1"/>
-                                    <TextBlock Text="{x:Bind DateCreated}" Foreground="Black" Margin="5"/>
+                                        <TextBlock Text="Customer Name:" Foreground="Black" Margin="1"/>
+                                        <TextBlock Text="{x:Bind CustomerName}" Foreground="Black" Margin="5"/>
 
-                                    <TextBlock Text="Amount:" Foreground="Black" Margin="1"/>
-                                    <TextBlock Text="{x:Bind Amount}" Foreground="Black" Margin="1"/>
+                                        <TextBlock Text="Date Created:" Foreground="Black" Margin="1"/>
+                                        <TextBlock Text="{x:Bind DateCreated}" Foreground="Black" Margin="5"/>
 
-                                    <TextBlock Text="Is Paid:" Foreground="Black" Margin="5"/>
-                                    <TextBlock Text="{x:Bind IsPaid}" Foreground="Black" Margin="5"/>
-                                    <!--<TextBlock Text="{Binding Machine.Name}" Foreground="Black" Margin="5"/>-->
-                                    <ListView ItemsSource="{Binding Invoices}">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding InvoiceDetails}" Foreground="Black" Margin="5"/>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Image Source="Asset/logo6_klein.png" Width="100" Height="100" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <Button Name="MarkAsPaidButton" Content="Mark as Paid" Click="MarkAsPaidButton_Click" IsEnabled="False"/>
-                <Button Name="InvoiceButton" Content="Send Invoice" Click="SendInvoiceButton_Click"/>
-                <Button Name="InvoiceOverviewButton" Content="Invoice Overview" Click="InvoiceOverviewButton_Click"/>
-                <Button Name="EditButton" Content="Edit" Click="EditButton_Click" IsEnabled="False"/>
-                <Button Name="DeleteButton" Content="Delete" Click="DeleteButton_Click" IsEnabled="False"/>
-                <Button Content="Refresh" Click="RefreshButton_Click"/>
+                                        <TextBlock Text="Amount:" Foreground="Black" Margin="1"/>
+                                        <TextBlock Text="{x:Bind Amount}" Foreground="Black" Margin="1"/>
+
+                                        <TextBlock Text="Is Paid:" Foreground="Black" Margin="5"/>
+                                        <TextBlock Text="{x:Bind IsPaid}" Foreground="Black" Margin="5"/>
+                                        <!--<TextBlock Text="{Binding Machine.Name}" Foreground="Black" Margin="5"/>-->
+                                        <ListView ItemsSource="{Binding Invoices}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding InvoiceDetails}" Foreground="Black" Margin="5"/>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Image Source="Asset/logo6_klein.png" Width="100" Height="100" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <Button Name="MarkAsPaidButton" Content="Mark as Paid" Click="MarkAsPaidButton_Click" IsEnabled="False"/>
+                    <Button Name="InvoiceButton" Content="Send Invoice" Click="SendInvoiceButton_Click"/>
+                    <Button Name="InvoiceOverviewButton" Content="Invoice Overview" Click="InvoiceOverviewButton_Click"/>
+                    <Button Name="EditButton" Content="Edit" Click="EditButton_Click" IsEnabled="False"/>
+                    <Button Name="DeleteButton" Content="Delete" Click="DeleteButton_Click" IsEnabled="False"/>
+                    <Button Content="Refresh" Click="RefreshButton_Click"/>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Window>
