@@ -128,6 +128,7 @@ namespace BarrocIntens
 
             this.Frame.GoBack();
         }
+
         void SendEmailToAdmin(Maintenance_Receipt receipt)
         {
             var smtpClient = new SmtpClient("sandbox.smtp.mailtrap.io")
