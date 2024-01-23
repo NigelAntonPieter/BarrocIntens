@@ -24,7 +24,7 @@
                     Grid.RowSpan="2"
                     Background="#fdd716">
             <Button x:Name="uitlogEL"
-                    Click="uitlogEL_Click">Uitloggen</Button>
+                    Click="uitlogEL_Click">Log out</Button>
             <TextBox TextChanged="searchTextbox_TextChanged"
                      x:Name="searchTextbox" />
         </StackPanel>
@@ -39,13 +39,13 @@
             <Button Name="addProduct"
                     Click="addProduct_Click">Add new product</Button>
             <Button Name="AddQuantity"
-                    Click="AddQuantity_Click">Voeg meer hoeveelheid</Button>
+                    Click="AddQuantity_Click">Add more quantity</Button>
             <ComboBox x:Name="stockStatusComboBox"
                       SelectionChanged="stockStatusComboBox_SelectionChanged">
-                <ComboBoxItem Content="Alle producten"
+                <ComboBoxItem Content="All products"
                               IsSelected="True" />
-                <ComboBoxItem Content="Momenteel leverbaar" />
-                <ComboBoxItem Content="Uit voorraad" />
+                <ComboBoxItem Content="Currently available" />
+                <ComboBoxItem Content="Currently not available" />
             </ComboBox>
         </StackPanel>
 
@@ -72,17 +72,17 @@
                                    Foreground="Green"
                                    FontWeight="Bold" />
                         <TextBlock Foreground="Gold">
-          <Run>Prijs:</Run>
+          <Run>Price:</Run>
           <Run Text="{x:Bind PriceFormatted}" />
                         </TextBlock>
                         <TextBlock Foreground="Green"
                                    FontWeight="Bold">
-             <Run>Hoeveelheid:</Run>
+             <Run>Quantity:</Run>
              <Run Text="{x:Bind StockQuantity}" />
                         </TextBlock>
                         <TextBlock Foreground="Red"
                                    FontWeight="Bold">
-             <Run>Besteld:</Run>
+             <Run>Ordered:</Run>
              <Run Text="{x:Bind IsOrdered}" />
                         </TextBlock>
                     </StackPanel>
@@ -92,28 +92,37 @@
         <ContentDialog x:Name="QuantityInputDialog"
                        Title="Voer Hoeveelheid In"
                        PrimaryButtonText="Ok"
-                       CloseButtonText="Annuleren">
+                       CloseButtonText="Close">
 
             <StackPanel Margin="20">
-                <TextBlock Text="Voer de hoeveelheid in:"
+                <TextBlock Text="Enter the quantity:"
                            Margin="0 0 0 10" />
                 <TextBox x:Name="QuantityTextBox"
-                         PlaceholderText="Voer hier de hoeveelheid in" />
+                         PlaceholderText="Enter the quantity" />
             </StackPanel>
         </ContentDialog>
         <ContentDialog x:Name="IsOrderdDialog"
-                       Title="Kan niet worden verwijderd"
+                       Title="can't be deleted"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Is al besteld." />
+                <TextBlock Text="Is already ordered." />
             </StackPanel>
         </ContentDialog>
         <ContentDialog x:Name="noProductClicked"
-                       Title="Is geen product aangeklikt "
+                       Title="No product is clicked "
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Selecteer een product om de hoeveelheid te wijzigen." />
+                <TextBlock Text="Selected a product to change." />
             </StackPanel>
+        </ContentDialog>
+        <ContentDialog x:Name="getPermission"
+                       Title="Request must be approved"
+                       CloseButtonText="OK">
+        </ContentDialog>
+        <ContentDialog x:Name="onlyNumbersDialog"
+                       Title="Error"
+                       CloseButtonText="OK">
+            <TextBlock Text="Only numbers are allowed. Please enter a valid quantity." />
         </ContentDialog>
     </Grid>
 </Page>

@@ -19,13 +19,13 @@
         <StackPanel Grid.Column="0"
                     Background="#fdd716">
             <Button Name="uitLogEL"
-                    Click="uitLogEL_Click">Uitloggen
+                    Click="uitLogEL_Click">Logout
             </Button>
             <Button Name="AddRoutine"
-                    Click="AddRoutine_Click">Routinematige bezoek
+                    Click="AddRoutine_Click">Routine visit
             </Button>
             <Button Name="addAppointment"
-                    Click="addAppointment_Click">onderhoudsbeurt
+                    Click="addAppointment_Click">Maintenance call
             </Button>
         </StackPanel>
         <CalendarView x:Name="MaintanceCalendar"
@@ -63,20 +63,19 @@
                 </Style>
             </CalendarView.CalendarViewDayItemStyle>
         </CalendarView>
-        <ListView 
-                  x:Name="MaintenanceListView"
+        <ListView x:Name="MaintenanceListView"
                   VerticalAlignment="Stretch"
                   HorizontalAlignment="Stretch"
                   Grid.Column="2"
                   IsItemClickEnabled="True"
                   ItemClick="MaintenanceListView_ItemClick">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="localData:Maintenance_appointment">
-                        <Grid Margin="5">
-                            <Border BorderBrush="Black"
-                                    BorderThickness="1"
-                                    Background="#fdd716"
-                                    CornerRadius="5">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="localData:Maintenance_appointment">
+                    <Grid Margin="5">
+                        <Border BorderBrush="Black"
+                                BorderThickness="1"
+                                Background="#fdd716"
+                                CornerRadius="5">
                             <StackPanel>
                                 <TextBlock Text="{x:Bind Company.Name}"
                                            Foreground="Black"
@@ -113,15 +112,19 @@
             <ContentDialog.ContentTemplate>
                 <DataTemplate x:DataType="localData:Maintenance_appointment">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{x:Bind GetUserName}" FontSize="15" />
-                        <TextBlock Text="{x:Bind Company.Name}" FontSize="15"/>
-                        <TextBlock Text="{x:Bind Location}" FontSize="15"/>
+                        <TextBlock Text="{x:Bind GetUserName}"
+                                   FontSize="15" />
+                        <TextBlock Text="{x:Bind Company.Name}"
+                                   FontSize="15" />
+                        <TextBlock>
+                            <Run Text="{x:Bind Company.Street}"
+                                 FontSize="15" />
+                        </TextBlock>
                     </StackPanel>
-                    </DataTemplate>
+                </DataTemplate>
             </ContentDialog.ContentTemplate>
         </ContentDialog>
         <ContentDialog x:Name="routineDialog"
-                       PrimaryButtonText="edit"
                        CloseButtonText="Close">
             <ContentDialog.TitleTemplate>
                 <DataTemplate>
@@ -131,15 +134,17 @@
                 </DataTemplate>
             </ContentDialog.TitleTemplate>
             <ContentDialog.ContentTemplate>
-                <DataTemplate x:DataType="localData:Maintenance_appointment">
+                <DataTemplate x:DataType="localData:Routine">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{x:Bind GetUserName}"
                                    FontSize="15" />
                         <TextBlock Text="{x:Bind Company.Name}"
                                    FontSize="15" />
-                        <TextBlock Text="{x:Bind Location}"
-                                   FontSize="15" />
-                    </StackPanel>                               
+                        <TextBlock>
+                            <Run Text="{x:Bind Company.Street}"
+                            FontSize="15" />
+                        </TextBlock>
+                    </StackPanel>
                 </DataTemplate>
             </ContentDialog.ContentTemplate>
         </ContentDialog>

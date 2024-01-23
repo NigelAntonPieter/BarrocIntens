@@ -1,0 +1,11 @@
+NIGEL:
+
+FEEDBACK Sprint 2
+1. Bij het inloggen enter gebruiken
+2. CRUD systeem voor een maintenance appointment
+3. van welk bedrijf komt het aanvraag.
+
+Sprint 3
+
+1. Als Barroc Intens wil ik dat inkoop medewerkers voor het inkopen van meer dan 5000 producten akkoord moeten krijgen van hun leidinggevende. Zo weten we als organisatie welke grote uitgaven gedaan worden.
+

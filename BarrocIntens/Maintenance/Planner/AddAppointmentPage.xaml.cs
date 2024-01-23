@@ -31,24 +31,40 @@ namespace BarrocIntens.Maintenance.Planner
             using (var context = new AppDbContext())
             {
                 var companies = context.Companies.ToList(); // Veronderst
-                CompanyComboBox.ItemsSource = companies.Select(c => new { c.Id, c.Name }).ToList();
+                CompanyComboBox.ItemsSource = companies.ToList();
                 CompanyComboBox.DisplayMemberPath = "Name"; // Toon de bedrijfsnamen
                 CompanyComboBox.SelectedValuePath = "Id"; // Gebruik de Id als geselecteerde waarde
 
+                CompanyComboBox.SelectionChanged += CompanyComboBox_SelectionChanged;
             }
-           
+        }
+
+        private void CompanyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Wanneer de geselecteerde maintenance appointment verandert, vul automatisch de locatie in
+            if (CompanyComboBox.SelectedItem is Company selectedcompany)
+            {
+                using var db = new AppDbContext();
+
+                // Zoek de bijbehorende Company op basis van de CompanyId
+                var selectedCompany = db.Companies.FirstOrDefault(c => c.Id == selectedcompany.Id);
+
+                if (selectedCompany != null)
+                {
+                    LocationTextBox.Text = selectedCompany.Street;
+                }
+                else
+                {
+                    // Handle het geval waarin de bijbehorende Company niet kan worden gevonden
+                    LocationTextBox.Text = "Locatie niet gevonden";
+                }
+            }
         }
 
         private void logoutClick_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
         }
-
-        private void FillCompanyComboBox()
-        {
-            
-        }
-
         private async void SaveMaintenanceAppointment_Click(object sender, RoutedEventArgs e)
         {
             if (AreAllFieldsFilled())
@@ -66,20 +82,15 @@ namespace BarrocIntens.Maintenance.Planner
                         await context.SaveChangesAsync();
                         this.Frame.GoBack();
                     }
-
-                    // Geef een succesmelding of voer andere acties uit
-                    // MessageBox.Show("Maintenance Appointment opgeslagen");
                 }
                 else
                 {
-                    // Melding weergeven dat er ongeldige gegevens zijn ingevoerd
-                    // MessageBox.Show("Ongeldige gegevens ingevoerd");
+                   await locationDialog.ShowAsync();
                 }
             }
             else
             {
-                // Melding weergeven dat niet alle velden zijn ingevuld
-                // MessageBox.Show("Vul alle verplichte velden in");
+                await addApointmentDialog.ShowAsync();
             }
         }
 

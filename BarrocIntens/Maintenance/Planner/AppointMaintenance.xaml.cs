@@ -25,6 +25,7 @@ namespace BarrocIntens.Maintenance.Planner
     public sealed partial class AppointMaintenance : Page
     {
         private Maintenance_appointment selectedMaintenance;
+
         public AppointMaintenance()
         {
             this.InitializeComponent();
@@ -46,11 +47,9 @@ namespace BarrocIntens.Maintenance.Planner
             }
         }
 
-        // In de AppointMaintenance.cs
-
         public async void SaveAppointmentButton_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedMaintenance != null && UserComboBox.SelectedItem != null)
+            if (selectedMaintenance != null && UserComboBox.SelectedItem != null && AppointmentDate.SelectedDate.HasValue)
             {
                 using var db = new AppDbContext();
 
@@ -80,5 +79,9 @@ namespace BarrocIntens.Maintenance.Planner
 
         }
 
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
     }
 }

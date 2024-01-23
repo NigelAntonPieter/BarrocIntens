@@ -12,58 +12,55 @@
 
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" /> 
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
 
-        <TextBlock Text="Name:"
-                   Grid.Row="0"
-                   Grid.Column="0"
-                   Margin="5" />
-        <TextBox x:Name="NameTextBox"
-                 Grid.Row="0"
-                 Grid.Column="1"
-                 Margin="5" />
+        <StackPanel Grid.Column="0"
+                    Grid.RowSpan="2"
+                    Background="#fdd716">
+            <Button Name="goBack"
+                    Click="goBack_Click">Go Back</Button>
+        </StackPanel>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Edit Product"
+                       FontSize="50"
+                       FontWeight="Bold"
+                       FontFamily="arial" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Name:"
+                       Margin="5" />
+            <TextBox x:Name="NameTextBox"
+                     Margin="5" />
 
-        <TextBlock Text="Description:"
-                   Grid.Row="1"
-                   Grid.Column="0"
-                   Margin="5" />
-        <TextBox x:Name="DescriptionTextBox"
-                 Grid.Row="1"
-                 Grid.Column="1"
-                 Margin="5" />
+            <TextBlock Text="Description:"
+                       Margin="5" />
+            <TextBox x:Name="DescriptionTextBox"
+                     Margin="5" />
 
-        <TextBlock Text="Price:"
-                   Grid.Row="2"
-                   Grid.Column="0"
-                   Margin="5" />
-        <TextBox x:Name="PriceTextBox"
-                 Grid.Row="2"
-                 Grid.Column="1"
-                 Margin="5" />
-        <ComboBox x:Name="ProductCategoryComboBox"
-              ItemsSource="{x:Bind ProductCategories}"
-              DisplayMemberPath="Name"
-              SelectedValuePath="Id"
-              PlaceholderText="Selecteer een categorie"
-                  Grid.Row="3"
-                  Grid.Column="1"/>
+            <TextBlock Text="Price:"
+                       Margin="5" />
+            <TextBox x:Name="PriceTextBox"
+                     Margin="5" />
+            <ComboBox x:Name="ProductCategoryComboBox"
+                      ItemsSource="{x:Bind ProductCategories}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      PlaceholderText="Selecteer een categorie" />
 
-        <Button Content="Update Product"
-                Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Click="Button_Click"
-                Margin="5" />
+            <Button Content="Update Product"
+                    Click="Button_Click"
+                    Margin="5" />
+        </StackPanel>
+       
         <ContentDialog x:Name="EditDialog"
                        Title="Onjuiste gegevens"
                        CloseButtonText="OK">

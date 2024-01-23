@@ -16,6 +16,7 @@ namespace BarrocIntens.Data
         public DateOnly DateOfRoutineAppointment { get; set; }
 
         public ICollection<UserRoutineAppointment> UserRoutineAppointments { get; set; }
+        public string GetUserName => UserRoutineAppointments.FirstOrDefault()?.User?.UserName ?? "Geen medewerker";
     }
 
     public class UserRoutineAppointment
