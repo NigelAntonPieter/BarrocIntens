@@ -21,9 +21,9 @@ using System.Security.Cryptography;
 /// ]]>
 /// </example>
 
-namespace BarrocIntens
+namespace BarrocIntens.Utility
 {
-    public static  class SecureHasher
+    public static class SecureHasher
     {
         /// <summary>
         /// Size of salt.

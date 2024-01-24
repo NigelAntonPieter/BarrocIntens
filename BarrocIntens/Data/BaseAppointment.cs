@@ -10,5 +10,6 @@ namespace BarrocIntens.Data
     {
         public int CompanyId { get; set; }
         public Company Company { get; set; }
+        public bool IsFinished { get; set; }
     }
 }

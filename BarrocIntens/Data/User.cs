@@ -21,7 +21,7 @@ namespace BarrocIntens.Data
         public ICollection<UserRoutineAppointment> UserRoutineAppointments { get; set; }
         public ICollection<Company> Companys { get; set; }
 
-
+        static User CurrentUser;
 
     }
 }   

@@ -12,9 +12,16 @@ namespace BarrocIntens.Data.Seeders
     {
         public void Configure(EntityTypeBuilder<Maintenance_Receipt> builder)
         {
-            builder.HasData(
-                new Maintenance_Receipt { Id = 1 }
-            );
+              builder.HasData(
+                new Maintenance_Receipt
+                {
+                    Id = 1,
+                    EmployeeId = 123,
+                    CompanyId = 1 ,
+                    WorkDescription = "Work Description 1",
+                    LaborHours = 5.5m,
+                    Maintenance_appointmentId = 3
+                });
 
         }
     }

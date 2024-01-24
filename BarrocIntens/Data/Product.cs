@@ -21,12 +21,17 @@ namespace BarrocIntens.Data
         public bool IsOrdered { get; set; }
 
         public string ImagePath { get; set; }
+        public List<Maintenance_Receipt> Maintenance_Receipts { get; set; }
 
-       
         public int Product_categoryId { get; set; }
         public  Product_category Product_category { get; set; }
         public bool Is_employee_only { get; set; }
         public string ImagePathWithFallBack => ImagePath ?? "/Assets/Logo6_klein.png";
         public string PriceFormatted => string.Format("{0:N2}", Price);
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

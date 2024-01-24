@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarrocIntens
+namespace BarrocIntens.Utility
 {
     public interface IWindowFactory
     {
@@ -26,7 +26,7 @@ namespace BarrocIntens
                 case "Maintenance":
                     return new MaintenanceWindow(user);
                 case "MaintenanceAdmin":
-                    return new AdminMaintenanceWindow(user);
+                    return new MaintenanceWindow(user);
                 case "Finance":
                     return new FinanceWindow(user);
                 case "Purchase":
