@@ -15,7 +15,12 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Background="#fdd716" />
+            <StackPanel Grid.Column="0"
+                        Background="#fdd716">
+                <Button Name="goBackButton" Click="goBackButton_Click">
+                    Go back
+                </Button>
+            </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
                 <TextBlock Text="All Lease Contracts" FontSize="50" FontWeight="Bold" />
                 <ListView x:Name="LeaseContractListView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

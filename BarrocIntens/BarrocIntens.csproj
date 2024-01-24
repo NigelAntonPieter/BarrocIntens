@@ -195,4 +195,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Finance\" />
+    <Folder Include="Sales\" />
+  </ItemGroup>
 </Project>
