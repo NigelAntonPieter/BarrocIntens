@@ -153,5 +153,10 @@ namespace BarrocIntens
 
             copiedFile = await file.CopyAsync(localFolder, renamedFileName);
         }
+
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.GoBack();
+        }
     }
 }
