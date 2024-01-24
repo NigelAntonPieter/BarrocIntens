@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BarrocIntens
+namespace BarrocIntens.Utility
 {
     internal class InvoicesFinance
     {
