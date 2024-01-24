@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace BarrocIntens.Data
 {
-    internal class MaintenanceReceiptProduct
+    public class MaintenanceReceiptProduct
     {
         public int ProductId { get; set; }
         public int Maintenance_ReceiptId { get; set; }
+        public int QuantityUsed { get; set; }
+
+        public Product Product { get; set; }
     }
 }

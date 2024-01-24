@@ -23,7 +23,8 @@ namespace BarrocIntens.Data.Seeders
                 .HasForeignKey(ua => ua.MaintenanceAppointmentId);
 
             builder.HasData(
-                new UserMaintenanceAppointment { UserId = 2, MaintenanceAppointmentId = 1 },
+                new UserMaintenanceAppointment { UserId = 8, MaintenanceAppointmentId = 1 },
+                new UserMaintenanceAppointment { UserId = 8, MaintenanceAppointmentId = 3 },
                 new UserMaintenanceAppointment { UserId = 7, MaintenanceAppointmentId = 2 }
             );
 

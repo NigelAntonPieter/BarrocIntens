@@ -43,10 +43,16 @@ namespace BarrocIntens
                 {
                     receipt = db.MaintenanceReceipts
                         .Include(r => r.Company)
+                        /*.Include(r => r.MaintenanceReceiptProducts)*/
                         .FirstOrDefault(r => r.Maintenance_appointmentId == selectedMaintenance.Id);
-
-                    CompanyTextBlock.Text = receipt.Company.Name;
+                    LaborHoursTextBlock.Text = receipt.LaborHours.ToString("0.##");
                     WorkDescriptionTextBlock.Text = receipt.WorkDescription;
+/*                    foreach (var productReceipt in receipt.MaintenanceReceiptProducts)
+                    {
+                        TextBlock productTextBlock = new TextBlock();
+                        productTextBlock.Text = $"{productReceipt.Product.Name} - Quantity: {productReceipt.QuantityUsed}";
+                        MaintenanceReceiptDetailsPanel.Children.Add(productTextBlock);
+                    }*/
                     MaintenanceReceiptDetailsPanel.Visibility = Visibility.Visible;
                     MarkAsFinishedButton.Visibility = Visibility.Collapsed;
                 }

@@ -17,6 +17,7 @@ namespace BarrocIntens.Data
         public int Maintenance_appointmentId { get; set; }
         public List<Product> Products { get; set; }
         public Maintenance_appointment Maintenance_appointment { get; set; }
+        public ICollection<MaintenanceReceiptProduct> MaintenanceReceiptProducts { get; set; }
 
     }
 }

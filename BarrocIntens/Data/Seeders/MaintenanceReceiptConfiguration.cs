@@ -20,7 +20,7 @@ namespace BarrocIntens.Data.Seeders
                     CompanyId = 1 ,
                     WorkDescription = "Work Description 1",
                     LaborHours = 5.5m,
-                    Maintenance_appointmentId = 1
+                    Maintenance_appointmentId = 3
                 });
 
         }

@@ -43,19 +43,13 @@
 
         </StackPanel>
         <StackPanel Grid.Column="2" HorizontalAlignment="Right" Margin="0,180,100,0" VerticalAlignment="Top" Spacing="10" x:Name="MaintenanceReceiptDetailsPanel">
-            <TextBlock FontWeight="Bold" Text="Bon" />
-
-
-            <TextBlock FontWeight="Bold" Text="Company:" />
-            <TextBlock x:Name="CompanyTextBlock" />
-
-
-            <TextBlock FontWeight="Bold" Text="Service Type:" />
-            <TextBlock x:Name="ServiceTypeTextBlock" />
-
             <TextBlock FontWeight="Bold" Text="Work Description:" />
             <TextBlock x:Name="WorkDescriptionTextBlock" />
-        </StackPanel>
 
+            <TextBlock FontWeight="Bold" Text="Labor hours:" />
+            <TextBlock x:Name="LaborHoursTextBlock" />
+            
+
+        </StackPanel>
     </Grid>
 </Page>

@@ -110,9 +110,17 @@ namespace BarrocIntens
             var maintenanceReceiptProducts = new List<Product>();
             foreach (var currentMaintenanceReceiptProduct in currentProducts)
             {
-                var maintenanceReceiptProduct = db.Products.First(p => p.Id == currentMaintenanceReceiptProduct.Id);
-                maintenanceReceiptProduct.StockQuantity = currentMaintenanceReceiptProduct.StockQuantity;
-                maintenanceReceiptProducts.Add(maintenanceReceiptProduct);
+                var product = db.Products.First(p => p.Id == currentMaintenanceReceiptProduct.Id);
+                int productQuantityDifference = product.StockQuantity - currentMaintenanceReceiptProduct.StockQuantity;
+                product.StockQuantity = currentMaintenanceReceiptProduct.StockQuantity;
+                maintenanceReceiptProducts.Add(product);
+
+                var maintenanceReceiptProduct = new MaintenanceReceiptProduct
+                {
+                    ProductId = currentMaintenanceReceiptProduct.Id,
+                    Maintenance_ReceiptId = newReceipt.Id,  
+                    QuantityUsed = productQuantityDifference
+                };
             }
             newReceipt.Products = maintenanceReceiptProducts;
 
