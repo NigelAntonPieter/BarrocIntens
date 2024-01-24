@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BarrocIntens.Data;
 using BarrocIntensTestlLibrary.LoginWindow;
 
-namespace BarrocIntens
+namespace BarrocIntens.Utility
 {
     public class AppAuthenticationService : IAuthenticationService
     {
@@ -18,13 +18,13 @@ namespace BarrocIntens
                 if (user != null)
                 {
                     bool isValidPassword = SecureHasher.Verify(password, user.Password);
-                    if (isValidPassword) 
+                    if (isValidPassword)
                     {
                         User.LoggedInUser = user;
                     }
                     return isValidPassword;
                 }
-                
+
                 return false;
             }
         }

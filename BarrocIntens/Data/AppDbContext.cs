@@ -35,6 +35,7 @@ namespace BarrocIntens.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging();
             optionsBuilder.UseMySql(
                ConfigurationManager.ConnectionStrings["BarrocIntens"].ConnectionString,
                ServerVersion.Parse("5.7.33-winx64"));
@@ -42,6 +43,10 @@ namespace BarrocIntens.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Maintenance_Receipt>()
+                .HasMany(maintenance_receipt => maintenance_receipt.Products)
+                .WithMany(product => product.Maintenance_Receipts)
+                .UsingEntity<MaintenanceReceiptProduct>();
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new Product_categoryConfiguration());

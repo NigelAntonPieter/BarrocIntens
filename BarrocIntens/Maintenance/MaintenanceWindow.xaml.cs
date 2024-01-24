@@ -15,6 +15,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using BarrocIntensTestlLibrary;
 using BarrocIntensTestlLibrary.LoginWindow;
+using Windows.Networking.Proximity;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -25,28 +26,25 @@ namespace BarrocIntens.Maintenance
     /// </summary>
     public sealed partial class MaintenanceWindow : Window
     {
-        private readonly User _currentUser;
+        public User _currentUser;
 
         public MaintenanceWindow(User user)
         {
             _currentUser = user;
             this.InitializeComponent();
 
-            LoadMaintenanceAppointments();
-        }
-
-        private void LoadMaintenanceAppointments()
-        {
-            using (var dbContext = new AppDbContext())
+            if (_currentUser.Role == "MaintenanceAdmin")
             {
-  
-                var maintenanceAppointments = dbContext.UserMaintenanceAppointments
-                    .Where(uma => uma.UserId == _currentUser.Id)
-                    .Select(uma => uma.MaintenanceAppointment)
-                    .ToList();
-
-                MaintenanceListView.ItemsSource = maintenanceAppointments;
+                this.maintenanceFrame.Navigate(typeof(AdminMaintenancePage), user);
+            }
+            else
+            {
+                this.maintenanceFrame.Navigate(typeof(EmployeeMaintenancePage), user);
             }
         }
+
+
+
+
     }
 }
