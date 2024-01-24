@@ -19,28 +19,31 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0"
-                       Grid.RowSpan="2"
-                       Background="#fdd716" />
+                    Grid.RowSpan="2"
+                    Background="#fdd716">
+            <Button Name="goBackButton"
+                    Click="goBackButton_Click">Go Back</Button>
+        </StackPanel>
         <StackPanel Grid.Row="0"
                        Grid.Column="1"
                        HorizontalAlignment="Center">
-            <TextBlock Text="Voeg een note toe"
+            <TextBlock Text="Add an new note"
                        FontSize="50"
                        FontWeight="Bold"
                        FontFamily="arial" />
         </StackPanel>
         <StackPanel Grid.Column="1"
                        Grid.Row="1">
-            <TextBlock Text="Opmerkingen:"
+            <TextBlock Text="Remark:"
                        HorizontalAlignment="center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="commentsTB" />
-            <TextBlock Text="Afspraken:"
+            <TextBlock Text="appointments:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <TextBox x:Name="appointmentTitleTB"
                      Margin="0,0,0,10" />
-            <TextBlock Text="Datum van afspraak:"
+            <TextBlock Text="Date of appointments:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
             <CalendarDatePicker x:Name="appointmentDatePicker"
@@ -57,7 +60,7 @@
                        DisplayMemberPath="Name"
                        SelectedValuePath="Id" />
 
-            <Button Content="Opslaan"
+            <Button Content="Save"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
                        Width="75"
@@ -66,14 +69,14 @@
                        Title="Ongeldige gegevens"
                        CloseButtonText="OK">
                 <StackPanel>
-                    <TextBlock Text="Ongeldig bedrijf. Deze bestaat niet in de lijst van bedrijven." />
+                    <TextBlock Text="Invalid company. This does not exist in the list of companies." />
                 </StackPanel>
             </ContentDialog>
             <ContentDialog x:Name="wrongInputCD"
                        Title="Ongeldige gegevens"
                        CloseButtonText="OK">
                 <StackPanel>
-                    <TextBlock Text="Ongeldige invoer. Voer een geldig getal in." />
+                    <TextBlock Text="Invalid input. Please enter a valid number." />
                 </StackPanel>
             </ContentDialog>
         </StackPanel>

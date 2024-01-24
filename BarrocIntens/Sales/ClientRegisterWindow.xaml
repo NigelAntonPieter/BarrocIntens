@@ -17,22 +17,27 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0"
-                    Background="#fdd716" />
+                    Background="#fdd716">
+            <Button Name="goBackButton" Click="goBackButton_Click">
+                Go back
+            </Button>
+        </StackPanel>
         <StackPanel Grid.Column="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="10">
-            <TextBlock Text="Registreer klant"
+            <TextBlock Text="Register costumer"
                        FontSize="16"
                        FontWeight="Bold"
                        HorizontalAlignment="Center" />
-            <TextBlock Text="Naam" />
+            <TextBlock Text="Name" />
             <TextBox x:Name="nameEl" />
-            <TextBlock Text="Gebruikersnaam" />
+            <TextBlock Text="Username" />
             <TextBox x:Name="usernameEl" />
-            <TextBlock Text="Wachtwoord" />
+            <TextBlock Text="Password" />
             <PasswordBox x:Name="PasswordEl" />
-            <Button x:Name="registerEl" Click="registerEl_Click">Registreren</Button>
+            <Button x:Name="registerEl"
+                    Click="registerEl_Click">Register</Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -103,5 +103,10 @@ namespace BarrocIntens
                 this.Close();
             }
         }
+
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -67,5 +67,10 @@ namespace BarrocIntens
             var window = new ClientNotesListWindow(clickedItem.Id);
             window.Activate();
         }
+
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.DashboardWindow.Close();
+        }
     }
 }

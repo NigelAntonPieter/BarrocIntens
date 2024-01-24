@@ -21,7 +21,11 @@
 
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2"
-                    Background="#fdd716" />
+                    Background="#fdd716">
+            <Button Name="goBackButton" Click="goBackButton_Click">
+                Go back
+            </Button>
+        </StackPanel>
         <StackPanel Grid.Column="1"
                     Grid.Row="0"
                     HorizontalAlignment="Center"
@@ -39,7 +43,7 @@
                     Spacing="10">
             <Button x:Name="MakeClientAccount"
                     HorizontalAlignment="Center"
-                    Click="MakeClientAccount_Click">Registreer nieuwe klant</Button>
+                    Click="MakeClientAccount_Click">Register new customer</Button>
             <ListView x:Name="clientsListView" IsItemClickEnabled="True" ItemClick="clientsListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="localData:User">

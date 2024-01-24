@@ -67,5 +67,9 @@ namespace BarrocIntens
             LoadUserNotes();
         }
 
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

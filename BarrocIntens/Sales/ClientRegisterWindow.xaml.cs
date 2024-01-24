@@ -58,7 +58,11 @@ namespace BarrocIntens
 
             context.Users.Add(newUser);
             context.SaveChanges();
+            this.Close();
+        }
 
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

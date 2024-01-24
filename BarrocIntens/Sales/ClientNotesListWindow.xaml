@@ -22,11 +22,13 @@
 
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2"
-                    Background="#fdd716" />
+                    Background="#fdd716">
+            <Button Name="goBackButton" Click="goBackButton_Click">Go back</Button>
+        </StackPanel>
         <StackPanel Grid.Row="0"
                     Grid.Column="1"
                     HorizontalAlignment="Center">
-            <TextBlock Text="Notes voor Client"
+            <TextBlock Text="Notes for client"
                        FontSize="50"
                        FontWeight="Bold"
                        FontFamily="arial" />
@@ -57,21 +59,21 @@
                                 <TextBlock HorizontalAlignment="Center"
                                            Margin="5"
                                            FontWeight="Bold"
-                                           Text="Notities:" />
+                                           Text="Notes:" />
                                 <TextBlock HorizontalAlignment="Center"
                                            Margin="5"
                                            Text="{x:Bind Comments}" />
                                 <TextBlock HorizontalAlignment="Center"
                                            Margin="5"
                                            FontWeight="Bold"
-                                           Text="Afspraak titel:" />
+                                           Text="Appointment title:" />
                                 <TextBlock HorizontalAlignment="Center"
                                            Margin="5"
                                            Text="{x:Bind AppointmentTitle}" />
                                 <TextBlock HorizontalAlignment="Center"
                                            Margin="5"
                                            FontWeight="Bold"
-                                           Text="Datum van afspraak:" />
+                                           Text="Date of appointment:" />
                                 <TextBlock HorizontalAlignment="Center"
                                            Width="70"
                                            Margin="5"
@@ -79,13 +81,13 @@
                                 <TextBlock HorizontalAlignment="Center"
                                            Margin="5"
                                            FontWeight="Bold"
-                                           Text="Naam van het bedrijf:" />
+                                           Text="Name of company:" />
                                 <TextBlock HorizontalAlignment="Center"
                                            Margin="5"
                                            Text="{x:Bind Company.Name}" />
                             </StackPanel>
                             <Button x:Name="EditNoteButton"
-                                    Content="Aanpassen"
+                                    Content="Change"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Center"
                                     Margin="5"
@@ -98,7 +100,7 @@
         <Button Grid.Column="2"
                 Grid.Row="2"
                 x:Name="CreateNoteButton"
-                Content="Nieuwe Notitie Toevoegen"
+                Content="Add new notes"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Right"
                 Margin="10"
