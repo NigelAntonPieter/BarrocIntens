@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BarrocIntens.Finance
+namespace BarrocIntens.Data
 {
     internal class InvoicesFinance
     {
@@ -9,3 +9,6 @@ namespace BarrocIntens.Finance
         public DateTime DateCreated { get; set; }
     }
 }
+
+
+    
