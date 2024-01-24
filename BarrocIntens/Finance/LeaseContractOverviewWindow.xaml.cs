@@ -143,5 +143,12 @@ namespace BarrocIntens
 
 
         }
+
+        private void goBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var financeWindow = new FinanceWindow(_currentUser);
+            financeWindow.Activate();
+            this.Close();
+        }
     }
 }
