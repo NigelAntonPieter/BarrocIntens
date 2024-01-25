@@ -45,6 +45,15 @@
                 <ComboBoxItem Content="Uit voorraad" />
             </ComboBox>
         </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Spacing="15"
+                    Margin="0 0 200 0">
+            <Button x:Name="contractsEl"
+                    Click="contractsEl_Click">Mijn lease contracten</Button>
+        </StackPanel>
    
         <ListView x:Name="productListView"
                   Grid.Row="1"

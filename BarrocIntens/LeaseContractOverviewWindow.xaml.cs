@@ -62,9 +62,9 @@ namespace BarrocIntens
                 LeaseContract selectedContract = (LeaseContract)LeaseContractListView.SelectedItem;
 
                 using var db = new AppDbContext();
-                var newInvoice = new InvoiceFinance
+                var newInvoice = new InvoicesFinance
                 {
-                    LeaseContractId = selectedContract.Id,
+                    /*LeaseContractId = selectedContract.Id*/
                     CustomerName = selectedContract.CustomerName,
                     Amount = selectedContract.Amount,
                     DateCreated = DateTime.Now,
@@ -84,7 +84,7 @@ namespace BarrocIntens
 
         private void GenerateInvoice(LeaseContract leaseContract)
         {
-            var invoice = new InvoiceFinance
+            var invoice = new InvoicesFinance
             {
                 CustomerName = leaseContract.CustomerName,
                 Amount = leaseContract.Amount,

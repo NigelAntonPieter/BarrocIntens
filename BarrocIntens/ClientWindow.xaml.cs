@@ -106,5 +106,10 @@ namespace BarrocIntens
             }
         }
 
+        private void contractsEl_Click(object sender, RoutedEventArgs e)
+        {
+            var contractListOverview = new ContractListWindow();
+            contractListOverview.Activate();
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace BarrocIntens.Data.Seeders
                 new LeaseContract
                 {
                     Id = 1,
-                    CustomerName = "Customer1",
+                    CustomerName = "colin",
                     BkrCheckPassed = true,
                     MonthlyInvoice = true,
                     PeriodicInvoice = false,
@@ -21,21 +21,21 @@ namespace BarrocIntens.Data.Seeders
                     IsPaid = false,
                     MachineId = 1,
                     SignedContract = true
-                
-                //},
-                //new LeaseContract
-                //{
-                //    Id = 2,
-                //    CustomerName = "Customer2",
-                //    BkrCheckPassed = false,
-                //    MonthlyInvoice = false,
-                //    PeriodicInvoice = true,
-                //    DateCreated = DateTime.Now,
-                //    Amount = 20.00m,
-                //    IsPaid = true,
-                //    MachineId = 2,
-                //    SignedContract = false
-                }
+
+                },
+                    new LeaseContract
+                    {
+                        Id = 2,
+                        CustomerName = "colin",
+                        BkrCheckPassed = false,
+                        MonthlyInvoice = false,
+                        PeriodicInvoice = true,
+                        DateCreated = DateTime.Now,
+                        Amount = 20.00m,
+                        IsPaid = true,
+                        MachineId = 2,
+                        SignedContract = false
+                    }
                 // Add more LeaseContract seeding data as needed
             );
         }

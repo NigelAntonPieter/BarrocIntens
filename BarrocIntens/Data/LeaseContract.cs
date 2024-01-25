@@ -26,7 +26,7 @@ namespace BarrocIntens.Data
 
         public bool SignedContract { get; set; }
         public virtual Machine Machine { get; set; }
-        public virtual ICollection<InvoiceFinance> Invoices { get; set; }
+        public virtual ICollection<InvoicesFinance> Invoices { get; set; }
     }
 
 }
