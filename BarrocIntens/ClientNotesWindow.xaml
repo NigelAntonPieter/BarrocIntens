@@ -68,14 +68,14 @@
                     Title="Ongeldige gegevens"
                     CloseButtonText="OK">
           <StackPanel>
-            <TextBlock Text="Ongeldig bedrijf. Deze bestaat niet in de lijst van bedrijven." />
+            <TextBlock Text="Incorrect company, company isn't registerd with us" />
           </StackPanel>
           </ContentDialog>
           <ContentDialog x:Name="wrongInputCD"
-                    Title="Ongeldige gegevens"
+                    Title="Incorrect data"
                     CloseButtonText="OK">
           <StackPanel>
-            <TextBlock Text="Ongeldige invoer. Voer een geldig getal in." />
+            <TextBlock Text="incorrect input, enter valid input" />
           </StackPanel>
           </ContentDialog>
         </StackPanel>

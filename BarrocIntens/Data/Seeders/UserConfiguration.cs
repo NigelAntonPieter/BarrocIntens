@@ -15,15 +15,18 @@ namespace BarrocIntens.Data.Seeders
         {
             builder.HasKey(u => u.Id);
 
-            builder.HasMany(u => u.Companys)
-          .WithMany(c => c.Users).UsingEntity<Note>();
+
+            builder
+            .HasOne(u => u.Company)
+            .WithMany(c => c.Users)
+            .HasForeignKey(u => u.CompanyId);
 
             builder.HasData(
                 new User { Id = 1, Name = "John Doe", UserName = "johndoe", Password = SecureHasher.Hash("password123"), Role = "Sales" },
                 new User { Id = 2, Name = "Jane Smith", UserName = "janesmith", Password = SecureHasher.Hash("password456"), Role = "Maintenance" },
                 new User { Id = 3, Name = "Nigel Pieter", UserName = "AnsjoNation", Password = SecureHasher.Hash("a"), Role = "Purchase" },
                 new User { Id = 4, Name = "Jorrel Hato", UserName = "Hato", Password = SecureHasher.Hash("h"), Role = "PurchaseAdmin" },
-                new User { Id = 5, Name = "Luna Smedes", UserName = "lunasmedes", Password = SecureHasher.Hash("n"), Role = "Client" },
+                new User { Id = 5, Name = "Luna Smedes", UserName = "lunasmedes", Password = SecureHasher.Hash("n"), Role = "Client", CompanyId = 1 },
                 new User { Id = 6, Name = "Merijn Sweep", UserName = "merijnsweep", Password = SecureHasher.Hash("m"), Role = "Finance" },
                 new User { Id = 7, Name = "Brent Albers", UserName = "balbers", Password = SecureHasher.Hash("n"), Role = "MaintenanceAdmin" },
                 new User { Id = 8, Name = "Jennet Smit", UserName = "jennetsmit", Password = SecureHasher.Hash("password456"), Role = "Maintenance" },

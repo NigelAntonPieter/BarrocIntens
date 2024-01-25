@@ -30,17 +30,20 @@
                         <Grid Margin="5">
                             <Border BorderBrush="Black" BorderThickness="1" Background="#fdd716" CornerRadius="5">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Id}" Foreground="Black"  FontWeight="Bold" Margin="5"/>
-                                    <ListView ItemsSource="{Binding UserMaintenanceAppointments}">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate x:DataType="localData:UserMaintenanceAppointment">
-                                                <TextBlock Text="{Binding User.Name}" Foreground="Black" Margin="5"/>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                    <TextBlock Text="{Binding Company.Name}" Foreground="Black" Margin="5"/>
-                                    <TextBlock Text="{Binding Remark}" Foreground="Black" TextWrapping="Wrap" Margin="5"/>
-                                    <TextBlock Text="{Binding DateAdded}" Foreground="Black" Margin="5"/>
+                                    <TextBlock Margin="0,20,0,0" Foreground="Black" FontWeight="Bold" Text="Description"/>
+                                        <TextBlock Text="{Binding Remark}"
+                                       Foreground="Black"
+                                       TextWrapping="Wrap"
+                                       Margin="5" />
+                                        <TextBlock Foreground="Black" FontWeight="Bold" Text="Location"/>
+                                        <TextBlock Text="{Binding Location}"
+                                       Foreground="Black"
+                                       TextWrapping="Wrap"
+                                       Margin="5" />
+                                        <TextBlock  Margin="0,20,0,0" Foreground="Black" FontWeight="Bold" Text="Date of appointment"/>
+                                    <TextBlock Text="{Binding DateOfMaintenanceAppointment}"
+                                       Foreground="Black"
+                                       Margin="5" />
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -61,17 +64,20 @@
                         <Grid Margin="5">
                             <Border BorderBrush="Black" BorderThickness="1" Background="#fdd716" CornerRadius="5">
                                 <StackPanel>
-                                    <TextBlock Text="{Binding Id}" Foreground="Black"  FontWeight="Bold" Margin="5"/>
-                                    <ListView ItemsSource="{Binding UserMaintenanceAppointments}">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate x:DataType="localData:UserMaintenanceAppointment">
-                                                <TextBlock Text="{Binding User.Name}" Foreground="Black" Margin="5"/>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                    <TextBlock Text="{Binding Company.Name}" Foreground="Black" Margin="5"/>
-                                    <TextBlock Text="{Binding Remark}" Foreground="Black" TextWrapping="Wrap" Margin="5"/>
-                                    <TextBlock Text="{Binding DateAdded}" Foreground="Black" Margin="5"/>
+                                    <TextBlock Margin="0,20,0,0" Foreground="Black" FontWeight="Bold" Text="Description"/>
+                                    <TextBlock Text="{Binding Remark}"
+                                       Foreground="Black"
+                                       TextWrapping="Wrap"
+                                       Margin="5" />
+                                    <TextBlock Foreground="Black" FontWeight="Bold" Text="Location"/>
+                                    <TextBlock Text="{Binding Location}"
+                                       Foreground="Black"
+                                       TextWrapping="Wrap"
+                                       Margin="5" />
+                                    <TextBlock  Margin="0,20,0,0" Foreground="Black" FontWeight="Bold" Text="Date of appointment"/>
+                                    <TextBlock Text="{Binding DateOfMaintenanceAppointment}"
+                                       Foreground="Black"
+                                       Margin="5" />
                                 </StackPanel>
                             </Border>
                         </Grid>

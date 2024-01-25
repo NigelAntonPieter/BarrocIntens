@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -74,6 +75,7 @@ namespace BarrocIntens
                             // Voeg een opmerking toe aan de bestelling (optioneel)
                             string comment = commentTextBox.Text;
                             // Hier kun je de logica toevoegen om de opmerking op te slaan in de database, indien nodig.
+                            await ShowSuccesDialog("Bestelling geplaatst!");
                         }
                         else
                         {
@@ -106,5 +108,15 @@ namespace BarrocIntens
             }
         }
 
+        private void mijnAccountEl_Click(object sender, RoutedEventArgs e)
+        {
+            var clientAccountWindow = new ClientAccountWindow();
+            clientAccountWindow.Activate();
+        }
+        private async Task ShowSuccesDialog(string succesMessage)
+        {
+            SuccesMessageText.Text = succesMessage;
+            await succesDialog.ShowAsync();
+        }
     }
 }

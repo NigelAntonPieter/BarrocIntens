@@ -23,6 +23,8 @@ namespace BarrocIntens.Data
         public ICollection<User> Users { get; set; }
 
         public ICollection<Note> Notes { get; set; }
+
+        public ICollection<LeaseContract> LeaseContracts { get; set; }
     }
 
 }

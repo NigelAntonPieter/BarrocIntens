@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+using System.ComponentModel.Design;
+using System.Reflection.PortableExecutable;
 
 namespace BarrocIntens.Data.Seeders
 {
@@ -8,6 +10,11 @@ namespace BarrocIntens.Data.Seeders
     {
         public void Configure(EntityTypeBuilder<LeaseContract> builder)
         {
+            builder
+                .HasOne(u => u.Company)
+                .WithMany(c => c.LeaseContracts)
+                .HasForeignKey(u => u.CompanyId);
+
             builder.HasData(
                 new LeaseContract
                 {
@@ -20,8 +27,22 @@ namespace BarrocIntens.Data.Seeders
                     Amount = 15.00m,
                     IsPaid = false,
                     MachineId = 1,
+                    CompanyId = 1,
                     SignedContract = true
-                
+                },
+                new LeaseContract{
+                    Id = 2,
+                    CustomerName = "Customer1",
+                    BkrCheckPassed = true,
+                    MonthlyInvoice = true,
+                    PeriodicInvoice = false,
+                    DateCreated = DateTime.Now,
+                    Amount = 20.00m,
+                    IsPaid = true,
+                    MachineId = 1,
+                    CompanyId = 1,
+                    SignedContract = true
+
                 //},
                 //new LeaseContract
                 //{

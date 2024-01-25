@@ -31,7 +31,7 @@ namespace BarrocIntens.Maintenance
 
             using (var dbContext = new AppDbContext())
             {
-                var allMaintenanceAppointments = dbContext.MaintenanceAppointments.Include(ma => ma.UserMaintenanceAppointments).ToList();
+                var allMaintenanceAppointments = dbContext.MaintenanceAppointments.Include(ma => ma.UserMaintenanceAppointments).ThenInclude(uma => uma.User).ToList();
                 var finishedMaintenanceAppointments = allMaintenanceAppointments.Where(ma => ma.IsFinished).ToList();
                 var unfinishedMaintenanceAppointments = allMaintenanceAppointments.Where(ma => !ma.IsFinished).ToList();
 

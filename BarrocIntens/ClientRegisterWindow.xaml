@@ -22,7 +22,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="10">
-            <TextBlock Text="Registreer klant"
+            <TextBlock Text="Register client"
                        FontSize="16"
                        FontWeight="Bold"
                        HorizontalAlignment="Center" />
@@ -32,7 +32,7 @@
             <TextBox x:Name="usernameEl" />
             <TextBlock Text="Wachtwoord" />
             <PasswordBox x:Name="PasswordEl" />
-            <Button x:Name="registerEl" Click="registerEl_Click">Registreren</Button>
+            <Button x:Name="registerEl" Click="registerEl_Click">Register</Button>
         </StackPanel>
     </Grid>
 </Window>

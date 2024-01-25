@@ -25,6 +25,10 @@ namespace BarrocIntens.Data
         [ForeignKey("MachineId")]
 
         public bool SignedContract { get; set; }
+
+        public int CompanyId { get; set; }
+        public virtual Company Company { get; set; }
+
         public virtual Machine Machine { get; set; }
         public virtual ICollection<InvoiceFinance> Invoices { get; set; }
     }

@@ -13,6 +13,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="AdminMaintenanceWindow.xaml" />
+    <None Remove="ClientAccountWindow.xaml" />
+    <None Remove="ClientAccount\ClientAccountEditPage.xaml" />
+    <None Remove="ClientAccount\ClientAccountPage.xaml" />
+    <None Remove="ClientAccount\ClientCreateMaintenanceAppointment.xaml" />
     <None Remove="ClientNotesListWindow.xaml" />
     <None Remove="ClientNotesWindow.xaml" />
     <None Remove="ClientRegisterWindow.xaml" />
@@ -137,6 +141,21 @@
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Page Update="ClientAccount\ClientCreateMaintenanceAppointment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ClientAccount\ClientAccountEditPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ClientAccountWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="LeaseContractInvoiceOverviewWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,6 +211,11 @@
     <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="ClientNotesListWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ClientAccount\ClientAccountPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -151,7 +151,7 @@ namespace BarrocIntens
                 //dit moet eigenlijk email worden van de admin maar users heeft nog geen email weet ook niet of we dat willen toevoegen
                 From = new MailAddress("brent.albers1999@gmail.com"),
                 Subject = "Maintenance Receipt",
-                Body = $"New Maintenance Receipt:\n\nEmployee ID: {receipt.EmployeeId}\nReceipt ID: {receipt.Id}\n\nDetails:\nWork Description: {receipt.WorkDescription}\nLabor Hours: {receipt.LaborHours}",
+                Body = $"New Maintenance Receipt:\n\nEmployee ID: {receipt.EmployeeId}\nMaintenance appointment ID: {receipt.Maintenance_appointmentId}\nReceipt ID: {receipt.Id}\n\nDetails:\nWork Description: {receipt.WorkDescription}\nLabor Hours: {receipt.LaborHours}",
             };
 
             mailMessage.To.Add("brent.albers1999@gmail.com");

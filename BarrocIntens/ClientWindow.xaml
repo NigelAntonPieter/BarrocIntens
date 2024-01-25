@@ -23,14 +23,15 @@
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2"
                     Background="#fdd716">
-            <Button x:Name="uitlogEl"
-                    Click="uitlogEl_Click">Uitloggen</Button>
         </StackPanel>
+        <Button x:Name="mijnAccountEl"
+                    Click="mijnAccountEl_Click"  Grid.Column="1" Grid.Row="0" Background="Gray"  HorizontalAlignment="Left">my account</Button>
         <StackPanel Grid.Column="1"
                     Grid.Row="0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="10">
+
             <TextBlock Text="Client"
                        FontSize="50"
                        FontWeight="Bold" />
@@ -41,8 +42,8 @@
                       SelectionChanged="stockStatusComboBox_SelectionChanged">
                 <ComboBoxItem Content="Alle producten"
                               IsSelected="True" />
-                <ComboBoxItem Content="Momenteel leverbaar" />
-                <ComboBoxItem Content="Uit voorraad" />
+                <ComboBoxItem Content="currently available" />
+                <ComboBoxItem Content="Out of stock" />
             </ComboBox>
         </StackPanel>
    
@@ -69,32 +70,41 @@
             </ListView.ItemTemplate>
         </ListView>
         <ContentDialog x:Name="Orderdialog"
-                       Title="Hoeveelheid bestellen"
-                       PrimaryButtonText="bestellen"
-                       CloseButtonText="annuleer">
+                       Title="Order quantity"
+                       PrimaryButtonText="order"
+                       CloseButtonText="cancel">
             <StackPanel>
-                <TextBlock Text="Voer de hoeveelheid in die u wilt bestellen:" />
+                <TextBlock Text="Enter amount you want to order" />
                 <TextBox x:Name="quantityTextBox"
-                         PlaceholderText="Hoeveelheid"
+                         PlaceholderText="Amount"
                          Margin="0,5,0,10" />
-                <TextBlock Text="Opmerking (optioneel):" />
+                <TextBlock Text="Remark (optional)" />
                 <TextBox x:Name="commentTextBox"
-                         PlaceholderText="Opmerking"
+                         PlaceholderText="Remark"
                          Margin="0,5,0,10" />
             </StackPanel>
         </ContentDialog>
         <ContentDialog x:Name="QuantityLevelDialog"
-                       Title="Fout bij bestellen"
+                       Title="Error while ordering"
                        CloseButtonText="OK">
             <StackPanel>
-                <TextBlock Text="Het opgegeven aantal is niet beschikbaar" />
+                <TextBlock Text="Not enough stock available" />
             </StackPanel>
         </ContentDialog>
         <ContentDialog x:Name="QuantityParameterDialog"
-                       Title="Ongeldige invoer"
+                       Title="Incorrect input"
                        CloseButtonText="OK">
             <StackPanel>
-            <TextBlock Text="Voer een geldig aantal in." />
+            <TextBlock Text="Enter valid amount" />
+            </StackPanel>
+        </ContentDialog>
+        <ContentDialog
+            x:Name="succesDialog"
+            Title="Succes"
+            CloseButtonText="OK"
+            SecondaryButtonText="">
+            <StackPanel>
+                <TextBlock x:Name="SuccesMessageText" FontSize="13" Text="" Foreground="Green" />
             </StackPanel>
         </ContentDialog>
     </Grid>

@@ -21,16 +21,16 @@
         <StackPanel Grid.Column="0"
                     Background="#fdd716" />
         <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-            <TextBlock FontWeight="Bold" Text="beschrijving" />
+            <TextBlock FontWeight="Bold" Text="description" />
             <TextBlock x:Name="RemarkTextBlock" Text="{x:Bind selectedMaintenance.Remark}" />
 
-            <TextBlock FontWeight="Bold" Margin="0,20,0,0" Text="Locatie" />
+            <TextBlock FontWeight="Bold" Margin="0,20,0,0" Text="Location" />
             <TextBlock x:Name="LocationTextBlock" Text="{x:Bind selectedMaintenance.Location}" />
 
-            <TextBlock FontWeight="Bold" Margin="0,20,0,0" Text="Datum toegevoegd" />
+            <TextBlock FontWeight="Bold" Margin="0,20,0,0" Text="Date added" />
             <TextBlock x:Name="DateAddedTextBlock" Text="{x:Bind selectedMaintenance.DateAdded}" />
 
-            <TextBlock FontWeight="Bold" Margin="0,20,0,0" Text="Datum van afspraak" />
+            <TextBlock FontWeight="Bold" Margin="0,20,0,0" Text="Date of appointment" />
             <TextBlock x:Name="DateOfMaintenanceAppointmentTextBlock" Text="{x:Bind selectedMaintenance.DateOfMaintenanceAppointment}" />
 
             <TextBlock FontWeight="Bold" Margin="0,20,0,0" Text="Status" />
