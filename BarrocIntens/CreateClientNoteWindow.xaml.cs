@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation and Contributors.
-// Licensed under the MIT License.
-
 using BarrocIntens.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
@@ -20,19 +17,14 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace BarrocIntens
 {
-    /// <summary>
-    /// An empty window that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class CreateClientNoteWindow : Window
     {
         private Note userNotes;
         private int userId;
         public DateTimeOffset AppointmentDate { get; set; }
+        public List<Company> UserCompanies { get; set; } = new List<Company>();
 
         public CreateClientNoteWindow(int userId)
         {
@@ -41,7 +33,9 @@ namespace BarrocIntens
 
             using (var db = new AppDbContext())
             {
-                CompaniesCB.ItemsSource = db.Companies.ToList();
+                UserCompanies = db.Companies.Where(c => c.UserId == userId).ToList();
+
+                CompaniesCB.ItemsSource = UserCompanies;
                 CompaniesCB.DisplayMemberPath = "Name";
                 CompaniesCB.SelectedValuePath = "Id";
             }
