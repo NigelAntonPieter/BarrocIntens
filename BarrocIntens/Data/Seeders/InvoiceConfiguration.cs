@@ -18,9 +18,9 @@ namespace BarrocIntens.Data.Seeders
                     Id = 9,
                     MonthlyInvoice = true,
                     PeriodicInvoice = false,
-                    DateCreated = DateTime.Now,
+                    DateCreated = new DateTime(2024, 4, 25),
                     Amount = 15.00m,
-                    IsPaid = false,
+                    IsPaid = true,
                     CustomerName = "colin",
                 },
 
@@ -29,9 +29,9 @@ namespace BarrocIntens.Data.Seeders
                         Id = 8,
                         MonthlyInvoice = false,
                         PeriodicInvoice = true,
-                        DateCreated = DateTime.Now,
+                        DateCreated = new DateTime(2024, 1, 25),
                         Amount = 15.00m,
-                        IsPaid = false,
+                        IsPaid = true,
                         CustomerName = "colin",
                     },
                     new InvoicesFinance
@@ -39,9 +39,9 @@ namespace BarrocIntens.Data.Seeders
                         Id = 10,
                         MonthlyInvoice = false,
                         PeriodicInvoice = true,
-                        DateCreated = DateTime.Now,
+                        DateCreated = new DateTime(2024, 2, 25),
                         Amount = 15.00m,
-                        IsPaid = false,
+                        IsPaid = true,
                         CustomerName = "colin",
                     },
                     new InvoicesFinance
@@ -49,9 +49,9 @@ namespace BarrocIntens.Data.Seeders
                         Id = 7,
                         MonthlyInvoice = false,
                         PeriodicInvoice = true,
-                        DateCreated = DateTime.Now,
+                        DateCreated = new DateTime(2024, 2, 25),
                         Amount = 15.00m,
-                        IsPaid = false,
+                        IsPaid = true,
                         CustomerName = "colin",
                     }
             );
