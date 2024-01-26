@@ -43,10 +43,9 @@
             <TextBlock Text="Datum van afspraak:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />
-            <CalendarDatePicker x:Name="appointmentDatePicker"
-                       HorizontalAlignment="Center"
-                       Date="{x:Bind AppointmentDate, Mode=TwoWay}"
-                       Margin="0,0,0,10" />
+            <DatePicker x:Name="DateCreatedPicker"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,10" />
             <TextBlock Text="Bedrijf:"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,10" />

@@ -64,7 +64,7 @@ namespace BarrocIntens
                         return;
                     }
 
-                    userNotes.AppointmentDate = AppointmentDate;
+                    userNotes.AppointmentDate = DateCreatedPicker.Date.DateTime;
 
                     db.Notes.Update(userNotes);
                 }
@@ -80,7 +80,7 @@ namespace BarrocIntens
                             AppointmentTitle = appointmentTitleTB.Text,
                             UserId = userId,
                             CompanyId = companyId,
-                            AppointmentDate = AppointmentDate
+                            AppointmentDate = DateCreatedPicker.Date.DateTime
                         };
 
                         db.Notes.Add(userNotes);
