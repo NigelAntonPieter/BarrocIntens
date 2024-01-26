@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
@@ -38,6 +38,8 @@
     <None Remove="ProductEditWindow.xaml" />
     <None Remove="PurchaseWindow.xaml" />
     <None Remove="SalesWindow.xaml" />
+    <None Remove="StatsWindow.xaml" />
+    <None Remove="StatsWindowMonthly.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -135,6 +137,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BarrocIntensTestlLibrary\BarrocIntensTestlLibrary.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="StatsWindowMonthly.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="StatsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="ContractListWindow.xaml">

@@ -229,6 +229,12 @@ namespace BarrocIntens
                 PeriodicalPaymentComboBox.Text = months.ToString();
             }
         }
+
+        private void ViewStatsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var statsOverview = new StatsWindow();
+            statsOverview.Activate();
+        }
     }
 }
 
